@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/12 17:30:13 by ekern             #+#    #+#             */
-/*   Updated: 2022/08/09 15:16:49 by ekern            ###   ########.fr       */
+/*   Created: 2022/08/09 17:17:38 by ekern             #+#    #+#             */
+/*   Updated: 2022/08/09 17:22:46 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void fc_start_up(void)
 {
-	size_t			a;
-	unsigned char	d1;
-	unsigned char	d2;
+	ft_putstr_fd("-------------------------------\n", 1);
+	ft_putstr_fd("-------------------------------\n", 1);
+	ft_putstr_fd("-----------MINISHELL-----------\n", 1);
+	ft_putstr_fd("-------------------------------\n", 1);
+	ft_putstr_fd("-------------------------------\n", 1);
+}
 
-	a = 0;
-	if (n == 0)
-		return (0);
-	while (n > 0)
-	{
-		d1 = s1[a];
-		d2 = s2[a];
-		if (d1 != d2)
-			return (d1 - d2);
-		if (d1 == '\0')
-			return (0);
-		n--;
-		a++;
-	}
+int	fc_init(t_info *info)
+{
+	fc_start_up();
 	return (0);
 }

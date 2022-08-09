@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/12 17:30:13 by ekern             #+#    #+#             */
-/*   Updated: 2022/08/09 15:16:49 by ekern            ###   ########.fr       */
+/*   Created: 2022/08/05 12:49:37 by ekern             #+#    #+#             */
+/*   Updated: 2022/08/09 14:10:49 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void fc_error(int a)
 {
-	size_t			a;
-	unsigned char	d1;
-	unsigned char	d2;
+	if (a == 1)
+		ft_putstr_fd("Pas d'arg en plus\n", 1);
+	exit (0);
+}
+
+size_t	fc_strlen(const char *str)
+{
+	int	a;
 
 	a = 0;
-	if (n == 0)
-		return (0);
-	while (n > 0)
-	{
-		d1 = s1[a];
-		d2 = s2[a];
-		if (d1 != d2)
-			return (d1 - d2);
-		if (d1 == '\0')
-			return (0);
-		n--;
+	while (str[a] != ' ' && str[a] != '\0')
 		a++;
-	}
-	return (0);
+	return (a);
 }
