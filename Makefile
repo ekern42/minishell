@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/08/09 17:22:04 by ekern            ###   ########.fr        #
+#    Updated: 2022/08/11 12:55:29 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ MINISHELL = minishell
 NAME = $(MINISHELL)
 
 CC = gcc
-CFLAGS = 
+CFLAGS =
 
 INCLUDES = srcs/minishell.h
 
@@ -26,7 +26,9 @@ SRCS = \
 	srcs/main_minishell.c	\
 	srcs/minishell_utils.c	\
 	srcs/signal.c			\
-	srcs/init.c 
+	srcs/init.c				\
+	srcs/split_line.c		\
+	srcs/free_time.c
 
 OBJS = ${SRCS:c=o}
 

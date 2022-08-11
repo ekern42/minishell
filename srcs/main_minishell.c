@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/08/09 17:20:37 by ekern            ###   ########.fr       */
+/*   Updated: 2022/08/11 14:47:24 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,55 @@
 
 int	fc_command(t_info *info)
 {
-	if (strncmp(info->command_line, "echo", 5) == 0)
+	if (strncmp(info->seg_command_line[0], "echo", 5) == 0)
 		ft_putstr_fd("echo\n", 1);
-	else if (strncmp(info->command_line, "cd", 3) == 0)
+	else if (strncmp(info->seg_command_line[0], "cd", 3) == 0)
 		ft_putstr_fd("cd\n", 1);
-	else if (strncmp(info->command_line, "pwd", 4) == 0)
+	else if (strncmp(info->seg_command_line[0], "pwd", 4) == 0)
 		ft_putstr_fd("pwd\n", 1);
-	else if (strncmp(info->command_line, "export", 7) == 0)
+	else if (strncmp(info->seg_command_line[0], "export", 7) == 0)
 		ft_putstr_fd("export\n", 1);
-	else if (strncmp(info->command_line, "unset", 6) == 0)
+	else if (strncmp(info->seg_command_line[0], "unset", 6) == 0)
 		ft_putstr_fd("unset\n", 1);
-	else if (strncmp(info->command_line, "env", 4) == 0)
+	else if (strncmp(info->seg_command_line[0], "env", 4) == 0)
 		ft_putstr_fd("env\n", 1);
-	else if (strncmp(info->command_line, "exit", 5) == 0)
-		ft_putstr_fd("exit\n", 1);
+	else if (strncmp(info->seg_command_line[0], "exit", 5) == 0)
+		fc_control_d(info);
 	else
 		ft_putstr_fd("Syntax error\n", 1);
+	fc_free_seg_command_line(info);
 	return (0);
 }
 
 int	fc_prompt(t_info *info)
 {
 	info->command_line = readline("Minishell : ");
+	if (!info->command_line)
+		fc_control_d(info);
+	else if (info->command_line[0] == '\0')
+		fc_prompt(info);
+	else
+		add_history(info->command_line);
 	return (1);
-}
+	}
 
 int	main(int ac, char **av, char **envp)
 {
 	t_info info;
 
+	info.seg_command_line = NULL;
 	if (ac > 1 || av[1] != NULL)
-		fc_error(1);
-	fc_init(&info);
+		fc_error(&info, 1);
+//	fc_test(envp);
+	fc_init(&info, envp);
 	fc_signal(&info);
 	while(1)
 	{
 		fc_prompt(&info);
-		if (info.command_line == NULL)
-			fc_control_d();
-		fc_command(&info);
-		
+		fc_split_line(&info);
+		if (info.seg_command_line)
+			fc_command(&info);
+		free(info.command_line);
 	}
-	
+	fc_final_free(&info); 
 }
