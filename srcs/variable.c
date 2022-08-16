@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_line.c                                       :+:      :+:    :+:   */
+/*   variable.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 10:25:51 by ekern             #+#    #+#             */
-/*   Updated: 2022/08/16 14:39:41 by ekern            ###   ########.fr       */
+/*   Created: 2022/08/16 12:41:00 by ekern             #+#    #+#             */
+/*   Updated: 2022/08/16 14:29:27 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void fc_split_line(t_info *info)
+void fc_check_variable_command(t_info *info)
 {
-	info->seg_command_line = ft_split(info->command_line, ' ');
-	if (!info->seg_command_line)
-		fc_error(info ,2);
-	
+	int	a;
+	int	b;
+	a = -1;
+	b = -1;
+//	printf("[]%s[]\n", info->seg_command_line[0]);
+	while (info->seg_command_line[++a] != NULL)
+	{
+		while (info->seg_command_line[a][++b] != '\0')
+		{
+			if (info->seg_command_line[a][b] == '=')
+			{
+				
+				break ;
+			}
+		}
+		b = -1;
+	}
 }

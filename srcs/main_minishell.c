@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/08/11 14:47:24 by ekern            ###   ########.fr       */
+/*   Updated: 2022/08/16 14:29:41 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	fc_command(t_info *info)
 	else if (strncmp(info->seg_command_line[0], "exit", 5) == 0)
 		fc_control_d(info);
 	else
-		ft_putstr_fd("Syntax error\n", 1);
+		fc_check_variable_command(info);
 	fc_free_seg_command_line(info);
 	return (0);
 }
@@ -59,7 +59,8 @@ int	main(int ac, char **av, char **envp)
 	while(1)
 	{
 		fc_prompt(&info);
-		fc_split_line(&info);
+		if (fc_quotes(&info) == 1)
+			fc_split_line(&info);
 		if (info.seg_command_line)
 			fc_command(&info);
 		free(info.command_line);
