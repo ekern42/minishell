@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:31:22 by ekern             #+#    #+#             */
-/*   Updated: 2021/10/14 12:32:43 by ekern            ###   ########.fr       */
+/*   Updated: 2022/08/26 12:07:53 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ char	*ft_strnstr(const char *src, const char *rc, size_t n)
 {
 	size_t	a;
 	size_t	b;
-	size_t	c;
 
 	a = 0;
 	b = 0;
-	c = -1;
 	if (rc[0] == '\0')
 		return ((char *)src);
 	while (n > 0 && src[a] != '\0')

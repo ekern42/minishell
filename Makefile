@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/08/16 12:40:51 by ekern            ###   ########.fr        #
+#    Updated: 2022/08/30 15:20:29 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBFT_DIR = libft
 LIBFT_FILE = $(LIBFT_DIR)/$(LIBFT)
 
 SRCS = \
-	srcs/main_minishell.c	\
+	srcs/main.c	\
 	srcs/minishell_utils.c	\
 	srcs/signal.c			\
 	srcs/init.c				\
