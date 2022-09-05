@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/08/30 15:20:29 by ekern            ###   ########.fr        #
+#    Updated: 2022/09/05 11:21:30 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,14 +23,14 @@ LIBFT_DIR = libft
 LIBFT_FILE = $(LIBFT_DIR)/$(LIBFT)
 
 SRCS = \
-	srcs/main.c	\
-	srcs/minishell_utils.c	\
-	srcs/signal.c			\
-	srcs/init.c				\
-	srcs/split_line.c		\
-	srcs/free_time.c		\
-	srcs/quotes.c			\
-	srcs/variable.c
+	srcs/main.c						\
+	srcs/minishell_utils.c			\
+	srcs/signal/signal.c			\
+	srcs/init.c						\
+	srcs/split/split_line.c			\
+	srcs/free_time.c				\
+	srcs/quotes/quotes.c			\
+	srcs/variable/variable.c
 
 OBJS = ${SRCS:c=o}
 

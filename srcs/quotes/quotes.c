@@ -6,11 +6,11 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:24:46 by ekern             #+#    #+#             */
-/*   Updated: 2022/08/16 12:00:41 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 11:26:12 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static void fc_dbl_quotes(t_info *info)
 {

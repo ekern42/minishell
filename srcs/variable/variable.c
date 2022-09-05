@@ -6,13 +6,18 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 12:41:00 by ekern             #+#    #+#             */
-/*   Updated: 2022/08/16 14:29:27 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 11:25:46 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void fc_check_variable_command(t_info *info)
+void fc_variable_command(t_info *info)
+{
+	ft_putstr_fd("it's a variable\n", 1);
+}
+
+int fc_check_variable(t_info *info)
 {
 	int	a;
 	int	b;
@@ -24,11 +29,9 @@ void fc_check_variable_command(t_info *info)
 		while (info->seg_command_line[a][++b] != '\0')
 		{
 			if (info->seg_command_line[a][b] == '=')
-			{
-				
-				break ;
-			}
+				return (1);
 		}
 		b = -1;
 	}
+	return (0);
 }

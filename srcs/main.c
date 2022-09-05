@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_minishell.c                                   :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/08/16 14:29:41 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/01 14:32:22 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void fc_exit(t_info *info)
+{
+	if (info->seg_command_line)
+		fc_free_seg_command_line(info);
+	ft_putstr_fd("exit command\n", 1);
+	exit (0);
+}
 
 int	fc_command(t_info *info)
 {
@@ -27,9 +35,11 @@ int	fc_command(t_info *info)
 	else if (strncmp(info->seg_command_line[0], "env", 4) == 0)
 		ft_putstr_fd("env\n", 1);
 	else if (strncmp(info->seg_command_line[0], "exit", 5) == 0)
-		fc_control_d(info);
+		fc_exit(info);
+	else if (fc_check_variable(info) == 1)
+		fc_variable_command(info);
 	else
-		fc_check_variable_command(info);
+		ft_putstr_fd("error : command not found\n", 1);
 	fc_free_seg_command_line(info);
 	return (0);
 }
