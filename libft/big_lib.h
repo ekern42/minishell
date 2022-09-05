@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:58:23 by ekern             #+#    #+#             */
-/*   Updated: 2022/04/12 15:21:29 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 12:45:08 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@
 # include "libft_srcs/libft.h"
 
 char	*get_next_line(int fd);
-int		ft_printf(const char *src, ...);
 
 #endif

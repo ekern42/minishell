@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/01 14:32:22 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 12:24:09 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	fc_prompt(t_info *info)
 	else
 		add_history(info->command_line);
 	return (1);
-	}
+}
 
 int	main(int ac, char **av, char **envp)
 {
