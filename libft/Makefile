@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 11:30:17 by ekern             #+#    #+#              #
-#    Updated: 2022/09/05 12:46:06 by ekern            ###   ########.fr        #
+#    Updated: 2022/09/05 19:17:47 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,14 @@ SRCS = \
 	libft_srcs/ft_putnbr_fd.c		\
 	libft_srcs/fc_dec_to_binary.c	\
 	libft_srcs/ft_atol.c			\
+	libft_srcs/ft_lstnew.c			\
+	libft_srcs/ft_lstadd_front.c	\
+	libft_srcs/ft_lstsize.c			\
+	libft_srcs/ft_lstlast.c			\
+	libft_srcs/ft_lstadd_back.c		\
+	libft_srcs/ft_lstdelone.c		\
+	libft_srcs/ft_lstclear.c		\
+	libft_srcs/fc_print_chainlist.c	\
 	gnl/get_next_line.c				\
 	gnl/get_next_line_utils.c
 
