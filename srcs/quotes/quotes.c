@@ -3,31 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:24:46 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 11:26:12 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 22:29:35 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void fc_dbl_quotes(t_info *info)
+static void	fc_dbl_quotes(t_info *info)
 {
+	(void)info;
 	ft_putstr_fd("double quotes\n", 1);
 }
 
-static void fc_sgl_quotes(t_info *info)
+static void	fc_sgl_quotes(t_info *info)
 {
+	(void)info;
 	ft_putstr_fd("single quotes\n", 1);
 }
 
-int fc_quotes(t_info *info)
+int	fc_quotes(t_info *info)
 {
 	int	i;
 	int	sgl_quote;
 	int	dbl_quote;
-	
+
 	i = -1;
 	sgl_quote = 0;
 	dbl_quote = 0;

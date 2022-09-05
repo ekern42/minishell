@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 14:13:56 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:25:13 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	fc_prompt(t_info *info)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_info info;
+	t_info	info;
 
 	info.seg_command_line = NULL;
 	if (ac > 1 || av[1] != NULL)
@@ -34,7 +34,7 @@ int	main(int ac, char **av, char **envp)
 //	fc_test(envp);
 	fc_init(&info, envp);
 	fc_signal(&info);
-	while(1)
+	while (1)
 	{
 		fc_prompt(&info);
 		if (fc_quotes(&info) == 1)
@@ -43,5 +43,5 @@ int	main(int ac, char **av, char **envp)
 			fc_commands(&info);
 		free(info.command_line);
 	}
-	fc_final_free(&info); 
+	fc_final_free(&info);
 }

@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   variable.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 12:41:00 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 11:25:46 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 22:30:19 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void fc_variable_command(t_info *info)
+void	fc_variable_command(t_info *info)
 {
+	(void)info;
 	ft_putstr_fd("it's a variable\n", 1);
 }
 
-int fc_check_variable(t_info *info)
+int	fc_check_variable(t_info *info)
 {
 	int	a;
 	int	b;
+
 	a = -1;
 	b = -1;
 //	printf("[]%s[]\n", info->seg_command_line[0]);

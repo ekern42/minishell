@@ -6,7 +6,7 @@
 #    By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/09/05 14:41:37 by angelo           ###   ########.fr        #
+#    Updated: 2022/09/05 22:09:58 by angelo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ MINISHELL = minishell
 NAME = $(MINISHELL)
 
 CC = gcc
-CFLAGS = 
+CFLAGS = -Wall -Wextra -Werror
 
 INCLUDES = srcs/minishell.h
 
@@ -64,17 +64,6 @@ SRCS =	\
 	$(SRC_UTILS)	\
 	$(SRC_VARIABLE)	\
 	$(SRC_ROOT)
-
-#SRCS = \
-#	srcs/main.c						\
-#	srcs//utils/utils.c				\
-#	srcs/signal/signal.c			\
-#	srcs/init/init.c				\
-#	srcs/split/split_line.c			\
-#	srcs/free/free_time.c			\
-#	srcs/quotes/quotes.c			\
-#	srcs/variable/variable.c		\
-#	srcs/command/command.c
 
 
 OBJS = ${SRCS:c=o}
