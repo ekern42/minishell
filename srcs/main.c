@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 13:13:28 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 14:13:56 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int ac, char **av, char **envp)
 		if (fc_quotes(&info) == 1)
 			fc_split_line(&info);
 		if (info.seg_command_line)
-			fc_command(&info);
+			fc_commands(&info);
 		free(info.command_line);
 	}
 	fc_final_free(&info); 
