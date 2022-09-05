@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/01 14:25:47 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 13:22:55 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_info
 /* SRCS */
 
 void fc_error(t_info *info, int a);
+int	fc_command(t_info *info);
 size_t	fc_strlen(const char *str);
 int	fc_signal(t_info *info);
 void fc_control_d(t_info *info);

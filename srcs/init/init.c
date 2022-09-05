@@ -6,11 +6,11 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:17:38 by ekern             #+#    #+#             */
-/*   Updated: 2022/08/11 14:42:39 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 13:26:04 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static void fc_start_up(void)
 {

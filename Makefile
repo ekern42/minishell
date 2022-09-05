@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/09/05 11:21:30 by ekern            ###   ########.fr        #
+#    Updated: 2022/09/05 13:25:55 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,20 +24,21 @@ LIBFT_FILE = $(LIBFT_DIR)/$(LIBFT)
 
 SRCS = \
 	srcs/main.c						\
-	srcs/minishell_utils.c			\
+	srcs//utils/utils.c				\
 	srcs/signal/signal.c			\
-	srcs/init.c						\
+	srcs/init/init.c				\
 	srcs/split/split_line.c			\
-	srcs/free/free_time.c				\
+	srcs/free/free_time.c			\
 	srcs/quotes/quotes.c			\
-	srcs/variable/variable.c
+	srcs/variable/variable.c		\
+	srcs/command/command.c
 
 OBJS = ${SRCS:c=o}
 
 all : $(LIBFT) $(NAME)
 
 $(MINISHELL) : $(OBJS)
-	$(CC) $(CFLAGS) $^ $(LIBFT_FILE) -L$(HOME)/.brew/opt/readline/lib -lreadline -o $(NAME)
+	$(CC) $(CFLAGS) $^ $(LIBFT_FILE) -lreadline -o $(NAME)
 
 srcs/%.o : %.c $(INCLUDES)
 	$(CC) $(CFLAGS) -c $<

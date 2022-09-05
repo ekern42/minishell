@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_utils.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:37 by ekern             #+#    #+#             */
-/*   Updated: 2022/08/11 14:43:24 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 13:26:28 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void fc_error(t_info *info, int a)
 {
@@ -39,4 +39,12 @@ void fc_test(char **envp)
 	i = -1;
 	while (envp[++i] != NULL)
 		printf("{%d}%s{%d}\n", i, envp[i], i);
+}
+
+void fc_exit(t_info *info)
+{
+	if (info->seg_command_line)
+		fc_free_seg_command_line(info);
+	ft_putstr_fd("exit command\n", 1);
+	exit (0);
 }
