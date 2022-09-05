@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_time.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:45:01 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 13:00:34 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 22:27:48 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void fc_free_seg_command_line(t_info *info)
+void	fc_free_seg_command_line(t_info *info)
 {
 	int	a;
 
@@ -21,7 +21,7 @@ void fc_free_seg_command_line(t_info *info)
 		free(info->seg_command_line[a]);
 }
 
-void fc_final_free(t_info *info)
+void	fc_final_free(t_info *info)
 {
 	fc_free_seg_command_line(info);
 }

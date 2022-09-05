@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:37 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 14:34:27 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:32:25 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	fc_strlen(const char *str)
 	return (a);
 }
 
-void fc_test(char **envp)
+void	fc_test(char **envp)
 {
 	int	i;
 
@@ -31,7 +31,7 @@ void fc_test(char **envp)
 		printf("{%d}%s{%d}\n", i, envp[i], i);
 }
 
-void fc_exit(t_info *info)
+void	fc_exit(t_info *info)
 {
 	if (info->seg_command_line)
 		fc_free_seg_command_line(info);

@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 15:02:35 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:24:14 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef struct s_info
 }	t_info;
 
 /* commands */
-int	fc_commands(t_info *info);
+int		fc_commands(t_info *info);
+int		fc_echo(t_info *info);
 
 /* errors */
 void	fc_error(t_info *info, int a);
@@ -52,20 +53,20 @@ void	fc_final_free(t_info *info);
 void	fc_free_seg_command_line(t_info *info);
 
 /* init */
-static void	fc_start_up(void);
-static void	fc_envp_init(t_info *info, char **envp);
-int			fc_init(t_info *info, char **envp);
+//static void	fc_start_up(void);
+//static void	fc_envp_init(t_info *info, char **envp);
+int		fc_init(t_info *info, char **envp);
 
 /* quotes */
-static void fc_dbl_quotes(t_info *info);
-static void fc_sgl_quotes(t_info *info);
-int			fc_quotes(t_info *info);
+//static void fc_dbl_quotes(t_info *info);
+//static void fc_sgl_quotes(t_info *info);
+int		fc_quotes(t_info *info);
 
 /* signal */
-void		fc_control_d(t_info *info);
-static void	fc_control_backslash(int num);
-static void	fc_control_c(int num);
-int			fc_signal(t_info *info);
+void	fc_control_d(t_info *info);
+//static void	fc_control_backslash(int num);
+//static void	fc_control_c(int num);
+int		fc_signal(t_info *info);
 
 /* split */
 void	fc_split_line(t_info *info);
@@ -80,6 +81,6 @@ void	fc_variable_command(t_info *info);
 int		fc_check_variable(t_info *info);
 
 /* main.c */
-int	fc_prompt(t_info *info);
+int		fc_prompt(t_info *info);
 
 #endif
