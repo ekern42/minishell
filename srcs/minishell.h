@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 14:40:13 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/05 15:02:35 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,20 @@
 # include "../libft/big_lib.h"
 
 /* STRUCT */
-typedef struct	s_envp_list
+typedef struct s_envp_list
 {
 	char				*name;
 	void				*data;
-	struct	s_envp_list	*next;
+	struct s_envp_list	*next;
 }	t_envp_list;
 
-typedef struct	s_info
+typedef struct s_info
 {
 	char				*command_line;
 	char				**seg_command_line;
 	struct s_envp_list	*envp;
 	struct s_envp_list	*var;
 }	t_info;
-
 
 /* commands */
 int	fc_commands(t_info *info);
@@ -53,7 +52,7 @@ void	fc_final_free(t_info *info);
 void	fc_free_seg_command_line(t_info *info);
 
 /* init */
-static void fc_start_up(void);
+static void	fc_start_up(void);
 static void	fc_envp_init(t_info *info, char **envp);
 int			fc_init(t_info *info, char **envp);
 
@@ -64,8 +63,8 @@ int			fc_quotes(t_info *info);
 
 /* signal */
 void		fc_control_d(t_info *info);
-static void fc_control_backslash(int num);
-static void fc_control_c(int num);
+static void	fc_control_backslash(int num);
+static void	fc_control_c(int num);
 int			fc_signal(t_info *info);
 
 /* split */
