@@ -28,7 +28,7 @@ SRCS = \
 	srcs/signal/signal.c			\
 	srcs/init.c						\
 	srcs/split/split_line.c			\
-	srcs/free_time.c				\
+	srcs/free/free_time.c				\
 	srcs/quotes/quotes.c			\
 	srcs/variable/variable.c
 

@@ -6,11 +6,11 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:45:01 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/01 14:32:45 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/05 13:00:34 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void fc_free_seg_command_line(t_info *info)
 {
