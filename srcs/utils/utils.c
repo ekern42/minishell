@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:37 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 22:32:25 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/06 11:55:54 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ size_t	fc_strlen(const char *str)
 	while (str[a] != ' ' && str[a] != '\0')
 		a++;
 	return (a);
+}
+
+int	fc_argc_wt_exe(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (info->seg_command_line[i])
+		i++;
+	return (i);
 }
 
 void	fc_test(char **envp)

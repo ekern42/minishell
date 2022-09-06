@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 22:24:14 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/06 11:57:02 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int		fc_signal(t_info *info);
 void	fc_split_line(t_info *info);
 
 /* utils */
-void	fc_split_line(t_info *info);
+size_t	fc_strlen(const char *str);
+int		fc_argc_wt_exe(t_info *info);
 void	fc_exit(t_info *info);
 void	fc_test(char **envp);
 
