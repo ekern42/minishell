@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:49:05 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 19:12:33 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/06 12:34:37 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void		ft_putnbr_fd(int n, int fd);
 
 /* Part 3 : Bonus */
 
-typedef struct		s_list
+typedef struct s_list
 {
-    void			*content;
-    struct s_list	*next;
-}					t_list;
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 t_list		*ft_lstnew(void *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
