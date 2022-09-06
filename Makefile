@@ -6,7 +6,7 @@
 #    By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/09/06 12:10:53 by angelo           ###   ########.fr        #
+#    Updated: 2022/09/06 15:56:27 by angelo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,13 @@ LIBFT_DIR = libft
 LIBFT_FILE = $(LIBFT_DIR)/$(LIBFT)
 
 SRC_COMMANDS =	\
-	srcs/commands/commands.c	\
-	srcs/commands/fc_echo.c
+	srcs/builtins/builtins.c	\
+	srcs/builtins/fc_cd.c	\
+	srcs/builtins/fc_echo.c	\
+	srcs/builtins/fc_env.c	\
+	srcs/builtins/fc_export.c	\
+	srcs/builtins/fc_pwd.c	\
+	srcs/builtins/fc_unset.c
 
 SRC_ERRORS =	\
 	srcs/errors/errors.c
@@ -52,7 +57,6 @@ SRC_VARIABLE =	\
 
 SRC_ROOT = srcs/main.c
 
-
 SRCS =	\
 	$(SRC_COMMANDS)	\
 	$(SRC_ERRORS)	\
@@ -64,7 +68,6 @@ SRCS =	\
 	$(SRC_UTILS)	\
 	$(SRC_VARIABLE)	\
 	$(SRC_ROOT)
-
 
 OBJS = ${SRCS:c=o}
 

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:13:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 17:08:21 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:49:51 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	fc_commands(t_info *info)
+int	fc_builtins(t_info *info)
 {
 	if (strncmp(info->seg_command_line[0], "echo", 5) == 0)
 		fc_echo(info);

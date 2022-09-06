@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/06 11:57:02 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:50:07 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_info
 }	t_info;
 
 /* commands */
-int		fc_commands(t_info *info);
+int		fc_builtins(t_info *info);
 int		fc_echo(t_info *info);
 
 /* errors */

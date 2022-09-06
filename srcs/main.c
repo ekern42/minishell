@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 22:25:13 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:54:53 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int ac, char **av, char **envp)
 		if (fc_quotes(&info) == 1)
 			fc_split_line(&info);
 		if (info.seg_command_line)
-			fc_commands(&info);
+			fc_builtins(&info);
 		free(info.command_line);
 	}
 	fc_final_free(&info);
