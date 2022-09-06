@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/06 15:50:07 by angelo           ###   ########.fr       */
+/*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
+/*   Updated: 2022/09/06 16:09:29 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <signal.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <readline/readline.h>
@@ -25,20 +26,30 @@
 # include "../libft/big_lib.h"
 
 /* STRUCT */
-typedef struct s_envp_list
-{
-	char				*name;
-	void				*data;
-	struct s_envp_list	*next;
-}	t_envp_list;
 
-typedef struct s_info
+typedef struct		s_lex_info
 {
-	char				*command_line;
-	char				**seg_command_line;
-	struct s_envp_list	*envp;
-	struct s_envp_list	*var;
-}	t_info;
+	bool	pipes;
+	bool	sgl_quotes;
+	bool	dlb_quotes;
+	bool	variable;
+	bool	re_append;	// >>
+	bool	re_del;		// <<
+	bool	re_input;	// <
+	bool	re_output;	// >
+
+	
+}					t_lex_info;
+
+typedef struct		s_info
+{
+	char			*command_line;
+	char			**seg_command_line;
+	int				pair_sgl_quotes;
+	int				pair_dbl_quotes;
+	struct s_list	*envp;
+	struct s_list	*var;
+}					t_info;
 
 /* commands */
 int		fc_builtins(t_info *info);
@@ -55,7 +66,8 @@ void	fc_free_seg_command_line(t_info *info);
 /* init */
 //static void	fc_start_up(void);
 //static void	fc_envp_init(t_info *info, char **envp);
-int		fc_init(t_info *info, char **envp);
+//static void	fc_init_lexer(t_lex_info *lex);
+int		fc_init(t_info *info, t_lex_info *lex, char **envp);
 
 /* quotes */
 //static void fc_dbl_quotes(t_info *info);
