@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 22:25:13 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:46:02 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,20 @@ int	fc_prompt(t_info *info)
 int	main(int ac, char **av, char **envp)
 {
 	t_info	info;
+	t_lex_info	lex;
 
 	info.seg_command_line = NULL;
 	if (ac > 1 || av[1] != NULL)
 		fc_error(&info, 1);
 //	fc_test(envp);
-	fc_init(&info, envp);
+	fc_init(&info, &lex, envp);
 	fc_signal(&info);
 	while (1)
 	{
 		fc_prompt(&info);
-		if (fc_quotes(&info) == 1)
-			fc_split_line(&info);
+//		fc_lexer(&info);
+//		fc_quotes(&info);
+		fc_split_line(&info);
 		if (info.seg_command_line)
 			fc_commands(&info);
 		free(info.command_line);
