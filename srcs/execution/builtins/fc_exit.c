@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   fc_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 12:49:37 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/17 15:25:01 by angelo           ###   ########.fr       */
+/*   Created: 2022/09/10 15:38:34 by angelo            #+#    #+#             */
+/*   Updated: 2022/09/11 18:07:36 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-size_t	fc_strlen(const char *str)
+int	fc_exit(t_info *info)
 {
-	int	a;
-
-	a = 0;
-	while (str[a] != ' ' && str[a] != '\0')
-		a++;
-	return (a);
-}
-
-void	fc_test(char **envp)
-{
-	int	i;
-
-	i = -1;
-	while (envp[++i] != NULL)
-		printf("{%d}%s{%d}\n", i, envp[i], i);
+	if (strncmp(info->seg_command_line[0], "exit", 5) == 0)
+	{
+		fc_free_seg_command_line(info);
+		exit (127);
+	}
+	return (1);
 }

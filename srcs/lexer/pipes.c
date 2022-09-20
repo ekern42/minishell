@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 12:49:37 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/17 15:25:01 by angelo           ###   ########.fr       */
+/*   Created: 2022/09/20 09:42:54 by ekern             #+#    #+#             */
+/*   Updated: 2022/09/20 17:35:56 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-size_t	fc_strlen(const char *str)
+int	fc_lex_pipes(t_info *info, int a)
 {
-	int	a;
-
-	a = 0;
-	while (str[a] != ' ' && str[a] != '\0')
-		a++;
-	return (a);
-}
-
-void	fc_test(char **envp)
-{
-	int	i;
-
-	i = -1;
-	while (envp[++i] != NULL)
-		printf("{%d}%s{%d}\n", i, envp[i], i);
+	if (a == 0)
+	{
+		info->lex->error = true;
+		return (0);
+	}
+	if (fc_check_lex(info, a) == 0)
+		return (0);
+	info->lex->nbr_pipe++;
+	info->lex->pipes = true;
+	return (1);
 }

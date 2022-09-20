@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:17:38 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/06 15:48:25 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/20 17:21:48 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,32 @@ static void	fc_envp_init(t_info *info, char **envp)
 	envtemp = ft_lstnew(envp[a]);
 	while (envp[++a] != NULL)
 		ft_lstadd_back(&envtemp, ft_lstnew(envp[a]));
-	fc_print_chainlist(envtemp, 's', 1);
+	info->envp = envtemp;
 }
 
-static void	fc_init_lexer(t_lex_info *lex)
+void	fc_init_lexer(t_info *info)
 {
-	lex->pipes = false;
-	lex->sgl_quotes = false;
-	lex->dlb_quotes = false;
-	lex->variable = false;
-	lex->re_append = false;
-	lex->re_del = false;
-	lex->re_input = false;
-	lex->re_output = false;
+	info->lex->pipes = false;
+	info->lex->nbr_pipe = 0;
+	info->lex->sgl_quotes = false;
+	info->lex->dbl_quotes = false;
+	info->lex->variable = false;
+	info->lex->nbr_variable = 0;
+	info->lex->re_append = false;
+	info->lex->nbr_re_append = 0;
+	info->lex->re_del = false;
+	info->lex->nbr_re_del = 0;
+	info->lex->re_input = false;
+	info->lex->nbr_re_input = 0;
+	info->lex->re_output = false;
+	info->lex->nbr_re_output = 0;
+	info->lex->error = false;
 }
 
 int	fc_init(t_info *info, t_lex_info *lex, char **envp)
 {
 	fc_start_up();
 	fc_envp_init(info, envp);
-	fc_init_lexer(lex);	
+	info->lex = lex;
 	return (0);
 }

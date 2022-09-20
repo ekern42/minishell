@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:13:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 17:08:21 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/19 18:38:34 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-int	fc_commands(t_info *info)
+int	fc_builtins(t_info *info)
 {
 	if (strncmp(info->seg_command_line[0], "echo", 5) == 0)
 		fc_echo(info);
 	else if (strncmp(info->seg_command_line[0], "cd", 3) == 0)
-		ft_putstr_fd("cd\n", 1);
-	else if (strncmp(info->seg_command_line[0], "pwd", 4) == 0)
-		ft_putstr_fd("pwd\n", 1);
+		fc_cd(info);
+	//else if (strncmp(info->seg_command_line[0], "pwd", 4) == 0)
+		//fc_pwd(info);
 	else if (strncmp(info->seg_command_line[0], "export", 7) == 0)
-		ft_putstr_fd("export\n", 1);
+		fc_export(info);
 	else if (strncmp(info->seg_command_line[0], "unset", 6) == 0)
-		ft_putstr_fd("unset\n", 1);
+		fc_unset(info);
 	else if (strncmp(info->seg_command_line[0], "env", 4) == 0)
-		ft_putstr_fd("env\n", 1);
-	else if (strncmp(info->seg_command_line[0], "exit", 5) == 0)
-		fc_exit(info);
+		fc_env(info);
 	else if (fc_check_variable(info) == 1)
 		fc_variable_command(info);
-	else
-		ft_putstr_fd("error : command not found\n", 1);
-	fc_free_seg_command_line(info);
-	return (0);
+	exit (0);
 }

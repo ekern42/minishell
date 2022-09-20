@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   fc_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 12:49:37 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/17 15:25:01 by angelo           ###   ########.fr       */
+/*   Created: 2022/09/18 19:44:16 by angelo            #+#    #+#             */
+/*   Updated: 2022/09/20 17:34:24 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-size_t	fc_strlen(const char *str)
+int	fc_parsing(t_info *info)
 {
-	int	a;
-
-	a = 0;
-	while (str[a] != ' ' && str[a] != '\0')
-		a++;
-	return (a);
-}
-
-void	fc_test(char **envp)
-{
-	int	i;
-
-	i = -1;
-	while (envp[++i] != NULL)
-		printf("{%d}%s{%d}\n", i, envp[i], i);
+	fc_info_seg_cmd_line(info);
+	return (0);
 }

@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   fc_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 12:49:37 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/17 15:25:01 by angelo           ###   ########.fr       */
+/*   Created: 2022/09/06 12:51:42 by angelo            #+#    #+#             */
+/*   Updated: 2022/09/11 17:06:45 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-size_t	fc_strlen(const char *str)
+int	fc_env(t_info *info)
 {
-	int	a;
-
-	a = 0;
-	while (str[a] != ' ' && str[a] != '\0')
-		a++;
-	return (a);
-}
-
-void	fc_test(char **envp)
-{
-	int	i;
-
-	i = -1;
-	while (envp[++i] != NULL)
-		printf("{%d}%s{%d}\n", i, envp[i], i);
+	fc_print_chainlist(info->envp, 's', 1);
+	return (0);
 }

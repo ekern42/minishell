@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:49:05 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/06 12:34:37 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/09 17:48:40 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <ctype.h>
 # include <unistd.h>
 # include <strings.h>
+# include <errno.h>
 
 /* Part 1 */
 

@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:24:46 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/06 13:53:47 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/06 16:48:54 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ int	fc_quotes(t_info *info)
 	info->pair_sgl_quotes = sgl_quote / 2;
 	info->pair_dbl_quotes = dbl_quote / 2;
 //	printf("sgl : %d dbl : %d\n", info->pair_sgl_quotes, info->pair_dbl_quotes);
+	return (0);
 }
