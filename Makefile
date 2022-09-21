@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/09/20 17:34:06 by ekern            ###   ########.fr        #
+#    Updated: 2022/09/21 12:17:42 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,9 +57,10 @@ SRC_INIT =	\
 
 SRC_LEXER = \
 	srcs/lexer/lexer.c	\
-	srcs/lexer/pipes.c	\
-	srcs/lexer/quotes.c	\
-	srcs/lexer/redirections.c	\
+	srcs/lexer/lex_pipes.c	\
+	srcs/lexer/lex_quotes.c	\
+	srcs/lexer/lex_redirections.c	\
+	srcs/lexer/lex_variables.c
 
 SRC_PARSING =	\
 	srcs/parsing/fc_parsing.c	\

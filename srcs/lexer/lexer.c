@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:19:16 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/20 17:35:36 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/21 12:21:58 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ static void test(t_info *info)
 		printf("%d re outputed\n", info->lex->nbr_re_output);
 	if (info->lex->variable == true)
 		printf("%d variabled\n", info->lex->nbr_variable);
+}
+*/
+/*
+static void fc_print_list(t_info *info)
+{
+	while (info->quotes_list)
+	{
+		printf("Type : %c, begin : %d, end : %d\n", info->quotes_list->type, info->quotes_list->begin, info->quotes_list->end);
+		info->quotes_list = info->quotes_list->next;
+	}
+	printf(" sgl quote : %d, dlb quote : %d\n", info->lex->nbr_pair_sgl_q, info->lex->nbr_pair_dbl_q);
 }
 */
 int fc_check_lex(t_info *info, int a)
@@ -59,14 +70,12 @@ void	fc_lexer(t_info *info)
 	a = -1;
 	while (info->command_line[++a] != '\0')
 	{
+		a = fc_lex_quotes(info, a);
+		if (info->command_line[a] == '$')
+			fc_lex_variables(info);
 		if (info->command_line[a] == '|')
 			if (fc_lex_pipes(info, a) == 0)
 				return ;
-		if (info->command_line[a] == '$')
-		{
-			info->lex->variable = true;
-			info->lex->nbr_variable++;
-		}
 		if (info->command_line[a] == '<' || info->command_line[a] == '>')
 		{
 			b = fc_lex_redirections(info, a);
@@ -76,5 +85,6 @@ void	fc_lexer(t_info *info)
 				a++;
 		}	
 	}
+//	fc_print_list(info); // printer pour la liste des quotes
 //	test(info); // permet de voir le nombre de meta chara
 }

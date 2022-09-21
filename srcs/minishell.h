@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/20 17:21:03 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/21 12:19:27 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,23 @@
 	bool	re_input;	// <
 	bool	re_output;	// >
 */
+
+typedef struct	s_quotes
+{
+	char			type;
+	int				begin;
+	int				end;
+	struct s_quotes	*next;
+}				t_quotes;
+
 typedef struct s_lex_info
 {
 	bool	pipes;
 	int		nbr_pipe;
 	bool	sgl_quotes;
+	int		nbr_pair_sgl_q;
 	bool	dbl_quotes;
+	int		nbr_pair_dbl_q;
 	bool	variable;
 	int		nbr_variable;
 	bool	re_append;
@@ -78,8 +89,8 @@ typedef struct s_info
 	int				pair_sgl_quotes;
 	int				pair_dbl_quotes;
 	struct s_list	*envp;
-	struct s_list	*var;
 	t_lex_info		*lex;
+	t_quotes		*quotes_list;
 }	t_info;
 
 /* execution */
@@ -123,7 +134,9 @@ void	fc_init_lexer(t_info *info);
 void	fc_lexer(t_info *info);
 int		fc_check_lex(t_info *info, int a);
 int		fc_lex_pipes(t_info *info, int a);
+int		fc_lex_quotes(t_info *info, int a);
 int		fc_lex_redirections(t_info *info, int a);
+void	fc_lex_variables(t_info *info);
 
 /* parsing */
 int		fc_parsing(t_info *info);
@@ -134,9 +147,6 @@ char	**fc_cpy_cmd(t_info *info);
 char	**fc_cpy_cmd2(t_info *info);
 //int		fc_separate_cmd_pipe(t_info *info);
 //char	**fc_copy_pipe_cmd(char **cmd_line);
-
-/* quotes */
-int		fc_quotes(t_info *info);
 
 /* signal */
 void	fc_control_d(t_info *info);

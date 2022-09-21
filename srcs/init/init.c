@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:17:38 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/20 17:21:48 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/21 12:00:49 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	fc_init_lexer(t_info *info)
 	info->lex->pipes = false;
 	info->lex->nbr_pipe = 0;
 	info->lex->sgl_quotes = false;
+	info->lex->nbr_pair_sgl_q = 0;
 	info->lex->dbl_quotes = false;
+	info->lex->nbr_pair_dbl_q = 0;
 	info->lex->variable = false;
 	info->lex->nbr_variable = 0;
 	info->lex->re_append = false;

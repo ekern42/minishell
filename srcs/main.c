@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/20 17:33:16 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/21 12:01:03 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int ac, char **av, char **envp)
 	t_lex_info	lex;
 
 	info.seg_command_line = NULL;
+	info.quotes_list = NULL;
 	if (ac > 1 || av[1] != NULL)
 		fc_error(&info, 1);
 	fc_init(&info, &lex, envp);
@@ -47,7 +48,7 @@ int	main(int ac, char **av, char **envp)
 			{
 //				fc_parsing(&info);
 				fc_exit(&info);
-				fc_execution(&info);
+//				fc_execution(&info);
 			}
 		}
 		free(info.command_line);
