@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:19:16 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/21 12:21:58 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/22 10:38:44 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void test(t_info *info)
 		printf("%d re outputed\n", info->lex->nbr_re_output);
 	if (info->lex->variable == true)
 		printf("%d variabled\n", info->lex->nbr_variable);
-}
-*/
+}*/
+
 /*
 static void fc_print_list(t_info *info)
 {
@@ -43,7 +43,7 @@ static void fc_print_list(t_info *info)
 	printf(" sgl quote : %d, dlb quote : %d\n", info->lex->nbr_pair_sgl_q, info->lex->nbr_pair_dbl_q);
 }
 */
-int fc_check_lex(t_info *info, int a)
+int	fc_check_lex(t_info *info, int a)
 {
 	if (info->command_line[a + 1] == '\0')
 	{
@@ -52,15 +52,16 @@ int fc_check_lex(t_info *info, int a)
 	}
 	if (info->command_line[a + 1] == ' ')
 		a++;
-	if (info->command_line[a + 1] == '|' ||
-	info->command_line[a + 1] == '<' ||
-	info->command_line[a + 1] == '>')
+	if (info->command_line[a + 1] == '|'
+		|| info->command_line[a + 1] == '<'
+		|| info->command_line[a + 1] == '>')
 	{
 		info->lex->error = true;
 		return (0);
 	}
 	return (1);
 }
+
 /* Quotes pas encore fonctionnel, un peu plus percher a faire */
 void	fc_lexer(t_info *info)
 {

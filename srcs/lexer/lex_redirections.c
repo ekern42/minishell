@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirections.c                                     :+:      :+:    :+:   */
+/*   lex_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:47:40 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/20 17:10:48 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/22 10:35:49 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void fc_lex_sgl_red(t_info *info, int a)
+static void	fc_lex_sgl_red(t_info *info, int a)
 {
 	if (info->command_line[a] == '>')
 	{
@@ -26,21 +26,21 @@ static void fc_lex_sgl_red(t_info *info, int a)
 	}
 }
 
-static void fc_lex_dbl_red(t_info *info, int a)
+static void	fc_lex_dbl_red(t_info *info, int a)
 {
-		if (info->command_line[a] == '<')
-		{
-			info->lex->re_del = true;
-			info->lex->nbr_re_del++;
-		}
-		else if (info->command_line[a] == '>')
-		{
-			info->lex->re_append = true;
-			info->lex->nbr_re_append++;
-		}
+	if (info->command_line[a] == '<')
+	{
+		info->lex->re_del = true;
+		info->lex->nbr_re_del++;
+	}
+	else if (info->command_line[a] == '>')
+	{
+		info->lex->re_append = true;
+		info->lex->nbr_re_append++;
+	}
 }
 
-int fc_lex_redirections(t_info *info, int a)
+int	fc_lex_redirections(t_info *info, int a)
 {
 	if (a == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:24:46 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/21 12:17:57 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/22 10:41:56 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,20 @@ static void	fc_free_one_chain(t_info *info)
 	info->quotes_list = temp;
 }
 
-static void fc_init_quote_list(t_info *info, int a, char c)
+static void	fc_init_quote_list(t_info *info, int a, char c)
 {
 	t_quotes	*temp;
-	
+
 	temp = malloc(sizeof(t_quotes));
 	if (!temp)
-		exit (0);	// erreur a faire
+		exit (0); // erreur a faire
 	temp->type = c;
 	temp->begin = a;
 	temp->next = info->quotes_list;
 	info->quotes_list = temp;
 }
 
-
-int fc_lex_quotes(t_info *info, int a)
+int	fc_lex_quotes(t_info *info, int a)
 {
 	if (info->command_line[a] == 39) // single quote '
 	{
@@ -50,7 +49,7 @@ int fc_lex_quotes(t_info *info, int a)
 				return (a);
 			}
 		}
-		info->quotes_list->end = a;			
+		info->quotes_list->end = a;
 	}
 	else if (info->command_line[a] == 34) // double quote "
 	{
@@ -65,7 +64,7 @@ int fc_lex_quotes(t_info *info, int a)
 				return (a);
 			}
 		}
-		info->quotes_list->end = a;	
+		info->quotes_list->end = a;
 	}
 	return (a);
 }

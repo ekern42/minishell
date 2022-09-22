@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/21 12:01:03 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/22 10:43:04 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	main(int ac, char **av, char **envp)
 		fc_lexer(&info);
 		if (info.lex->error == false)
 		{
-			
 			fc_init_seg_cmd_line(&info);
 			if (info.seg_command_line)
 			{

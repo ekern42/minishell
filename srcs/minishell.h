@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/21 12:19:27 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/22 10:46:23 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 	bool	re_output;	// >
 */
 
-typedef struct	s_quotes
+typedef struct s_quotes
 {
 	char			type;
 	int				begin;
