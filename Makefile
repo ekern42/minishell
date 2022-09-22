@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/09/21 12:17:42 by ekern            ###   ########.fr        #
+#    Updated: 2022/09/22 16:26:10 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ MINISHELL = minishell
 NAME = $(MINISHELL)
 
 CC = gcc
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = 
 #-g3 -fsanitize=address
 
 INCLUDES = srcs/minishell.h
@@ -64,8 +64,9 @@ SRC_LEXER = \
 
 SRC_PARSING =	\
 	srcs/parsing/fc_parsing.c	\
-	srcs/parsing/fc_info_seg_cmd_line.c	\
-	srcs/parsing/fc_separate_cmd_pipe.c
+	srcs/parsing/fc_separate_cmd_pipe.c	\
+	srcs/parsing/sub_str.c	\
+	srcs/parsing/seg_str.c
 
 SRC_SIGNAL =	\
 	srcs/signal/signal.c

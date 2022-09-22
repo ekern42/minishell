@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/22 10:46:23 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/22 16:27:39 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_info
 {
 	char			*command_line;
 	char			**seg_command_line;
+	int				b_sub_str;
 	char			**cpy_cmd;
 	int				idx_seg_cmd_line;
 	char			*path;
@@ -89,6 +90,7 @@ typedef struct s_info
 	int				pair_sgl_quotes;
 	int				pair_dbl_quotes;
 	struct s_list	*envp;
+	struct s_list	*small_str_list;
 	t_lex_info		*lex;
 	t_quotes		*quotes_list;
 }	t_info;
@@ -140,13 +142,15 @@ void	fc_lex_variables(t_info *info);
 
 /* parsing */
 int		fc_parsing(t_info *info);
-int		fc_info_seg_cmd_line(t_info *info);
 int		fc_go_until_pipe(t_info *info);
 int		fc_go_until_next(t_info *info);
 char	**fc_cpy_cmd(t_info *info);
 char	**fc_cpy_cmd2(t_info *info);
 //int		fc_separate_cmd_pipe(t_info *info);
 //char	**fc_copy_pipe_cmd(char **cmd_line);
+int		fc_small_str_with_quote(t_info *info, t_quotes *temp, int a);
+void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a);
+void	fc_seg_str(t_info *info);
 
 /* signal */
 void	fc_control_d(t_info *info);

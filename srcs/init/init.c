@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
@@ -35,6 +35,7 @@ static void	fc_envp_init(t_info *info, char **envp)
 
 void	fc_init_lexer(t_info *info)
 {
+	info->quotes_list = NULL;
 	info->lex->pipes = false;
 	info->lex->nbr_pipe = 0;
 	info->lex->sgl_quotes = false;

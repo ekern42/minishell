@@ -6,12 +6,12 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:19:16 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/22 10:38:44 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/22 17:36:43 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-/*
+
 static void test(t_info *info)
 {
 	if (info->lex->pipes == true)
@@ -30,19 +30,21 @@ static void test(t_info *info)
 		printf("%d re outputed\n", info->lex->nbr_re_output);
 	if (info->lex->variable == true)
 		printf("%d variabled\n", info->lex->nbr_variable);
-}*/
+}
 
-/*
+
 static void fc_print_list(t_info *info)
 {
-	while (info->quotes_list)
+	t_quotes *temp;
+	
+	temp = info->quotes_list;
+	while (temp)
 	{
-		printf("Type : %c, begin : %d, end : %d\n", info->quotes_list->type, info->quotes_list->begin, info->quotes_list->end);
-		info->quotes_list = info->quotes_list->next;
+		printf("Type : %c, begin : %d, end : %d\n", temp->type, temp->begin, temp->end);
+		temp = temp->next;
 	}
 	printf(" sgl quote : %d, dlb quote : %d\n", info->lex->nbr_pair_sgl_q, info->lex->nbr_pair_dbl_q);
 }
-*/
 int	fc_check_lex(t_info *info, int a)
 {
 	if (info->command_line[a + 1] == '\0')
@@ -62,7 +64,6 @@ int	fc_check_lex(t_info *info, int a)
 	return (1);
 }
 
-/* Quotes pas encore fonctionnel, un peu plus percher a faire */
 void	fc_lexer(t_info *info)
 {
 	int	a;
@@ -86,6 +87,6 @@ void	fc_lexer(t_info *info)
 				a++;
 		}	
 	}
-//	fc_print_list(info); // printer pour la liste des quotes
+	fc_print_list(info); // printer pour la liste des quotes
 //	test(info); // permet de voir le nombre de meta chara
 }

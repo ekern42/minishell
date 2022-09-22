@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_time.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:45:01 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 22:27:48 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/22 17:08:09 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	fc_free_seg_command_line(t_info *info)
 	while (info->seg_command_line[++a] != NULL)
 		free(info->seg_command_line[a]);
 }
-
+/*
 void	fc_final_free(t_info *info)
 {
 	fc_free_seg_command_line(info);
 }
+*/
