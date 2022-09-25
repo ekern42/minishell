@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/09/22 16:26:10 by ekern            ###   ########.fr        #
+#    Updated: 2022/09/25 17:10:57 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@ MINISHELL = minishell
 NAME = $(MINISHELL)
 
 CC = gcc
-CFLAGS = 
-#-g3 -fsanitize=address
+CFLAGS = -g3 -fsanitize=address
 
 INCLUDES = srcs/minishell.h
 

@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:19:16 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/22 17:36:43 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/25 15:54:59 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void test(t_info *info)
 }
 
 
-static void fc_print_list(t_info *info)
+void fc_print_list(t_info *info)
 {
 	t_quotes *temp;
 	
@@ -87,6 +87,6 @@ void	fc_lexer(t_info *info)
 				a++;
 		}	
 	}
-	fc_print_list(info); // printer pour la liste des quotes
+//	fc_print_list(info); // printer pour la liste des quotes
 //	test(info); // permet de voir le nombre de meta chara
 }
