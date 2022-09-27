@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:24:46 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/22 16:54:02 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/26 15:02:45 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,37 +36,40 @@ static void	fc_init_quote_list(t_info *info, int a, char c)
 
 int	fc_lex_quotes(t_info *info, int a)
 {
+	int	b;
+
+	b = a;
 	if (info->command_line[a] == 39) // single quote '
 	{
 		info->lex->nbr_pair_sgl_q++;
 		fc_init_quote_list(info, a, 39);
-		while (info->command_line[++a] != 39)
+		while (info->command_line[++b] != 39)
 		{
-			if (info->command_line[a] == '\0')
+			if (info->command_line[b] == '\0')
 			{
 				info->lex->nbr_pair_sgl_q--;
 				fc_free_one_chain(info);
-				return (a);
+				return (a + 1);
 			}
 		}
-		info->quotes_list->end = a;
+		info->quotes_list->end = b;
 	}
 	else if (info->command_line[a] == 34) // double quote "
 	{
 		info->lex->nbr_pair_dbl_q++;
 		fc_init_quote_list(info, a, 34);
-		while (info->command_line[++a] != 34)
+		while (info->command_line[++b] != 34)
 		{
-			if (info->command_line[a] == '\0')
+			if (info->command_line[b] == '\0')
 			{
 				info->lex->nbr_pair_dbl_q--;
 				fc_free_one_chain(info);
-				return (a);
+				return (a + 1);
 			}
 		}
-		info->quotes_list->end = a;
+		info->quotes_list->end = b;
 	}
-	return (a);
+	return (b);
 }
 
 /*

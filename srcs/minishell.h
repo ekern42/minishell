@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/25 16:48:00 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/27 16:51:48 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_info
 	char			*command_line;
 	char			**seg_command_line;
 	int				b_sub_str;
+	int				nbr_sstr;
 	char			**cpy_cmd;
 	int				idx_seg_cmd_line;
 	char			*path;
@@ -153,6 +154,7 @@ char	**fc_cpy_cmd2(t_info *info);
 int		fc_small_str_with_quote(t_info *info, t_quotes *temp, int a);
 void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a);
 void	fc_seg_str(t_info *info);
+void	fc_final_seg(t_info *info);
 
 /* signal */
 void	fc_control_d(t_info *info);

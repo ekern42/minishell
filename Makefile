@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/09/25 17:10:57 by ekern            ###   ########.fr        #
+#    Updated: 2022/09/26 15:13:03 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ SRC_PARSING =	\
 	srcs/parsing/fc_parsing.c	\
 	srcs/parsing/fc_separate_cmd_pipe.c	\
 	srcs/parsing/sub_str.c	\
-	srcs/parsing/seg_str.c
+	srcs/parsing/seg_str.c	\
+	srcs/parsing/final_seg.c
 
 SRC_SIGNAL =	\
 	srcs/signal/signal.c

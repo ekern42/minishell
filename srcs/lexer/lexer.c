@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:19:16 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/25 15:54:59 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/26 15:06:16 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void fc_print_list(t_info *info)
 	}
 	printf(" sgl quote : %d, dlb quote : %d\n", info->lex->nbr_pair_sgl_q, info->lex->nbr_pair_dbl_q);
 }
+
 int	fc_check_lex(t_info *info, int a)
 {
 	if (info->command_line[a + 1] == '\0')
@@ -72,6 +73,7 @@ void	fc_lexer(t_info *info)
 	a = -1;
 	while (info->command_line[++a] != '\0')
 	{
+		
 		a = fc_lex_quotes(info, a);
 		if (info->command_line[a] == '$')
 			fc_lex_variables(info);
@@ -85,7 +87,9 @@ void	fc_lexer(t_info *info)
 				return ;
 			else if (b == 2)
 				a++;
-		}	
+		}
+//		if (info->command_line[a] == '\0')	// si stack overflow dans fc_lexer decommente ce "if"
+//			break ;
 	}
 //	fc_print_list(info); // printer pour la liste des quotes
 //	test(info); // permet de voir le nombre de meta chara
