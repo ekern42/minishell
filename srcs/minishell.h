@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/27 16:51:48 by ekern            ###   ########.fr       */
+/*   Updated: 2022/09/28 15:04:37 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int		fc_error_exe2(int code_return);
 void	fc_final_free(t_info *info);
 void	fc_free_seg_command_line(t_info *info);
 void	fc_free_t_list(t_info *info);
+void	fc_free_t_list_spec(t_info *info);
 void	fc_quote_list_free(t_info *info);
 
 /* init */
