@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sub_str.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:44:17 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/27 16:46:59 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/01 10:20:18 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	fc_small_str_with_quote(t_info *info, t_quotes *temp, int a)
 
 void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a)
 {
+	(void)temp;
 	while (info->command_line[a] != '\0')
 	{
 		a = fc_small_str_common(info, a);

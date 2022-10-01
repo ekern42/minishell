@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_seg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:11:47 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/28 17:17:56 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/01 10:25:16 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static char *fc_sstr_change(char *content_temp)
 static void	fc_size_seg_str(t_info *info)
 {
 	t_list	*temp;
-	char	*content_temp;
+//	char	*content_temp;
 
 	temp = info->small_str_list;
-	content_temp = NULL;
+//	content_temp = NULL;
 	info->b_sub_str = 0;
 	while (temp && ft_strncmp(temp->content, "|", 1))
 	{
@@ -71,7 +71,8 @@ void fc_final_seg(t_info *info)
 		temp = info->small_str_list;
 		seg_temp = malloc(sizeof(char *) * (info->b_sub_str + 1));
 		if (seg_temp)
-			exit ; // erreur a faire
+			exit(1);
+//			exit ; // erreur a faire
 		seg_temp[info->b_sub_str] = NULL;
 		while (temp && ft_strncmp(temp->content, "|", 1))
 		{

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
+#    By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/09/26 15:13:03 by ekern            ###   ########.fr        #
+#    Updated: 2022/10/01 10:16:31 by angelo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ MINISHELL = minishell
 NAME = $(MINISHELL)
 
 CC = gcc
-CFLAGS = -g3 -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall
+#-g3 -fsanitize=address
 
 INCLUDES = srcs/minishell.h
 
@@ -38,11 +39,15 @@ SRC_EXECVE =	\
 	srcs/execution/execve/fc_path_for_execve.c
 
 SRC_REDIRECTIONS =	\
+	srcs/execution/redirections/fc_double_bracket_big_to_small.c	\
+	srcs/execution/redirections/fc_simple_bracket_big_to_small.c	\
+	srcs/execution/redirections/bracket_small_to_big.c	\
 	srcs/execution/redirections/pipe.c
 
 SRC_EXECUTION =	\
 	srcs/execution/fc_execution.c	\
-	srcs/execution/fc_builtins_or_execve.c	\
+	srcs/execution/fc_exe_with_pipe.c	\
+	srcs/execution/fc_builtins_or_execve.c
 
 SRC_ERRORS =	\
 	srcs/errors/errors.c
@@ -63,10 +68,11 @@ SRC_LEXER = \
 
 SRC_PARSING =	\
 	srcs/parsing/fc_parsing.c	\
-	srcs/parsing/fc_separate_cmd_pipe.c	\
 	srcs/parsing/sub_str.c	\
 	srcs/parsing/seg_str.c	\
-	srcs/parsing/final_seg.c
+	srcs/parsing/final_seg.c	\
+	srcs/parsing/info_seg_cmd_line.c	\
+	srcs/parsing/temp_solution_for_pipe.c
 
 SRC_SIGNAL =	\
 	srcs/signal/signal.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/28 15:04:37 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/01 10:32:29 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <fcntl.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/big_lib.h"
@@ -41,7 +43,7 @@ typedef struct s_quotes
 	int				begin;
 	int				end;
 	struct s_quotes	*next;
-}				t_quotes;
+}	t_quotes;
 
 typedef struct s_lex_info
 {
@@ -67,16 +69,38 @@ typedef struct s_lex_info
 typedef struct s_execution
 {
 	char	***cmds;
+	char	**str_left;
+	char	**str_right;
 	pid_t	pid_init;
 	pid_t	pid_other;
 	int		pipe_init;
 	int		size_seg_cmd_line;
-	int		idx_for_pipe;
+	int		nbr_pipe;
+	int		nbr_bracket_smaller_one;
+	int		nbr_bracket_smaller_two;
+	int		nbr_bracket_bigger_one;
+	int		nbr_bracket_bigger_two;
+	char	*buffer;
+	int		size_buffer;
 	int		fd[2];
 	int		**fd_final;
 	int		i;
 	int		j;
 }	t_execution;
+
+typedef struct s_path
+{
+	char	**split;
+	char	*path;
+	int		i;
+	int		j;
+}	t_path;
+
+typedef struct s_builtin
+{
+	struct dirent	*entity;
+	DIR				*dir;
+}	t_builtin;
 
 typedef struct s_info
 {
@@ -84,9 +108,11 @@ typedef struct s_info
 	char			**seg_command_line;
 	int				b_sub_str;
 	int				nbr_sstr;
-	char			**cpy_cmd;
 	int				idx_seg_cmd_line;
+	int				idx;
 	char			*path;
+	t_path			*p;
+	t_builtin		*b;
 	t_execution		*exe;
 	int				pair_sgl_quotes;
 	int				pair_dbl_quotes;
@@ -98,6 +124,7 @@ typedef struct s_info
 
 /* execution */
 int		fc_execution(t_info *info);
+int		fc_exe_with_pipe(t_info *info);
 int		fc_builtins_or_execve(t_info *info);
 
 /* execution/builtins */
@@ -115,14 +142,16 @@ int		fc_execve(t_info *info);
 void	*fc_path_for_execve(t_info *info);
 
 /* execution/redirections */
-//int		fc_pipe(t_info *info);
 int		fc_stdin_to_stdout(t_info *info); //Donc à gauche du pipe
 int		fc_stdout_to_stdin(t_info *info); //Donc à droite du pipe
+int		fc_double_bracket_big_to_small(t_info *info);
+int		fc_simple_bracket_big_to_small(t_info *info);
 
 /* errors */
 void	fc_error(t_info *info, int a);
 int		fc_error_exe(char *error, int code_return);
 int		fc_error_exe2(int code_return);
+int		fc_error_tmp(int code_return, char *error_message);
 
 /* free */
 void	fc_final_free(t_info *info);
@@ -134,6 +163,7 @@ void	fc_quote_list_free(t_info *info);
 /* init */
 int		fc_init(t_info *info, t_lex_info *lex, char **envp);
 void	fc_init_seg_cmd_line(t_info *info);
+void	fc_init_seg_cmd_line2(t_info *info);
 
 /* Lexer */
 void	fc_init_lexer(t_info *info);
@@ -146,16 +176,16 @@ void	fc_lex_variables(t_info *info);
 
 /* parsing */
 int		fc_parsing(t_info *info);
-int		fc_go_until_pipe(t_info *info);
-int		fc_go_until_next(t_info *info);
-char	**fc_cpy_cmd(t_info *info);
-char	**fc_cpy_cmd2(t_info *info);
-//int		fc_separate_cmd_pipe(t_info *info);
-//char	**fc_copy_pipe_cmd(char **cmd_line);
 int		fc_small_str_with_quote(t_info *info, t_quotes *temp, int a);
 void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a);
 void	fc_seg_str(t_info *info);
 void	fc_final_seg(t_info *info);
+int		fc_parsing2(t_info *info);
+int		fc_info_seg_cmd_line(t_info *info);
+int		fc_check_is_redirection(t_info *info);
+int		fc_size_for_create_substr(t_info *info);
+void	*fc_create_left_str(t_info *info);
+void	*fc_create_right_str(t_info *info);
 
 /* signal */
 void	fc_control_d(t_info *info);
@@ -174,6 +204,6 @@ int		fc_check_variable(t_info *info);
 
 /* main.c */
 int		fc_prompt(t_info *info);
-void fc_print_list(t_info *info);
+void	fc_print_list(t_info *info);
 
 #endif

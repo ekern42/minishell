@@ -6,25 +6,21 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:36:10 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/19 19:36:13 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/27 18:12:12 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// pwd | wc
-
 // Donc à gauche du pipe
 int	fc_stdin_to_stdout(t_info *info)
 {
-	//i = fc_go_until_pipe(info);
-	//printf("i = %d\n", i);
 	if (dup2(info->exe->fd[1], STDOUT_FILENO) < 0)
-		fc_error_exe2(11);
+		fc_error_tmp(1, "Problem with dup2 - info->exe->fd[1], STDOUT_FILENO\n");
 	if (close(info->exe->fd[0]) < 0)
-		fc_error_exe2(12);
+		fc_error_tmp(1, "Problem with close - fd[0]- fc_stdin_to_stdout\n");
 	if (close(info->exe->fd[1]) < 0)
-		fc_error_exe2(13);
+		fc_error_tmp(1, "Problem with close - fd[1]- fc_stdin_to_stdout\n");
 	return (0);
 }
 
@@ -32,107 +28,13 @@ int	fc_stdin_to_stdout(t_info *info)
 int	fc_stdout_to_stdin(t_info *info)
 {
 	if (dup2(info->exe->fd[0], STDIN_FILENO) < 0)
-		fc_error_exe2(14);
+		fc_error_tmp(1, "Problem with dup2 - info->exe->fd[0], STDIN_FILENO\n");
 	if (close(info->exe->fd[0]) < 0)
-		fc_error_exe2(15);
+		fc_error_tmp(1, "Problem with close - fd[0] - fc_stdout_to_stdin\n");
 	if (close(info->exe->fd[1]) < 0)
-		fc_error_exe2(16);
-	//j = fc_go_until_next(info);
-	//printf("j = %d\n", j);
+		fc_error_tmp(1, "Problem with close - fd[1]- fc_stdout_to_stdin\n");
 	return (0);
 }
-
-
-/*printf("nbr | : %d\n", info->exe->nbr_pipe);
-printf("nbr < : %d\n", info->exe->nbr_bracket_smaller_one);
-printf("nbr << : %d\n", info->exe->nbr_bracket_smaller_two);
-printf("nbr > : %d\n", info->exe->nbr_bracket_bigger_one);
-printf("nbr >> : %d\n", info->exe->nbr_bracket_bigger_two);
-printf("size_seg_cmd_line : %d\n", info->exe->size_seg_cmd_line);*/
-
-//char	*args[2];
-//args[0] = "/bin/pwd";
-//args[1] = NULL;
-//execve(args[0], args, NULL);
-
-/*
-int	fc_pipe(t_info *info)
-{
-	//fc_print_seg_cmd_line(info);
-	//fc_separate_cmd_pipe(info);
-	//printf("1.%s 2.%s 3.%s\n", info->exe->cmds[0][0], info->exe->cmds[0][1], info->exe->cmds[0][2]);
-	//printf("1.%s 2.%s\n", info->exe->cmds[1][0], info->exe->cmds[1][1]);
-	//printf("1.%s 2.%s 3.%s\n", info->exe->cmds[1][0], info->exe->cmds[1][1], info->exe->cmds[1][2]);
-
-	//fc_cpy_cmd(info);
-
-	int	fd[2];
-	//int	i;
-	//int	j;
-	if (pipe(fd) < 0)
-		fc_error_exe2(1);
-
-	info->exe->pid_init = fork();
-	if (info->exe->pid_init < 0)
-		fc_error_exe2(2);
-	if (info->exe->pid_init == 0)
-	{
-		//if (fc_check_is_builtins(info) == 0)
-		//	fc_builtins(info);
-		//else
-		//{
-			//i = fc_go_until_pipe(info);
-			//printf("i = %d\n", i);
-			if (dup2(fd[1], STDOUT_FILENO) < 0)
-				fc_error_exe2(3);
-			if (close(fd[0]) < 0)
-				fc_error_exe2(4);
-			if (close(fd[1]) < 0)
-				fc_error_exe2(5);
-			//info->idx_seg_cmd_line = 0;
-			fc_builtins_or_execve(info);
-		//}
-	}
-	info->exe->pid_other = fork();
-	if (info->exe->pid_other < 0)
-		fc_error_exe2(6);
-	if (info->exe->pid_other == 0)
-	{
-		//if (fc_check_is_builtins(info) == 0)
-		//	fc_builtins(info);
-		//else
-		//{
-			if (dup2(fd[0], STDIN_FILENO) < 0)
-				fc_error_exe2(9);
-			if (close(fd[0]) < 0)
-				fc_error_exe2(7);
-			if (close(fd[1]) < 0)
-				fc_error_exe2(8);
-			//j = fc_go_until_next(info);
-			//printf("j = %d\n", j);
-			//info->idx_seg_cmd_line = 2;
-			//fc_execution_cmd(info);
-			fc_builtins_or_execve(info);
-		//}
-	}
-	if (close(fd[0]) < 0)
-		fc_error_exe2(9);
-	if (close(fd[1]) < 0)
-		fc_error_exe2(10);
-	
-	if (waitpid(info->exe->pid_init, NULL, 0) < 0)
-		fc_error_exe2(11);
-	if (waitpid(info->exe->pid_other, NULL, 0) < 0)
-		fc_error_exe2(12);
-	
-	return (0);
-}
-//if (fc_builtins(info) != 0 || fc_execution_cmd(info) != 0)
-//{
-//	ft_putstr_fd("error : command not found\n", 1);
-//	fc_free_seg_command_line(info);
-//}
-*/
 
 /*
 -	la fonction pipe me permet de créer un "tuyau", cad une entrée et une sortie.

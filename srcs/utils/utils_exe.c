@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:16:47 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/19 11:59:20 by angelo           ###   ########.fr       */
+/*   Updated: 2022/09/28 15:36:28 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,33 @@ void	*fc_find_envp_without_name(t_info *info, char *var_env)
 }
 */
 
+void	*fc_find_envp_with_name(t_info *info, char *var_env)
+{
+	int		size;
+	//char	*new_pwd;
+
+	size = ft_strlen(var_env);
+	while (info->envp != NULL)
+	{
+		while (info->envp->content != NULL)
+		{
+			if (ft_strncmp(info->envp->content, var_env, size) == 0)
+			{
+				//new_pwd = malloc(sizeof(char) * 1000);
+				//new_pwd = "PWD=/home/angelo/Projets/minishell/srcs";
+				info->envp->content = NULL;
+				info->envp->content = "PWD=/home/angelo/Projets/minishell/srcs";
+				//info->envp->content = new_pwd;
+				printf("%s\n", (char *)info->envp->content);
+				return (info->envp->content);
+			}
+			info->envp = info->envp->next;
+		}
+	}
+	return (NULL);
+}
+
+/*
 // with the name of $VAR
 void	*fc_find_envp_with_name(t_info *info, char *var_env)
 {
@@ -97,6 +124,7 @@ void	*fc_find_envp_with_name(t_info *info, char *var_env)
 	}
 	return (NULL);
 }
+*/
 
 void	fc_print_seg_cmd_line(t_info *info)
 {
@@ -109,4 +137,16 @@ void	fc_print_seg_cmd_line(t_info *info)
 		printf("%s\n", (char *)info->seg_command_line[i]);
 		i++;
 	}
+}
+
+void	fc_print_seg_cmd_line2(t_info *info)
+{
+
+	info->idx = 0;
+	while (info->seg_command_line[info->idx] != NULL)
+	{
+		printf("info->seg_command_line[idx] = %s | idx = %d\n", (char *)info->seg_command_line[info->idx], info->idx);
+		info->idx++;
+	}
+	info->idx = 0;
 }

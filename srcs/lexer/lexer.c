@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:19:16 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/26 15:06:16 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/01 10:26:58 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
 static void test(t_info *info)
 {
 	if (info->lex->pipes == true)
@@ -31,7 +32,7 @@ static void test(t_info *info)
 	if (info->lex->variable == true)
 		printf("%d variabled\n", info->lex->nbr_variable);
 }
-
+*/
 
 void fc_print_list(t_info *info)
 {

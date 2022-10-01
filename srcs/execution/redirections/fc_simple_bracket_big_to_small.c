@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fc_execve.c                                        :+:      :+:    :+:   */
+/*   fc_simple_bracket_big_to_small.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 18:31:17 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/26 12:53:34 by angelo           ###   ########.fr       */
+/*   Created: 2022/09/30 12:31:39 by angelo            #+#    #+#             */
+/*   Updated: 2022/09/30 12:32:13 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-
-int	fc_execve(t_info *info)
+// >
+int	fc_simple_bracket_big_to_small(t_info *info)
 {
-	info->path = fc_path_for_execve(info);
-	if ((execve(info->path, (char **)&info->seg_command_line[info->idx],
-			(char **)info->envp)) == -1)
-		fc_error_exe2(4);
-	//free (info->path);
+	if (info->exe->nbr_bracket_bigger_one == 0)
+		return (0);
+
+
+
 	return (0);
 }
