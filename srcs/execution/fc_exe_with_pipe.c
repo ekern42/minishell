@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:06:00 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/26 12:49:36 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 12:34:21 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	fc_exe_with_pipe(t_info *info)
 			info->idx++;
 		//printf("idx = %d\n", info->idx); // comment voir puisque ça a été redirigé ??
 		info->path = fc_path_for_execve(info);
-		execve(info->path, fc_create_left_str(info), NULL);
+		//execve(info->path, fc_create_left_str(info), NULL);
+		info->idx = 0;
+		execve(info->path, info->exe->cmds[info->idx], NULL);
 	}
 
 	info->exe->pid_other = fork();
@@ -48,7 +50,8 @@ int	fc_exe_with_pipe(t_info *info)
 			info->idx++;
 		info->path = fc_path_for_execve(info);
 		//printf("info->path = %s\n", info->path);
-		execve(info->path, fc_create_right_str(info), NULL);
+		//execve(info->path, fc_create_right_str(info), NULL);
+		execve(info->path, info->exe->cmds[info->idx], NULL);
 	}
 	
 	if (close(info->exe->fd[0]) < 0)

@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 19:44:16 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/01 09:53:44 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 14:08:18 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,5 @@ int	fc_parsing(t_info *info)
 			printf("----------\n");
 		a++;
 	} */
-	return (0);
-}
-
-#include "../minishell.h"
-
-int	fc_parsing2(t_info *info)
-{
-	fc_info_seg_cmd_line(info);
 	return (0);
 }

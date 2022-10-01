@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:35:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/26 10:57:19 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 14:04:30 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	*fc_path_for_execve(t_info *info)
 		path_splited[i][ft_strlen(path_splited[i])] = '/';
 		if (path_splited[0][ft_strlen(path_splited[0]) - 1] == '!')
 			path_splited[0][ft_strlen(path_splited[0]) - 1] = '\0';
-		path = ft_strjoin(path_splited[i], info->seg_command_line[info->idx]);
+		//path = ft_strjoin(path_splited[i], info->seg_command_line[info->idx]);
+		path = ft_strjoin(path_splited[i], info->exe->cmds[info->idx2][info->idx]);
+		//path = ft_strjoin(path_splited[i], (char *)info->exe->cmds[info->idx2]);
 		//printf("path = %s\n", path);
 		if (access(path, X_OK) == 0)
 		{

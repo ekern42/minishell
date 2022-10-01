@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:11:47 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/01 10:25:16 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 13:52:11 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void fc_final_seg(t_info *info)
 		a = 0;
 		temp = info->small_str_list;
 		seg_temp = malloc(sizeof(char *) * (info->b_sub_str + 1));
-		if (seg_temp)
+		if (!seg_temp)
 			exit(1);
 //			exit ; // erreur a faire
 		seg_temp[info->b_sub_str] = NULL;

@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/01 10:32:29 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 14:08:35 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_quotes
 	struct s_quotes	*next;
 }	t_quotes;
 
-typedef struct s_lex_info
+typedef struct s_lex_info // lexical qqch -> vérifie chaque caractère
 {
 	bool	pipes;
 	int		nbr_pipe;
@@ -110,6 +110,7 @@ typedef struct s_info
 	int				nbr_sstr;
 	int				idx_seg_cmd_line;
 	int				idx;
+	int				idx2;
 	char			*path;
 	t_path			*p;
 	t_builtin		*b;
@@ -180,7 +181,6 @@ int		fc_small_str_with_quote(t_info *info, t_quotes *temp, int a);
 void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a);
 void	fc_seg_str(t_info *info);
 void	fc_final_seg(t_info *info);
-int		fc_parsing2(t_info *info);
 int		fc_info_seg_cmd_line(t_info *info);
 int		fc_check_is_redirection(t_info *info);
 int		fc_size_for_create_substr(t_info *info);

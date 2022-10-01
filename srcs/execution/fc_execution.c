@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:00:45 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/27 13:42:25 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 13:39:04 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	fc_init_execution(t_info *info)
 	return (0);
 }
 
+// idx2 est relié au pipe
 int	fc_execution(t_info *info)
 {
 	//fc_print_seg_cmd_line2(info);
@@ -30,6 +31,7 @@ int	fc_execution(t_info *info)
 	if (info->exe->pid_init == 0)
 	{
 		info->idx = 0;
+		//info->idx2 = 0;
 		fc_builtins_or_execve(info);
 	}
 	if (close(info->exe->fd[0]) < 0)
