@@ -6,12 +6,12 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 20:10:41 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/22 18:23:33 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 14:18:16 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
+/*
 int	fc_info_seg_cmd_line(t_info *info)
 {
 	int	i;
@@ -36,12 +36,12 @@ int	fc_info_seg_cmd_line(t_info *info)
 			info->exe->nbr_bracket_bigger_two++;
 	}
 	info->exe->size_seg_cmd_line = i;
-	/*printf("nbr | : %d\n", info->exe->nbr_pipe);
+	printf("nbr | : %d\n", info->exe->nbr_pipe);
 	printf("nbr < : %d\n", info->exe->nbr_bracket_smaller_one);
 	printf("nbr << : %d\n", info->exe->nbr_bracket_smaller_two);
 	printf("nbr > : %d\n", info->exe->nbr_bracket_bigger_one);
 	printf("nbr >> : %d\n", info->exe->nbr_bracket_bigger_two);
-	printf("size_seg_cmd_line : %d\n", info->exe->size_seg_cmd_line);*/
+	printf("size_seg_cmd_line : %d\n", info->exe->size_seg_cmd_line);
 	return (0);
 }
 
@@ -55,3 +55,4 @@ int	fc_check_is_redirection(t_info *info)
 			return (0);
 	return (1);
 }
+*/

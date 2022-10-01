@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/01 14:08:35 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 14:31:11 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct s_info
 	char			**seg_command_line;
 	int				b_sub_str;
 	int				nbr_sstr;
-	int				idx_seg_cmd_line;
+//	int				idx_seg_cmd_line;
 	int				idx;
 	int				idx2;
 	char			*path;
@@ -163,7 +163,6 @@ void	fc_quote_list_free(t_info *info);
 
 /* init */
 int		fc_init(t_info *info, t_lex_info *lex, char **envp);
-void	fc_init_seg_cmd_line(t_info *info);
 void	fc_init_seg_cmd_line2(t_info *info);
 
 /* Lexer */
@@ -181,8 +180,8 @@ int		fc_small_str_with_quote(t_info *info, t_quotes *temp, int a);
 void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a);
 void	fc_seg_str(t_info *info);
 void	fc_final_seg(t_info *info);
-int		fc_info_seg_cmd_line(t_info *info);
-int		fc_check_is_redirection(t_info *info);
+//int		fc_info_seg_cmd_line(t_info *info);
+//int		fc_check_is_redirection(t_info *info);
 int		fc_size_for_create_substr(t_info *info);
 void	*fc_create_left_str(t_info *info);
 void	*fc_create_right_str(t_info *info);
@@ -196,7 +195,7 @@ size_t	fc_strlen(const char *str);
 void	fc_test(char **envp);
 void	*fc_find_envp_with_name(t_info *info, char *var_env);
 void	*fc_find_envp_without_name(t_info *info, char *var_env);
-void	fc_print_seg_cmd_line(t_info *info);
+//void	fc_print_seg_cmd_line(t_info *info);
 
 /* variable */
 void	fc_variable_command(t_info *info);

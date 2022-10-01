@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/01 14:08:11 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 14:27:45 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	main(int ac, char **av, char **envp)
 		fc_lexer(&info);
 		if (info.lex->error == false)
 		{
-//			fc_init_seg_cmd_line(&info);
 			fc_init_seg_cmd_line2(&info);
 			fc_parsing(&info);
 			if (info.seg_command_line)

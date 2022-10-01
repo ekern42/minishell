@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:16:47 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/01 13:56:47 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 14:26:48 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	*fc_find_envp_with_name(t_info *info, char *var_env)
 	return (NULL);
 }
 */
-
+/*
 void	fc_print_seg_cmd_line(t_info *info)
 {
 	int	i;
@@ -138,7 +138,6 @@ void	fc_print_seg_cmd_line(t_info *info)
 		i++;
 	}
 }
-
 void	fc_print_seg_cmd_line2(t_info *info)
 {
 
@@ -150,3 +149,4 @@ void	fc_print_seg_cmd_line2(t_info *info)
 	}
 	info->idx = 0;
 }
+*/
