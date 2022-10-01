@@ -6,7 +6,7 @@
 #    By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/01 10:16:31 by angelo           ###   ########.fr        #
+#    Updated: 2022/10/01 19:13:52 by angelo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,8 @@ SRC_EXECVE =	\
 	srcs/execution/execve/fc_path_for_execve.c
 
 SRC_REDIRECTIONS =	\
-	srcs/execution/redirections/fc_double_bracket_big_to_small.c	\
-	srcs/execution/redirections/fc_simple_bracket_big_to_small.c	\
-	srcs/execution/redirections/bracket_small_to_big.c	\
+	srcs/execution/redirections/fc_re_append.c	\
+	srcs/execution/redirections/fc_re_output.c	\
 	srcs/execution/redirections/pipe.c
 
 SRC_EXECUTION =	\
@@ -56,8 +55,7 @@ SRC_FREE =	\
 	srcs/free/free_time.c
 
 SRC_INIT =	\
-	srcs/init/init.c	\
-	srcs/init/fc_init_seg_cmd_line.c
+	srcs/init/init.c
 
 SRC_LEXER = \
 	srcs/lexer/lexer.c	\
@@ -70,9 +68,7 @@ SRC_PARSING =	\
 	srcs/parsing/fc_parsing.c	\
 	srcs/parsing/sub_str.c	\
 	srcs/parsing/seg_str.c	\
-	srcs/parsing/final_seg.c	\
-	srcs/parsing/info_seg_cmd_line.c	\
-	srcs/parsing/temp_solution_for_pipe.c
+	srcs/parsing/final_seg.c
 
 SRC_SIGNAL =	\
 	srcs/signal/signal.c

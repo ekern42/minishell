@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 19:44:16 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/01 14:08:18 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 19:29:53 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	fc_parsing(t_info *info)
 {
 	int nbr_cmds;
 	char ***temp;
-//	int	a;
-//	int	b;
+	//int	a;
+	//int	b;
 	
 //	printf("pipe %d\n", info->lex->nbr_pipe);
 	temp= malloc(sizeof(char **) * (info->lex->nbr_pipe + 2));
@@ -27,7 +27,29 @@ int	fc_parsing(t_info *info)
 	temp[nbr_cmds] = NULL;
 	info->exe->cmds = temp;
 	fc_seg_str(info);
-/*	printf("parsing finish\n");
+	//fc_print_for_pipe(info);
+	//printf("parsing finish\n");
+	//a = 0;
+	//while (a != info->lex->nbr_pipe + 1)
+	//{
+	//	b = 0;
+	//	while (info->exe->cmds[a][b] != NULL)
+	//	{
+	//		printf("%s\n", info->exe->cmds[a][b]);
+	//		b++;
+	//	}
+	//		printf("----------\n");
+	//	a++;
+	//}
+	return (0);
+}
+
+void	fc_print_for_pipe(t_info *info)
+{
+	int	a;
+	int	b;
+	
+	printf("fc_print_for_pipe : \n");
 	a = 0;
 	while (a != info->lex->nbr_pipe + 1)
 	{
@@ -39,6 +61,5 @@ int	fc_parsing(t_info *info)
 		}
 			printf("----------\n");
 		a++;
-	} */
-	return (0);
+	}
 }

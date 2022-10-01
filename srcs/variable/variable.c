@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 12:41:00 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/05 22:30:19 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 19:11:52 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	fc_variable_command(t_info *info)
 
 int	fc_check_variable(t_info *info)
 {
-	int	a;
+	(void)info;
+/*	int	a;
 	int	b;
 
 	a = -1;
@@ -35,5 +36,6 @@ int	fc_check_variable(t_info *info)
 		}
 		b = -1;
 	}
+*/
 	return (0);
 }

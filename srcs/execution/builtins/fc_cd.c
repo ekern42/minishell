@@ -6,11 +6,12 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:51:19 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/28 15:59:12 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 19:01:49 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
 //#include <string.h>
 // size_t	ft_strlcat(char *dest, const char *src, size_t n)
 /*
@@ -41,8 +42,8 @@ static void	list_files(t_info *info, const char *dirname)
 int	fc_cd(t_info *info)
 {
 	//char	*path;
-
-//	Applications  Bureau  Documents  Images  Modèles  Musique  Projets  Public  snap  Téléchargements  Vidéos
+	(void)info;
+	ft_putstr_fd("cd\nNot yet implemented\n", 1);
 
 	//list_files(info, ".");
 	//printf("----------------\n");
@@ -62,7 +63,7 @@ int	fc_cd(t_info *info)
 //			fc_error_tmp(1, "Problem with chdir\n");
 //	}
 
-
+/*
 	char s[100];
   
 	// printing current working directory
@@ -86,7 +87,7 @@ int	fc_cd(t_info *info)
 	printf("Après : %s\n", getcwd(s, 100));
   
 	// after chdir is executed
-
+*/
 
 	//if (info->b->entity->d_type == 4)
 	//ft_putstr_fd("cd\nNot yet implemented\n", 1);

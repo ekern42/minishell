@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_time.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:45:01 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/28 15:40:30 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/01 19:09:24 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,6 @@ void	fc_quote_list_free(t_info *info)
 		free (free_time);
 		free_time = temp;
 	}
-}
-
-void	fc_free_seg_command_line(t_info *info)
-{
-	int	a;
-
-	a = -1;
-	while (info->seg_command_line[++a] != NULL)
-		free(info->seg_command_line[a]);
 }
 
 void	fc_free_t_list(t_info *info)
@@ -67,9 +58,8 @@ void	fc_free_t_list_spec(t_info *info)
 	}
 	info->small_str_list = free_time;
 }
-/*
+
 void	fc_final_free(t_info *info)
 {
-	fc_free_seg_command_line(info);
+	(void)info;
 }
-*/

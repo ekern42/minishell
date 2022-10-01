@@ -63,5 +63,6 @@ int	fc_init(t_info *info, t_lex_info *lex, char **envp)
 	fc_start_up();
 	fc_envp_init(info, envp);
 	info->lex = lex;
+	info->exe = malloc(sizeof(t_execution));
 	return (0);
 }

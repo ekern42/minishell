@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:38:34 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/11 18:07:36 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 19:27:22 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	fc_exit(t_info *info)
 {
-	if (strncmp(info->seg_command_line[0], "exit", 5) == 0)
-	{
-		fc_free_seg_command_line(info);
+	if (strncmp(info->exe->cmds[info->idx2][info->idx], "exit", 5) == 0)
 		exit (127);
-	}
 	return (1);
 }

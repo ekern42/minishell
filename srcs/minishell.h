@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/01 14:31:11 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/01 19:21:54 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,6 @@ typedef struct s_execution
 	pid_t	pid_init;
 	pid_t	pid_other;
 	int		pipe_init;
-	int		size_seg_cmd_line;
-	int		nbr_pipe;
-	int		nbr_bracket_smaller_one;
-	int		nbr_bracket_smaller_two;
-	int		nbr_bracket_bigger_one;
-	int		nbr_bracket_bigger_two;
 	char	*buffer;
 	int		size_buffer;
 	int		fd[2];
@@ -87,14 +81,6 @@ typedef struct s_execution
 	int		i;
 	int		j;
 }	t_execution;
-
-typedef struct s_path
-{
-	char	**split;
-	char	*path;
-	int		i;
-	int		j;
-}	t_path;
 
 typedef struct s_builtin
 {
@@ -105,14 +91,11 @@ typedef struct s_builtin
 typedef struct s_info
 {
 	char			*command_line;
-	char			**seg_command_line;
 	int				b_sub_str;
 	int				nbr_sstr;
-//	int				idx_seg_cmd_line;
 	int				idx;
 	int				idx2;
 	char			*path;
-	t_path			*p;
 	t_builtin		*b;
 	t_execution		*exe;
 	int				pair_sgl_quotes;
@@ -145,8 +128,8 @@ void	*fc_path_for_execve(t_info *info);
 /* execution/redirections */
 int		fc_stdin_to_stdout(t_info *info); //Donc à gauche du pipe
 int		fc_stdout_to_stdin(t_info *info); //Donc à droite du pipe
-int		fc_double_bracket_big_to_small(t_info *info);
-int		fc_simple_bracket_big_to_small(t_info *info);
+int		fc_re_append(t_info *info); // >>
+int		fc_re_output(t_info *info); // >
 
 /* errors */
 void	fc_error(t_info *info, int a);
@@ -156,14 +139,12 @@ int		fc_error_tmp(int code_return, char *error_message);
 
 /* free */
 void	fc_final_free(t_info *info);
-void	fc_free_seg_command_line(t_info *info);
 void	fc_free_t_list(t_info *info);
 void	fc_free_t_list_spec(t_info *info);
 void	fc_quote_list_free(t_info *info);
 
 /* init */
 int		fc_init(t_info *info, t_lex_info *lex, char **envp);
-void	fc_init_seg_cmd_line2(t_info *info);
 
 /* Lexer */
 void	fc_init_lexer(t_info *info);
@@ -176,15 +157,11 @@ void	fc_lex_variables(t_info *info);
 
 /* parsing */
 int		fc_parsing(t_info *info);
+void	fc_print_for_pipe(t_info *info);
 int		fc_small_str_with_quote(t_info *info, t_quotes *temp, int a);
 void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a);
 void	fc_seg_str(t_info *info);
 void	fc_final_seg(t_info *info);
-//int		fc_info_seg_cmd_line(t_info *info);
-//int		fc_check_is_redirection(t_info *info);
-int		fc_size_for_create_substr(t_info *info);
-void	*fc_create_left_str(t_info *info);
-void	*fc_create_right_str(t_info *info);
 
 /* signal */
 void	fc_control_d(t_info *info);
@@ -193,9 +170,7 @@ int		fc_signal(t_info *info);
 /* utils */
 size_t	fc_strlen(const char *str);
 void	fc_test(char **envp);
-void	*fc_find_envp_with_name(t_info *info, char *var_env);
 void	*fc_find_envp_without_name(t_info *info, char *var_env);
-//void	fc_print_seg_cmd_line(t_info *info);
 
 /* variable */
 void	fc_variable_command(t_info *info);
