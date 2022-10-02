@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/02 17:28:07 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/02 20:03:24 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ typedef struct s_lex_info // lexical qqch -> vérifie chaque caractère
 typedef struct s_execution
 {
 	char	***cmds;
+	char	**cmds_execve;
 	char	**str_left;
-	char	**str_right;
+	char	*path;
 	pid_t	pid_init;
 	pid_t	pid_other;
 	int		pipe_init;
@@ -95,7 +96,7 @@ typedef struct s_info
 	int				nbr_sstr;
 	int				idx;
 	int				idx2;
-	char			*path;
+	char			**str_left;
 	t_builtin		*b;
 	t_execution		*exe;
 	int				pair_sgl_quotes;
@@ -123,6 +124,7 @@ int		fc_unset(t_info *info);
 
 /* execution/execve */
 int		fc_execve(t_info *info);
+int		fc_execve_redir(t_info *info);
 void	*fc_path_for_execve(t_info *info);
 
 /* execution/redirections */
@@ -172,8 +174,11 @@ int		fc_signal(t_info *info);
 size_t	fc_strlen(const char *str);
 void	fc_test(char **envp);
 void	*fc_find_envp_without_name(t_info *info, char *var_env);
-void	fc_print_cmds_1(t_info *info);
-void	fc_print_cmds_2(t_info *info);
+void	fc_print_cmds(t_info *info);
+int		fc_check_is_redir(t_info *info);
+int		fc_size_str(t_info *info);
+void	*fc_create_left_str(t_info *info);
+void	fc_print_str_left(t_info *info);
 
 /* variable */
 void	fc_variable_command(t_info *info);

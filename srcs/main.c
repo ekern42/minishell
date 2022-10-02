@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/02 12:51:19 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/02 19:15:46 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			fc_parsing(&info);
 			fc_exit(&info);
-			//fc_print_cmds_1(&info);
-			//fc_print_cmds_2(&info);
+			//fc_print_cmds(&info);
 			if (info.lex->pipes == false && info.lex->re_append == false)
 				fc_execution(&info);
 			else if (info.lex->pipes == true && info.lex->re_append == false)

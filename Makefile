@@ -6,7 +6,7 @@
 #    By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/01 19:13:52 by angelo           ###   ########.fr        #
+#    Updated: 2022/10/02 18:03:31 by angelo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,8 @@ SRC_SIGNAL =	\
 
 SRC_UTILS =	\
 	srcs/utils/utils.c	\
-	srcs/utils/utils_exe.c
+	srcs/utils/utils_exe.c	\
+	srcs/utils/create_str_redir.c
 
 SRC_VARIABLE =	\
 	srcs/variable/variable.c
