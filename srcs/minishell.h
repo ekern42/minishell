@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/01 19:21:54 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/02 11:08:23 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	fc_quote_list_free(t_info *info);
 /* init */
 int		fc_init(t_info *info, t_lex_info *lex, char **envp);
 
-/* Lexer */
+/* lexer */
 void	fc_init_lexer(t_info *info);
 void	fc_lexer(t_info *info);
 int		fc_check_lex(t_info *info, int a);
@@ -171,6 +171,8 @@ int		fc_signal(t_info *info);
 size_t	fc_strlen(const char *str);
 void	fc_test(char **envp);
 void	*fc_find_envp_without_name(t_info *info, char *var_env);
+void	fc_print_cmds_1(t_info *info);
+void	fc_print_cmds_2(t_info *info);
 
 /* variable */
 void	fc_variable_command(t_info *info);

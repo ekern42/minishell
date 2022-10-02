@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:16:47 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/01 19:16:46 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/02 11:07:54 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,43 @@ void	*fc_find_envp_without_name(t_info *info, char *var_env)
 		//printf("%s\n", (char *)temp->content);
 	}
 	return (NULL);
+}
+
+void	fc_print_cmds_1(t_info *info)
+{
+	int	i;
+	
+	i = 0;
+	printf("info->exe->cmds[i] : \n");
+	//while (info->exe->cmds[i] != NULL)
+	while (info->exe->cmds[i])
+	{
+		printf("%s\n", *info->exe->cmds[i]);
+		i++;
+	}
+	printf("----------\n");
+}
+
+void	fc_print_cmds_2(t_info *info)
+{
+	int	i;
+	int	j;
+	int	size;
+	
+	size = 0;
+	while (info->exe->cmds[size])
+		size++;
+	printf("info->exe->cmds[i][j] : \n");
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (info->exe->cmds[i][j] != NULL)
+		{
+			printf("%s\n", info->exe->cmds[i][j]);
+			j++;
+		}
+		i++;
+	}
+	printf("----------\n");
 }
