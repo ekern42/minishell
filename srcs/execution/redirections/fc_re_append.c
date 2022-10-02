@@ -6,15 +6,27 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:45:37 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/01 19:06:22 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/02 13:46:18 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 // >>
+// ls -la >> test
 int	fc_re_append(t_info *info)
 {
+	//fc_print_cmds_2(&info);
+	printf("%s\n", info->exe->cmds[0][0]);
+	printf("%s\n", info->exe->cmds[0][1]);
+	printf("%s\n", info->exe->cmds[0][2]);
+	printf("%s\n", info->exe->cmds[0][3]);
+	//printf("%s\n", info->exe->cmds[1][0]);
+	printf("-------------\n");
+	//printf("%s\n", *info->exe->cmds[0]);
+	//printf("%s\n", *info->exe->cmds[1]);
+	//printf("-------------\n");
+
 	if (pipe(info->exe->fd) < 0)
 		fc_error_tmp(1, "Problem with pipe\n");
 	info->exe->pid_init = fork();
@@ -22,18 +34,13 @@ int	fc_re_append(t_info *info)
 		fc_error_tmp(1, "Problem with fork\n");
 	if (info->exe->pid_init == 0)
 	{
-		//info->exe->str_left = fc_create_left_str(info);
 		fc_stdin_to_stdout(info);
-		info->idx = 0;
-		info->path = NULL;
-		while (fc_path_for_execve(info) == NULL)
-			info->idx++;
-		info->path = fc_path_for_execve(info);
-		//execve(info->path, info->exe->str_left, NULL);
+		//info->idx = 0;
+		//info->idx2 = 1;
 		execve(info->path, info->exe->cmds[info->idx2], NULL);
+		//fc_builtins_or_execve(info);
 	}
 	// Prototype : char *get_next_line(int fd)
-
 	/*printf("%s", get_next_line(info->exe->fd[0]));
 	printf("%s", get_next_line(info->exe->fd[0]));
 	printf("%s", get_next_line(info->exe->fd[0]));
@@ -69,14 +76,13 @@ int	fc_re_append(t_info *info)
 	printf("FIN : i = %d\n", i);
 */
 
-
 	info->exe->buffer = malloc(sizeof(char) * 1000);
 	if (read(info->exe->fd[0], info->exe->buffer, 999) < 0)
 		fc_error_tmp(1, "Problem with read\n");
 
-	//info->exe->str_right = fc_create_right_str(info);
-
-	//info->exe->fd[0] = open(info->exe->str_right[0], O_CREAT | O_RDWR, 0777);
+	info->idx2 = 0;
+	info->idx = 3;
+	info->exe->fd[0] = open(info->exe->cmds[info->idx2][info->idx], O_CREAT | O_RDWR, 0777);
 	if (info->exe->fd[0] < 0)
 		fc_error_tmp(1, "Problem with open\n");
 	
@@ -216,48 +222,3 @@ int	fc_double_bracket_big_to_small(t_info *info)
 	return (0);
 }
 */
-
-/*
-// Yace
-int	fc_exe_db_bt_b_to_s(t_info *info)
-{
-	char	*buffer = malloc(sizeof(char) * 1000);
-	int		fd_file;
-
-	if (pipe(info->exe->fd) < 0)
-		fc_error_tmp(1, "Problem with pipe\n");
-	info->exe->pid_init = fork();
-	if (info->exe->pid_init < 0)
-		fc_error_tmp(1, "Problem with fork\n");
-	if (info->exe->pid_init == 0)
-	{
-		info->exe->str_left = fc_create_left_str(info);
-		fc_stdin_to_stdout(info);
-		info->idx = 0;
-		info->path = NULL;
-		while (fc_path_for_execve(info) == NULL)
-			info->idx++;
-		info->path = fc_path_for_execve(info);
-		execve(info->path, info->exe->str_left, NULL); //fd[1]
-	}
-		read(info->exe->fd[0], buffer, 999);
-		info->exe->str_right = fc_create_right_str(info);
-		fd_file = open(info->exe->str_right[0], O_CREAT | O_RDWR, 0777);
-		if (fd_file < 0)
-			fc_error_tmp(1, "Problem with open\n");
-
-		info->idx = 0;
-		if (write(fd_file, buffer, 999) < 0)
-			fc_error_tmp(1, "Problem with write\n");
-	close(fd_file);
-	if (close (info->exe->fd[0]) < 0)
-		fc_error_tmp(1, "Problem with close(info->exe->fd[0])\n");
-	if (close(info->exe->fd[1]) < 0)
-		fc_error_tmp(1, "Problem with close(info->exe->fd[1])\n");
-
-	if (waitpid(info->exe->pid_init, NULL, 0) < 0)
-		fc_error_tmp(1, "Problem with waitpid - info->exe->pid_init\n");
-	return (0);
-}
-*/
-

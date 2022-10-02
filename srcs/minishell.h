@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/02 11:08:23 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/02 17:28:07 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	*fc_path_for_execve(t_info *info);
 /* execution/redirections */
 int		fc_stdin_to_stdout(t_info *info); //Donc à gauche du pipe
 int		fc_stdout_to_stdin(t_info *info); //Donc à droite du pipe
+int		fc_stdout_and_stdin(t_info *info);
 int		fc_re_append(t_info *info); // >>
 int		fc_re_output(t_info *info); // >
 
