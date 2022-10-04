@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 18:01:49 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 13:21:16 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 15:03:03 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	*fc_create_left_str(t_info *info)
 
 	if (fc_check_is_redir(info) == 1)
 		return (NULL);
+	info->str_left = NULL;
 	info->str_left = malloc(sizeof(char *) * fc_size_str(info));
+	if (info->str_left == NULL)
+		fc_error_tmp(1, "Problem with malloc\n");
 
 	i = 0;
 	while (info->exe->cmds[info->idx_re][i] != NULL)

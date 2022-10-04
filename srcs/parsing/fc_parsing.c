@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 19:44:16 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 13:21:26 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 15:17:31 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	fc_parsing(t_info *info)
 	temp[nbr_cmds] = NULL;
 	info->exe->cmds = temp;
 	fc_seg_str(info);
-	fc_print_for_pipe(info);
+//	fc_print_for_pipe(info);
 	return (0);
 }
 
@@ -40,7 +40,7 @@ void	fc_print_for_pipe(t_info *info)
 		b = 0;
 		while (info->exe->cmds[a][b] != NULL)
 		{
-			printf("%s\n", info->exe->cmds[a][b]);
+			printf("%s | a = %d | b = %d\n", info->exe->cmds[a][b], a, b);
 			b++;
 		}
 //			printf("----------\n");

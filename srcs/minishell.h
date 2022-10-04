@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/04 13:15:55 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 15:06:05 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_execution
 	char	*path;
 	int		index;
 	pid_t	*pid_lst;
-	int		w_pid;
+	pid_t	w_pid;
 	pid_t	pid_init;
 	pid_t	pid_other;
 	int		pipe_init;

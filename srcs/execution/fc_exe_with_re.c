@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 13:24:45 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 15:18:28 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,41 @@
 int	fc_exe_with_re(t_info *info)
 {
 	int	i;
+	int	j;
 	
 	info->exe->pid_lst = malloc(sizeof(pid_t) * (info->lex->nbr_pipe + 1));
 	if (info->exe->pid_lst == NULL)
 		fc_error_tmp(1, "Problem malloc\n");
 
 	if (pipe(info->exe->fd) < 0)
-		fc_error_tmp(1, "Problem with pipe(info->exe->fd)\n");
+		fc_error_tmp(1, "Problem with pipe - info->exe->fd\n");
 
 	i = 0;
 	while (i < info->lex->nbr_pipe + 1)
 	{
-		//printf("i = %d\n", i);
 		info->exe->pid_lst[i] = fork();
 		if (info->exe->pid_lst[i] < 0)
-			fc_error_tmp(1, "Problem with info->exe->pid_lst[i]\n");
-		if (i == 0 && info->exe->pid_lst[i] == 0)
+			fc_error_tmp(1, "Problem with fork - info->exe->pid_lst[i]\n");
+		//printf("i = %d\n", i);
+		if (i == 0)
 		{
-			fc_stdin_to_stdout(info);
-			info->idx = 0;
-			fc_builtins_or_execve(info);
+			if (info->exe->pid_lst[i] == 0)
+			{
+				fc_stdin_to_stdout(info);
+				info->idx = 0;
+				fc_builtins_or_execve(info);
+			}
+
 		}
-		else if (i == info->lex->nbr_pipe && info->exe->pid_lst[i] == 0)
+		else if (i == info->lex->nbr_pipe)
 		{
-			fc_stdout_to_stdin(info);
-			info->idx = 0;
-			info->idx_re = 1;
-			fc_builtins_or_execve(info);
+			if (info->exe->pid_lst[i] == 0)
+			{
+				fc_stdout_to_stdin(info);
+				info->idx = 0;
+				info->idx_re = 1;
+				fc_builtins_or_execve(info);
+			}
 		}
 		i++;
 	}
@@ -51,18 +59,18 @@ int	fc_exe_with_re(t_info *info)
 	if (close(info->exe->fd[1]) < 0)
 		fc_error_tmp(1, "Problem with close(info->exe->fd[1])\n");
 
-	info->exe->w_pid = info->lex->nbr_pipe;
-	//printf("i = %d\n", i);
-	while (info->exe->w_pid > 0)
+	j = 0;
+	while (j < info->lex->nbr_pipe + 1)
 	{
-		//printf("i = %d\n", i);
-		if (waitpid(info->exe->pid_lst[i], NULL, 0) < 0)
+		info->exe->w_pid = waitpid(info->exe->pid_lst[i], WIFEXITED(true), 0);
+		if (info->exe->w_pid < 0)
 			fc_error_tmp(1, "Problem with waitpid - info->exe->w_pid\n");
-		info->exe->w_pid--;
+		j++;
 	}
 
 	return (0);
 }
+
 
 /*
 int	fc_exe_with_pipe(t_info info)
@@ -116,7 +124,7 @@ int	fc_exe_with_pipe(t_info info)
 
 /*
 // Good version for one pipe
-int	fc_exe_with_pipe(t_info *info)
+int	fc_exe_with_re(t_info *info)
 {
 	if (pipe(info->exe->fd) < 0)
 		fc_error_tmp(6, "Problem with pipe(info->exe->fd)\n");
@@ -137,7 +145,7 @@ int	fc_exe_with_pipe(t_info *info)
 	{
 		fc_stdout_to_stdin(info);
 		info->idx = 0;
-		info->idx2 = 1;
+		info->idx_re = 1;
 		fc_builtins_or_execve(info);
 	}
 	if (close(info->exe->fd[0]) < 0)
@@ -145,10 +153,15 @@ int	fc_exe_with_pipe(t_info *info)
 	if (close(info->exe->fd[1]) < 0)
 		fc_error_tmp(6, "Problem with close(info->exe->fd[1])\n");
 
-	if (waitpid(info->exe->pid_init, NULL, 0) < 0)
+	if (waitpid(info->exe->pid_init, WIFEXITED(1), 0) < 0)
 		fc_error_tmp(5, "Problem with waitpid - info->exe->pid_init\n");
-	if (waitpid(info->exe->pid_other, NULL, 0) < 0)
+	if (waitpid(info->exe->pid_other, WIFEXITED(1), 0) < 0)
 		fc_error_tmp(5, "Problem with waitpid - info->exe->pid_other\n");
+
+	//if (waitpid(info->exe->pid_init, NULL, 0) < 0)
+	//	fc_error_tmp(5, "Problem with waitpid - info->exe->pid_init\n");
+	//if (waitpid(info->exe->pid_other, NULL, 0) < 0)
+	//	fc_error_tmp(5, "Problem with waitpid - info->exe->pid_other\n");
 
 	return (0);
 }
