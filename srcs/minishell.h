@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/04 16:09:40 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 19:56:58 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ typedef struct s_info
 int		fc_execution(t_info *info);
 int		fc_exe_without_re(t_info *info);
 int		fc_exe_with_re(t_info *info);
+char **	fc_create_tmp_str(t_info *info); // emplacement temporaire
+void	fc_print_tmp_str(char **str); // emplacement temporaire
 int		fc_builtins_or_execve(t_info *info);
 
 /* execution/builtins */
