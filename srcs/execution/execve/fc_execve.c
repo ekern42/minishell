@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:31:17 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 16:29:38 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 17:44:33 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	fc_execve_mlt_pipes(t_info *info)
 {
 	info->exe->path = NULL;
-	//info->exe->path = fc_path_for_execve(info);
 	//info->exe->path = fc_path_mlt_pipes(info, info->exe->index);
 	info->exe->path = fc_path_mlt_pipes(info, info->idx_re);
 	info->exe->cmds_execve = (char **)&info->exe->cmds[info->idx_re][info->idx];
