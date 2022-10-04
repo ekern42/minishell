@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 18:01:49 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/02 19:40:55 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:21:16 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	fc_size_str(t_info *info)
 	int	i;
 	
 	i = 0;
-	while (info->exe->cmds[info->idx2][i])
+	while (info->exe->cmds[info->idx_re][i])
 	{
-		if (strncmp(info->exe->cmds[info->idx2][i], ">>", 3) == 0
-		|| strncmp(info->exe->cmds[info->idx2][i], ">", 2) == 0
-		|| strncmp(info->exe->cmds[info->idx2][i], "<<", 3) == 0
-		|| strncmp(info->exe->cmds[info->idx2][i], ">", 2) == 0)
+		if (strncmp(info->exe->cmds[info->idx_re][i], ">>", 3) == 0
+		|| strncmp(info->exe->cmds[info->idx_re][i], ">", 2) == 0
+		|| strncmp(info->exe->cmds[info->idx_re][i], "<<", 3) == 0
+		|| strncmp(info->exe->cmds[info->idx_re][i], ">", 2) == 0)
 			return (i);
 		i++;
 	}
@@ -48,14 +48,14 @@ void	*fc_create_left_str(t_info *info)
 	info->str_left = malloc(sizeof(char *) * fc_size_str(info));
 
 	i = 0;
-	while (info->exe->cmds[info->idx2][i] != NULL)
+	while (info->exe->cmds[info->idx_re][i] != NULL)
 	{
-		if (strncmp(info->exe->cmds[info->idx2][i], ">>", 3) == 0
-		|| strncmp(info->exe->cmds[info->idx2][i], ">", 2) == 0
-		|| strncmp(info->exe->cmds[info->idx2][i], "<<", 3) == 0
-		|| strncmp(info->exe->cmds[info->idx2][i], "<", 3) == 0)
+		if (strncmp(info->exe->cmds[info->idx_re][i], ">>", 3) == 0
+		|| strncmp(info->exe->cmds[info->idx_re][i], ">", 2) == 0
+		|| strncmp(info->exe->cmds[info->idx_re][i], "<<", 3) == 0
+		|| strncmp(info->exe->cmds[info->idx_re][i], "<", 3) == 0)
 			break ;
-		info->str_left[i] = info->exe->cmds[info->idx2][i];
+		info->str_left[i] = info->exe->cmds[info->idx_re][i];
 		i++;
 	}
 	info->str_left[i] = NULL;

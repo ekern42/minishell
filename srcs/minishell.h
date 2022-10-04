@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/04 11:48:14 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:15:55 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_execution
 	char	**cmds_execve;
 	char	**str_left;
 	char	*path;
+	int		index;
 	pid_t	*pid_lst;
 	int		w_pid;
 	pid_t	pid_init;
@@ -81,9 +82,6 @@ typedef struct s_execution
 	char	*buff[1024];
 	int		size_buffer;
 	int		fd[2];
-	int		**fd_final;
-	int		i;
-	int		j;
 }	t_execution;
 
 typedef struct s_builtin
@@ -98,7 +96,7 @@ typedef struct s_info
 	int				b_sub_str;
 	int				nbr_sstr;
 	int				idx;
-	int				idx2;
+	int				idx_re;
 	char			**str_left;
 	t_builtin		*b;
 	t_execution		*exe;
@@ -113,7 +111,8 @@ typedef struct s_info
 
 /* execution */
 int		fc_execution(t_info *info);
-int		fc_exe_with_pipe(t_info *info);
+int		fc_exe_without_re(t_info *info);
+int		fc_exe_with_re(t_info *info);
 int		fc_builtins_or_execve(t_info *info);
 
 /* execution/builtins */
@@ -131,7 +130,7 @@ int		fc_execve(t_info *info);
 int		fc_execve_redir(t_info *info);
 int		fc_execve_mlt_pipes(t_info *info);
 void	*fc_path_for_execve(t_info *info);
-void	*fc_path_mlt_pipes(t_info *info, int index);
+void	*fc_path_mlt_pipes(t_info *info, int index_re);
 
 /* execution/redirections */
 int		fc_stdin_to_stdout(t_info *info); //Donc à gauche du pipe

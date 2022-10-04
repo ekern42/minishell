@@ -6,39 +6,24 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:00:45 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/01 18:34:01 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:12:25 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	fc_init_execution(t_info *info)
-{
-	if (pipe(info->exe->fd) < 0)
-		fc_error_tmp(3, "Problem with pipe(info->exe->fd)\n");
-	info->exe->pid_init = fork();
-	if (info->exe->pid_init < 0)
-		fc_error_tmp(4, "Problem with info->exe->pid_init\n");
-	return (0);
-}
-
-// idx2 est relié au pipe
 int	fc_execution(t_info *info)
 {
-	fc_init_execution(info);
-	if (info->exe->pid_init == 0)
-	{
-		info->idx = 0;
-		fc_builtins_or_execve(info);
-	}
-	if (close(info->exe->fd[0]) < 0)
-		fc_error_tmp(5, "Problem with close(info->exe->fd[0])\n");
-	if (close(info->exe->fd[1]) < 0)
-		fc_error_tmp(5, "Problem with close(info->exe->fd[1])\n");
-
-	if (waitpid(info->exe->pid_init, NULL, 0) < 0)
-		fc_error_tmp(6, "Problem with waitpid - info->exe->pid_init\n");
-
+	if (info->lex->pipes == false
+	&& info->lex->re_append == false
+	&& info->lex->re_input == false
+	&& info->lex->re_del == false
+	&& info->lex->re_input == false)
+		fc_exe_without_re(info);
+	else if (fc_check_is_redir(info) == 0 && info->lex->pipes == false) // provisoire, pour : >>
+		fc_re_append(info);
+	else if (info->lex->pipes == true)
+		fc_exe_with_re(info); // with pipes
 	return (0);
 }
 

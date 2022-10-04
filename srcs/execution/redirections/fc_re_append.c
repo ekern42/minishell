@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:45:37 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/03 18:22:00 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:15:21 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,17 @@ int	fc_re_append(t_info *info)
 	{
 		fc_stdin_to_stdout(info);
 		info->idx = 0;
-		info->idx2 = 0;
+		info->idx_re = 0;
 		fc_builtins_or_execve(info);
 	}
 
 	info->idx = 1;
-	info->idx2 = 0;
+	info->idx_re = 0;
 	while (fc_path_for_execve(info) == NULL)
 		info->idx++;
 
 	printf("ntm = %d\n", info->exe->fd[0]);
-	new_fd = open(info->exe->cmds[info->idx2][info->idx], O_CREAT | O_RDWR | O_APPEND, 0777);
+	new_fd = open(info->exe->cmds[info->idx_re][info->idx], O_CREAT | O_RDWR | O_APPEND, 0777);
 	if (new_fd < 0)
 		fc_error_tmp(1, "Problem with open\n");
 	r = read(info->exe->fd[0], info->exe->buff, 1024);

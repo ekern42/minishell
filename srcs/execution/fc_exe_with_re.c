@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fc_exe_with_pipe.c                                 :+:      :+:    :+:   */
+/*   fc_exe_with_re.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 11:06:00 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 11:42:03 by angelo           ###   ########.fr       */
+/*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
+/*   Updated: 2022/10/04 13:24:45 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	fc_exe_with_pipe(t_info *info)
+int	fc_exe_with_re(t_info *info)
 {
 	int	i;
 	
@@ -21,7 +21,7 @@ int	fc_exe_with_pipe(t_info *info)
 		fc_error_tmp(1, "Problem malloc\n");
 
 	if (pipe(info->exe->fd) < 0)
-		fc_error_tmp(6, "Problem with pipe(info->exe->fd)\n");
+		fc_error_tmp(1, "Problem with pipe(info->exe->fd)\n");
 
 	i = 0;
 	while (i < info->lex->nbr_pipe + 1)
@@ -40,16 +40,16 @@ int	fc_exe_with_pipe(t_info *info)
 		{
 			fc_stdout_to_stdin(info);
 			info->idx = 0;
-			info->idx2 = 1;
+			info->idx_re = 1;
 			fc_builtins_or_execve(info);
 		}
 		i++;
 	}
 
 	if (close(info->exe->fd[0]) < 0)
-		fc_error_tmp(6, "Problem with close(info->exe->fd[0])\n");
+		fc_error_tmp(1, "Problem with close(info->exe->fd[0])\n");
 	if (close(info->exe->fd[1]) < 0)
-		fc_error_tmp(6, "Problem with close(info->exe->fd[1])\n");
+		fc_error_tmp(1, "Problem with close(info->exe->fd[1])\n");
 
 	info->exe->w_pid = info->lex->nbr_pipe;
 	//printf("i = %d\n", i);
@@ -57,7 +57,7 @@ int	fc_exe_with_pipe(t_info *info)
 	{
 		//printf("i = %d\n", i);
 		if (waitpid(info->exe->pid_lst[i], NULL, 0) < 0)
-			fc_error_tmp(5, "Problem with waitpid - info->exe->w_pid\n");
+			fc_error_tmp(1, "Problem with waitpid - info->exe->w_pid\n");
 		info->exe->w_pid--;
 	}
 
