@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:35:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 13:16:06 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:21:15 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	*fc_path_mlt_pipes(t_info *info, int index_re)
 		path_splited[i][ft_strlen(path_splited[i])] = '/';
 		if (path_splited[0][ft_strlen(path_splited[0]) - 1] == '!')
 			path_splited[0][ft_strlen(path_splited[0]) - 1] = '\0';
-		path = ft_strjoin(path_splited[i], info->exe->cmds[index_re][0]);
+		//path = ft_strjoin(path_splited[i], info->exe->cmds[index_re][0]);
+		path = ft_strjoin(path_splited[i], info->exe->cmds[index_re][info->idx]);
 		//printf("path = %s\n", path);
 		if (access(path, X_OK) == 0)
 		{

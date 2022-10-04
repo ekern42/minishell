@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 19:44:16 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 15:34:04 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 17:18:59 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	fc_print_for_pipe(t_info *info)
 	int	a;
 	int	b;
 
-	printf("pipe = %d\n", info->lex->nbr_pipe);
+	//printf("pipe = %d\n", info->lex->nbr_pipe);
 	a = 0;
 	while (a != info->lex->nbr_pipe + 1)
 	{
 		b = 0;
 		while (info->exe->cmds[a][b] != NULL)
 		{
-			printf("%s | a = %d | b = %d\n", info->exe->cmds[a][b], a, b);
+			//printf("%s | a = %d | b = %d\n", info->exe->cmds[a][b], a, b);
 			b++;
 		}
 //			printf("----------\n");

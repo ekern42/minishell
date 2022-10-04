@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:36:10 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/02 17:28:55 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:54:03 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ int	fc_stdout_to_stdin(t_info *info)
 int	fc_stdout_and_stdin(t_info *info)
 {
 	if (dup2(info->exe->fd[0], STDIN_FILENO) < 0)
-		fc_error_tmp(1, "Problem with dup2 - info->exe->fd[0], STDIN_FILENO\n");
+		fc_error_tmp(1, "Problem with dup2 - NTM1 - info->exe->fd[0], STDIN_FILENO\n");
 	if (close(info->exe->fd[0]) < 0)
-		fc_error_tmp(1, "Problem with close - fd[0] - fc_stdout_and_stdin\n");
-	if (close(info->exe->fd[1]) < 0)
-		fc_error_tmp(1, "Problem with close - fd[1]- fc_stdout_and_stdin\n");	
+		fc_error_tmp(1, "Problem with close - NTM1 - fd[0] - fc_stdout_and_stdin\n");
+	//if (close(info->exe->fd[1]) < 0)
+	//	fc_error_tmp(1, "Problem with close - NTM1 - fd[1]- fc_stdout_and_stdin\n");	
 	
 	if (dup2(info->exe->fd[1], STDOUT_FILENO) < 0)
-		fc_error_tmp(1, "Problem with dup2 - info->exe->fd[1], STDOUT_FILENO\n");
-	if (close(info->exe->fd[0]) < 0)
-		fc_error_tmp(1, "Problem with close - fd[0] - fc_stdout_and_stdin\n");
+		fc_error_tmp(1, "Problem with dup2 - NTM2 - info->exe->fd[1], STDOUT_FILENO\n");
+	//if (close(info->exe->fd[0]) < 0)
+	//	fc_error_tmp(1, "Problem with close - NTM2 -fd[0] - fc_stdout_and_stdin\n");
 	if (close(info->exe->fd[1]) < 0)
-		fc_error_tmp(1, "Problem with close - fd[1]- fc_stdout_and_stdin\n");
+		fc_error_tmp(1, "Problem with close - NTM2 - fd[1]- fc_stdout_and_stdin\n");
 	return (0);
 }
