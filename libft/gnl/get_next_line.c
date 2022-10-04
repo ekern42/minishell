@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 11:11:42 by ekern             #+#    #+#             */
-/*   Updated: 2022/03/14 13:44:14 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/03 16:27:16 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,3 +105,29 @@ char	*get_next_line(int fd)
 	src = fc_clean_src(src);
 	return (strfinal);
 }
+/*
+int main(void)
+{
+	char	*str;
+	int		fd;
+	str = NULL;
+	fd = open("42", O_RDONLY);
+	if (fd == -1)
+	{
+		printf("open() failed\n");
+		return (1);
+	}
+	str = get_next_line(fd);
+	while (str != (void *)0)
+	{
+		printf("%s", str);
+		str = get_next_line(fd);
+	}
+	if (close(fd) == 1)
+	{
+		printf("close() failed\n");
+		return (1);
+	}
+	return (0);
+}
+*/

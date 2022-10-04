@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/02 20:03:24 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/03 18:12:27 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_execution
 	pid_t	pid_other;
 	int		pipe_init;
 	char	*buffer;
+	char	*buff[1024];
 	int		size_buffer;
 	int		fd[2];
 	int		**fd_final;
@@ -101,6 +102,7 @@ typedef struct s_info
 	t_execution		*exe;
 	int				pair_sgl_quotes;
 	int				pair_dbl_quotes;
+	struct stat		*buffer3;
 	struct s_list	*envp;
 	struct s_list	*small_str_list;
 	t_lex_info		*lex;
@@ -132,6 +134,7 @@ int		fc_stdin_to_stdout(t_info *info); //Donc à gauche du pipe
 int		fc_stdout_to_stdin(t_info *info); //Donc à droite du pipe
 int		fc_stdout_and_stdin(t_info *info);
 int		fc_re_append(t_info *info); // >>
+int		fc_find_size_buffer(t_info *info);
 int		fc_re_output(t_info *info); // >
 
 /* errors */
