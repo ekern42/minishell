@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:06:00 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 11:28:33 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:42:03 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ int	fc_exe_with_pipe(t_info *info)
 	//printf("i = %d\n", i);
 	while (info->exe->w_pid > 0)
 	{
+		//printf("i = %d\n", i);
 		if (waitpid(info->exe->pid_lst[i], NULL, 0) < 0)
-			fc_error_tmp(5, "Problem with waitpid - info->exe->pid_init\n");
+			fc_error_tmp(5, "Problem with waitpid - info->exe->w_pid\n");
 		info->exe->w_pid--;
 	}
 

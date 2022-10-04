@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/04 11:12:31 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:48:14 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int		fc_unset(t_info *info);
 /* execution/execve */
 int		fc_execve(t_info *info);
 int		fc_execve_redir(t_info *info);
+int		fc_execve_mlt_pipes(t_info *info);
 void	*fc_path_for_execve(t_info *info);
 void	*fc_path_mlt_pipes(t_info *info, int index);
 

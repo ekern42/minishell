@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:22:07 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/02 20:07:06 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:58:03 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ int	fc_builtins_or_execve(t_info *info)
 		|| (strncmp(info->exe->cmds[info->idx2][info->idx], "export", 7) == 0)
 		|| (strncmp(info->exe->cmds[info->idx2][info->idx], "unset", 6) == 0))
 		fc_builtins(info);
-	else if (fc_check_is_redir(info) == 1)
+	else if (fc_check_is_redir(info) == 1 && info->lex->pipes == false)
 		fc_execve(info);
-	else if (fc_check_is_redir(info) == 0)
+	else if (info->lex->pipes == true)
+		fc_execve_mlt_pipes(info);
+	else if (info->lex->re_append == true && info->lex->pipes == false)
 		fc_execve_redir(info);
 	return (1);
 }
