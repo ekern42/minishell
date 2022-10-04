@@ -6,24 +6,29 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 15:18:28 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/04 15:58:51 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+static int	fc_init_exe_with_re(t_info *info)
+{
+	info->exe->pid_lst = malloc(sizeof(pid_t) * (info->lex->nbr_pipe + 1));
+	if (info->exe->pid_lst == NULL)
+		fc_error_tmp(1, "Problem malloc\n");
+	if (pipe(info->exe->fd) < 0)
+		fc_error_tmp(1, "Problem with pipe - info->exe->fd\n");
+
+	return (0);
+}
+
 int	fc_exe_with_re(t_info *info)
 {
 	int	i;
 	int	j;
-	
-	info->exe->pid_lst = malloc(sizeof(pid_t) * (info->lex->nbr_pipe + 1));
-	if (info->exe->pid_lst == NULL)
-		fc_error_tmp(1, "Problem malloc\n");
 
-	if (pipe(info->exe->fd) < 0)
-		fc_error_tmp(1, "Problem with pipe - info->exe->fd\n");
-
+	fc_init_exe_with_re(info);
 	i = 0;
 	while (i < info->lex->nbr_pipe + 1)
 	{
@@ -31,19 +36,15 @@ int	fc_exe_with_re(t_info *info)
 		if (info->exe->pid_lst[i] < 0)
 			fc_error_tmp(1, "Problem with fork - info->exe->pid_lst[i]\n");
 		//printf("i = %d\n", i);
-		if (i == 0)
-		{
-			if (info->exe->pid_lst[i] == 0)
+		while (info->exe->pid_lst[i] == 0)
+		{	
+			if (i == 0)
 			{
 				fc_stdin_to_stdout(info);
 				info->idx = 0;
 				fc_builtins_or_execve(info);
 			}
-
-		}
-		else if (i == info->lex->nbr_pipe)
-		{
-			if (info->exe->pid_lst[i] == 0)
+			else if (i == info->lex->nbr_pipe)
 			{
 				fc_stdout_to_stdin(info);
 				info->idx = 0;
@@ -53,7 +54,6 @@ int	fc_exe_with_re(t_info *info)
 		}
 		i++;
 	}
-
 	if (close(info->exe->fd[0]) < 0)
 		fc_error_tmp(1, "Problem with close(info->exe->fd[0])\n");
 	if (close(info->exe->fd[1]) < 0)
@@ -122,8 +122,75 @@ int	fc_exe_with_pipe(t_info info)
 }
 */
 
+
 /*
-// Good version for one pipe
+// good version with one pipe with fork and waitpid dynamique 
+static int	fc_init_exe_with_re(t_info *info)
+{
+	info->exe->pid_lst = malloc(sizeof(pid_t) * (info->lex->nbr_pipe + 1));
+	if (info->exe->pid_lst == NULL)
+		fc_error_tmp(1, "Problem malloc\n");
+	if (pipe(info->exe->fd) < 0)
+		fc_error_tmp(1, "Problem with pipe - info->exe->fd\n");
+	return (0);
+}
+
+int	fc_exe_with_re(t_info *info)
+{
+	int	i;
+	int	j;
+
+	fc_init_exe_with_re(info);
+	i = 0;
+	while (i < info->lex->nbr_pipe + 1)
+	{
+		info->exe->pid_lst[i] = fork();
+		if (info->exe->pid_lst[i] < 0)
+			fc_error_tmp(1, "Problem with fork - info->exe->pid_lst[i]\n");
+		//printf("i = %d\n", i);
+		if (i == 0)
+		{
+			if (info->exe->pid_lst[i] == 0)
+			{
+				fc_stdin_to_stdout(info);
+				info->idx = 0;
+				fc_builtins_or_execve(info);
+			}
+
+		}
+		else if (i == info->lex->nbr_pipe)
+		{
+			if (info->exe->pid_lst[i] == 0)
+			{
+				fc_stdout_to_stdin(info);
+				info->idx = 0;
+				info->idx_re = 1;
+				fc_builtins_or_execve(info);
+			}
+		}
+		i++;
+	}
+
+	if (close(info->exe->fd[0]) < 0)
+		fc_error_tmp(1, "Problem with close(info->exe->fd[0])\n");
+	if (close(info->exe->fd[1]) < 0)
+		fc_error_tmp(1, "Problem with close(info->exe->fd[1])\n");
+
+	j = 0;
+	while (j < info->lex->nbr_pipe + 1)
+	{
+		info->exe->w_pid = waitpid(info->exe->pid_lst[i], WIFEXITED(true), 0);
+		if (info->exe->w_pid < 0)
+			fc_error_tmp(1, "Problem with waitpid - info->exe->w_pid\n");
+		j++;
+	}
+
+	return (0);
+}
+*/
+
+/*
+// GOOD VERSION WITH ONE PIPE
 int	fc_exe_with_re(t_info *info)
 {
 	if (pipe(info->exe->fd) < 0)
