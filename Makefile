@@ -6,7 +6,7 @@
 #    By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/04 13:09:18 by angelo           ###   ########.fr        #
+#    Updated: 2022/10/05 18:59:08 by angelo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ MINISHELL = minishell
 NAME = $(MINISHELL)
 
 CC = gcc
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = 
+#-Werror -Wextra -Wall
 #-g3 -fsanitize=address
 
 INCLUDES = srcs/minishell.h

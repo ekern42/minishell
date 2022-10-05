@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/05 18:54:55 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/05 19:00:26 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	ft_execute(char **arg, char *path, int tmp_fd, char **env)
 
 int	fc_exe_with_re(t_info *info)
 {
-//	int		i;
+	int		i;
 	int		j;
 	int		tmp_fd;
 	char	*path = malloc(sizeof(char) * 100000);
 
-	//i = 0;
+	i = 0;
 	j = 0;
 	tmp_fd = dup(STDIN_FILENO);
 
@@ -51,7 +51,7 @@ int	fc_exe_with_re(t_info *info)
 			if ( fork() == 0)
 			{
 				path = "/usr/bin/wc";
-				fc_path_mlt_pipes(info, j);
+				//fc_path_mlt_pipes(info, j);
 				
 				if (ft_execute(info->exe->cmds[j], path, tmp_fd, (char**)info->envp))
 					return (1);
