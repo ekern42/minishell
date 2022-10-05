@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/05 14:57:15 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/05 18:56:33 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	*fc_path_mlt_pipes(t_info *info, int index_re);
 /* execution/redirections */
 int		fc_stdin_to_stdout(t_info *info); //Donc à gauche du pipe
 int		fc_stdout_to_stdin(t_info *info); //Donc à droite du pipe
-int		fc_stdout_and_stdin(t_info *info);
+int		fc_stdout_and_stdin(t_info *info, int fd_re[2]);
 int		fc_stdin_to_stdout_re(t_info *info, int i); // tableau de int
 int		fc_stdout_to_stdin_re(t_info *info, int i); // tableau de int
 int		fc_stdout_and_stdin_re(t_info *info, int i); // tableau de int
@@ -199,5 +199,11 @@ int		fc_check_variable(t_info *info);
 /* main.c */
 int		fc_prompt(t_info *info);
 void	fc_print_list(t_info *info);
+
+
+int	ft_putstr_fd2(char *str, char *arg);
+int	ft_execute(char **arg, char *path, int tmp_fd, char **env);
+//int	fc_exe_with_re(t_info *info);
+
 
 #endif

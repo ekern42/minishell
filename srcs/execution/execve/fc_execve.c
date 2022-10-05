@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:31:17 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 19:57:15 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/05 17:47:24 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,22 @@ char **	fc_create_tmp_str(t_info *info)
 		i++;
 	}
 	str[i] = NULL;
-	fc_print_tmp_str(str);
+	//fc_print_tmp_str(str);
 	return (str);
 }
 
+int	fc_execve_mlt_pipes(t_info *info)
+{
+	info->exe->path = NULL;
+	info->exe->path = fc_path_mlt_pipes(info, info->idx_re);
+	//info->exe->cmds_execve = (char **)&info->exe->cmds[info->idx_re][info->idx];
+	info->exe->cmds_execve = fc_create_tmp_str(info);
+	if ((execve(info->exe->path, info->exe->cmds_execve, (char **)info->envp)) == -1)
+		fc_error_tmp(1, "Problem with fc_execve\n");
+	return (0);
+}
 
-
+/*
 int	fc_execve_mlt_pipes(t_info *info)
 {
 	info->exe->path = NULL;
@@ -57,6 +67,7 @@ int	fc_execve_mlt_pipes(t_info *info)
 		fc_error_tmp(1, "Problem with fc_execve\n");
 	return (0);
 }
+*/
 
 int	fc_execve(t_info *info)
 {
