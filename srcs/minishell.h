@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/06 17:10:55 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/06 17:47:38 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ typedef struct s_execution
 	int		pipe_init;
 	char	*buffer;
 	//char	*buff[1024];
-	char	buff[1024];
+	//char	buff[1024];
+	char	*buff;
 	int		size_buffer;
 	int		fd[2];
 }	t_execution;

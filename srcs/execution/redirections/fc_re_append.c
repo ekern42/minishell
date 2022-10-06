@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:45:37 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/06 17:10:07 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/06 19:10:00 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,9 @@ int	fc_find_size_buffer(t_info *info)
 	return (i);
 }
 
+
 int	fc_re_append(t_info *info)
 {
-	//printf("%s\n", info->exe->cmds[0][0]);
-	//printf("%s\n", info->exe->cmds[0][1]);
-	//printf("%s\n", info->exe->cmds[0][2]);
-	//printf("%s\n", info->exe->cmds[0][3]);
 	int		new_fd;
 	ssize_t	r;
 
@@ -63,26 +60,24 @@ int	fc_re_append(t_info *info)
 	{
 		fc_stdin_to_stdout(info);
 		info->idx = 0;
-		//fc_builtins_or_execve(info);
 		info->exe->path = NULL;
-		//info->exe->path = fc_path_for_execve(info);
-		info->exe->path = fc_path_mlt_pipes(info, info->idx_re);
+		info->exe->path = fc_path_for_execve(info);
 		info->exe->cmds_execve = fc_create_left_str(info);
 		if ((execve(info->exe->path, info->exe->cmds_execve, (char **)info->envp)) == -1)
 			fc_error_tmp(1, "Problem with fc_execve_redir\n");
 	}
 
-	info->idx = 1;
-	while (fc_path_for_execve(info) == NULL)
-		info->idx++;
+	info->exe->buff = NULL;
+	info->exe->buff = malloc(sizeof(char) * 1000);
 
-	//printf("ntm = %d\n", info->exe->fd[0]);
-	new_fd = open(info->exe->cmds[info->idx_re][info->idx], O_CREAT | O_RDWR | O_APPEND, 0777);
+	new_fd = open(info->exe->cmds[info->idx_re][3], O_CREAT | O_RDWR | O_APPEND, 0777);
 	if (new_fd < 0)
 		fc_error_tmp(1, "Problem with open\n");
+
 	r = read(info->exe->fd[0], info->exe->buff, 10);
 	if (r == -1)
 		fc_error_tmp(1, "Problem with read\n");
+
 	while (r)
 	{
 		//printf("Read %zd bytes\n", r);
@@ -91,8 +86,6 @@ int	fc_re_append(t_info *info)
 		r = read(info->exe->fd[0], info->exe->buff, 10);
 		printf("r = %ld\n", r);
 	}
-
-
 	//while ((r = read(info->exe->fd[0], info->exe->buff, 1024)) > 0)
 	//{
 	//	printf("1. salut\n");
@@ -110,8 +103,6 @@ int	fc_re_append(t_info *info)
 		fc_error_tmp(1, "Problem with close(info->exe->fd[0])\n");
 	if (close(info->exe->fd[1]) < 0)
 		fc_error_tmp(1, "Problem with close(info->exe->fd[1])\n");
-
-
 
 	if (waitpid(info->exe->pid_init, WIFEXITED(true), 0) < 0)
 		fc_error_tmp(1, "Problem with waitpid - info->exe->pid_init\n");
