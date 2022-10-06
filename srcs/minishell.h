@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/05 18:56:33 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:21:10 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ int		fc_unset(t_info *info);
 /* execution/execve */
 int		fc_execve(t_info *info);
 int		fc_execve_redir(t_info *info);
+int		fc_putstr_fd_re(char *str, char *arg);
+int		fc_execute(char **arg, char *path, int tmp_fd, char **env);
 int		fc_execve_mlt_pipes(t_info *info);
 void	*fc_path_for_execve(t_info *info);
 void	*fc_path_mlt_pipes(t_info *info, int index_re);
@@ -199,11 +201,6 @@ int		fc_check_variable(t_info *info);
 /* main.c */
 int		fc_prompt(t_info *info);
 void	fc_print_list(t_info *info);
-
-
-int	ft_putstr_fd2(char *str, char *arg);
-int	ft_execute(char **arg, char *path, int tmp_fd, char **env);
-//int	fc_exe_with_re(t_info *info);
 
 
 #endif

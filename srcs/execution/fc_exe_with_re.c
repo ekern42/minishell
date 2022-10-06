@@ -6,13 +6,13 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/05 19:00:26 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:21:52 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_putstr_fd2(char *str, char *arg)
+int	fc_putstr_fd_re(char *str, char *arg)
 {
 	while (*str)
 		write(2, str++, 1);
@@ -23,37 +23,32 @@ int	ft_putstr_fd2(char *str, char *arg)
 	return (1);
 }
 
-int	ft_execute(char **arg, char *path, int tmp_fd, char **env)
+int	fc_execute(char **arg, char *path, int tmp_fd, char **env)
 {
 	dup2(tmp_fd, STDIN_FILENO);
 	close(tmp_fd);
 	execve(path, arg, env);
-	return (ft_putstr_fd2("error: ", path));
+	return (fc_putstr_fd_re("error: ", path));
 }
 
 
 int	fc_exe_with_re(t_info *info)
 {
 	int		i;
-	int		j;
 	int		tmp_fd;
-	char	*path = malloc(sizeof(char) * 100000);
+	char	*path;
 
 	i = 0;
-	j = 0;
 	tmp_fd = dup(STDIN_FILENO);
 
-	
-	while (j < info->lex->nbr_pipe + 1) //check if the end is reached
+	while (i < info->lex->nbr_pipe + 1) //check if the end is reached
 	{
-		if (j == info->lex->nbr_pipe) //exec in stdout
+		if (i == info->lex->nbr_pipe) //exec in stdout
 		{
-			if ( fork() == 0)
+			if (fork() == 0)
 			{
-				path = "/usr/bin/wc";
-				//fc_path_mlt_pipes(info, j);
-				
-				if (ft_execute(info->exe->cmds[j], path, tmp_fd, (char**)info->envp))
+				path = fc_path_mlt_pipes(info, i);
+				if (fc_execute(info->exe->cmds[i], path, tmp_fd, (char**)info->envp))
 					return (1);
 			}
 			else
@@ -67,13 +62,13 @@ int	fc_exe_with_re(t_info *info)
 		else // envoie l'output dans un pipe 
 		{
 			pipe(info->exe->fd);
-			if ( fork() == 0)
+			if (fork() == 0)
 			{
-				path = "/bin/ls";
+				path = fc_path_mlt_pipes(info, i);
 				dup2(info->exe->fd[1], STDOUT_FILENO);
 				close(info->exe->fd[0]);
 				close(info->exe->fd[1]);
-				if (ft_execute(info->exe->cmds[j], path, tmp_fd, (char**)info->envp))
+				if (fc_execute(info->exe->cmds[i], path, tmp_fd, (char**)info->envp))
 					return (1);
 			}
 			else
@@ -83,7 +78,7 @@ int	fc_exe_with_re(t_info *info)
 				tmp_fd = info->exe->fd[0];
 			}
 		}
-		j++;
+		i++;
 	}
 	close(tmp_fd);
 	return (0);
