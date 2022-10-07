@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 19:54:11 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 20:24:16 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int	fc_exe_with_re(t_info *info)
 	return (0);
 }
 
-int	fc_putstr_fd_re(char *str, char *arg)
+int	fc_putstr_fd_re(char *str, t_info *info)
 {
 	while (*str)
 		write(2, str++, 1);
-	if (arg)
-		while(*arg)
-			write(2, arg++, 1);
+	if (info->exe->path)
+		while(*info->exe->path)
+			write(2, info->exe->path++, 1);
 	write(2, "\n", 1);
 	return (1);
 }
