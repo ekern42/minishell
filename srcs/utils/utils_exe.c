@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:16:47 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/02 19:15:27 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 12:42:19 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,18 @@ void	fc_print_cmds(t_info *info)
 		i++;
 	}
 	printf("----------\n");
+}
+
+int	fc_find_idx_file(t_info *info, char *re, int size)
+{
+	info->idx = 0;
+	while (info->exe->cmds[info->idx_re][info->idx++] != NULL)
+	{
+		if (strncmp(info->exe->cmds[info->idx_re][info->idx], re, size) == 0)
+		{
+			info->idx++;
+			break ;
+		}
+	}
+	return (info->idx);
 }

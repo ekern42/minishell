@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/07 12:23:49 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 12:42:39 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ int		fc_check_is_redir(t_info *info);
 int		fc_size_str(t_info *info);
 void	*fc_create_left_str(t_info *info);
 void	fc_print_str_left(t_info *info);
+int		fc_find_idx_file(t_info *info, char *re, int size);
 
 /* variable */
 void	fc_variable_command(t_info *info);

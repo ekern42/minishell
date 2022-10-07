@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:45:37 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 12:36:44 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 12:42:54 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,10 @@
 //printf("%s\n", info->exe->cmds[1][0]); // segfault
 //printf("%s\n", info->exe->cmds[1][1]); // segfault
 
-static	int	fc_find_idx_file(t_info *info)
-{
-	info->idx = 0;
-	while (info->exe->cmds[info->idx_re][info->idx++] != NULL)
-	{
-		if (strncmp(info->exe->cmds[info->idx_re][info->idx], ">>", 3) == 0)
-		{
-			info->idx++;
-			break ;
-		}
-	}
-	return (info->idx);
-}
+
 
 int	fc_re_append(t_info *info)
 {
-//	int	i;
-
 	if (pipe(info->exe->fd) < 0)
 		fc_error_tmp(1, "Problem with pipe\n");
 	info->exe->pid_init = fork();
@@ -52,8 +38,7 @@ int	fc_re_append(t_info *info)
 		fc_builtins_or_execve(info);
 	}
 
-
-	fc_find_idx_file(info);
+	fc_find_idx_file(info, ">>", 3);
 	info->exe->file = open(info->exe->cmds[info->idx_re][info->idx], O_CREAT | O_RDWR | O_APPEND, 0777);
 	if (info->exe->file < 0)
 		fc_error_tmp(1, "Problem with open\n");
