@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 16:04:20 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:41:54 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ int	fc_putstr_fd_re(char *str, char *arg)
 }
 
 
-
-
 int	fc_exe_with_re(t_info *info)
 {
 	int	i;
-	
+
 	i = 0;
 	info->exe->tmp_td = dup(STDIN_FILENO);
 
@@ -40,8 +38,7 @@ int	fc_exe_with_re(t_info *info)
 			if (fork() == 0)
 			{
 				info->exe->path = fc_path_mlt_pipes(info, i);
-				//if (fc_execute(info->exe->cmds[i], info->exe->path, info->exe->tmp_td, (char**)info->envp))
-				//	return (1);
+				//fc_builtins_or_execve2(info, i);
 				fc_execve_re(info, i);
 					return (1);
 			}
@@ -62,6 +59,7 @@ int	fc_exe_with_re(t_info *info)
 				dup2(info->exe->fd[1], STDOUT_FILENO);
 				close(info->exe->fd[0]);
 				close(info->exe->fd[1]);
+				//fc_builtins_or_execve2(info, i);
 				fc_execve_re(info, i);
 					return (1);
 			}

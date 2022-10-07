@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/07 16:25:50 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:29:35 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_execution
 {
 	char	***cmds;
 	char	**cmds_execve;
-//	char	**str_left;
+	char	**str_left;
 	char	*path;
 	int		index;
 	pid_t	*pid_lst;
@@ -99,12 +99,10 @@ typedef struct s_info
 	int				nbr_sstr;
 	int				idx;
 	int				idx_re;
-	char			**str_left;
 	t_builtin		*b;
 	t_execution		*exe;
 	int				pair_sgl_quotes;
 	int				pair_dbl_quotes;
-	struct stat		*buffer3;
 	struct s_list	*envp;
 	struct s_list	*small_str_list;
 	t_lex_info		*lex;

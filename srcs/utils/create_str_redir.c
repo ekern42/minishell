@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 18:01:49 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/06 15:57:42 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:30:45 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	*fc_create_left_str(t_info *info)
 
 	if (fc_check_is_redir(info) == 1)
 		return (NULL);
-	info->str_left = NULL;
-	info->str_left = malloc(sizeof(char *) * (fc_size_str(info) + 1));
-	if (info->str_left == NULL)
+	info->exe->str_left = NULL;
+	info->exe->str_left = malloc(sizeof(char *) * (fc_size_str(info) + 1));
+	if (info->exe->str_left == NULL)
 		fc_error_tmp(1, "Problem with malloc\n");
 
 	i = 0;
@@ -58,12 +58,12 @@ void	*fc_create_left_str(t_info *info)
 		|| strncmp(info->exe->cmds[info->idx_re][i], "<<", 3) == 0
 		|| strncmp(info->exe->cmds[info->idx_re][i], "<", 3) == 0)
 			break ;
-		info->str_left[i] = info->exe->cmds[info->idx_re][i];
+		info->exe->str_left[i] = info->exe->cmds[info->idx_re][i];
 		i++;
 	}
-	info->str_left[i] = NULL;
+	info->exe->str_left[i] = NULL;
 	//fc_print_str_left(info);
-	return (info->str_left);
+	return (info->exe->str_left);
 }
 
 void	fc_print_str_left(t_info *info)
@@ -71,10 +71,10 @@ void	fc_print_str_left(t_info *info)
 	int	i;
 
 	i = 0;
-	while (info->str_left[i] != NULL)
+	while (info->exe->str_left[i] != NULL)
 	{
-		printf("str_left[i] = %s\n", info->str_left[i]);
+		printf("str_left[i] = %s\n", info->exe->str_left[i]);
 		i++;
 	}
-	printf("str_left[i] = %s\n", info->str_left[i]);
+	printf("str_left[i] = %s\n", info->exe->str_left[i]);
 }
