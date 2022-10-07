@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:22:07 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 16:37:22 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 18:33:03 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,44 @@ int	fc_builtins_or_execve(t_info *info)
 }
 
 
+
+int	fc_builtins2(t_info *info, int i)
+{
+	if (strncmp(info->exe->cmds[info->idx_re][i], "echo", 5) == 0)
+		fc_echo(info);
+	else if (strncmp(info->exe->cmds[info->idx_re][i], "cd", 3) == 0)
+		fc_cd(info);
+	else if (strncmp(info->exe->cmds[info->idx_re][i], "pwd", 4) == 0)
+		fc_pwd(info);
+	else if (strncmp(info->exe->cmds[info->idx_re][i], "export", 7) == 0)
+		fc_export(info);
+	else if (strncmp(info->exe->cmds[info->idx_re][i], "unset", 6) == 0)
+		fc_unset(info);
+	else if (strncmp(info->exe->cmds[info->idx_re][i], "env", 4) == 0)
+		fc_env(info);
+	//else if (fc_check_variable(info) == 1)
+	//	fc_variable_command(info);
+	exit (0);
+}
+
+
+
 int	fc_builtins_or_execve2(t_info *info, int i)
 {
-	if ((strncmp(info->exe->cmds[info->idx_re][info->idx], "echo", 5) == 0)
-		|| (strncmp(info->exe->cmds[info->idx_re][info->idx], "pwd", 4) == 0)
-		|| (strncmp(info->exe->cmds[info->idx_re][info->idx], "cd", 3) == 0)
-		|| (strncmp(info->exe->cmds[info->idx_re][info->idx], "exit", 5) == 0)
-		|| (strncmp(info->exe->cmds[info->idx_re][info->idx], "env", 4) == 0)
-		|| (strncmp(info->exe->cmds[info->idx_re][info->idx], "export", 7) == 0)
-		|| (strncmp(info->exe->cmds[info->idx_re][info->idx], "unset", 6) == 0))
-		fc_builtins(info);
+	if ((strncmp(info->exe->cmds[info->idx_re][i], "echo", 5) == 0)
+		|| (strncmp(info->exe->cmds[info->idx_re][i], "pwd", 4) == 0)
+		|| (strncmp(info->exe->cmds[info->idx_re][i], "cd", 3) == 0)
+		|| (strncmp(info->exe->cmds[info->idx_re][i], "exit", 5) == 0)
+		|| (strncmp(info->exe->cmds[info->idx_re][i], "env", 4) == 0)
+		|| (strncmp(info->exe->cmds[info->idx_re][i], "export", 7) == 0)
+		|| (strncmp(info->exe->cmds[info->idx_re][i], "unset", 6) == 0))
+		fc_builtins2(info, i);
 	else
 		fc_execve_re(info, i);
-	return (1);
+	return (0);
 }
+
+
+
+
+

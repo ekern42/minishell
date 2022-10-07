@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:31:17 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 17:28:20 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 18:15:43 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	fc_execve_re(t_info *info, int i)
 {
-	dup2(info->exe->tmp_td, STDIN_FILENO);
-	close(info->exe->tmp_td);
-	info->exe->cmds_execve = info->exe->cmds[i]; // both works
-	//info->exe->cmds_execve = (char **)&info->exe->cmds[info->idx_re][i]; // both works
-	//info->exe->cmds_execve = (char **)&info->exe->cmds[info->idx_re][i]; // both works
+	if (dup2(info->exe->tmp_fd, STDIN_FILENO) == -1)
+		fc_error_tmp(1, "dup2");
+	if (close(info->exe->tmp_fd) == -1)
+		fc_error_tmp(1, "close");
+	info->exe->cmds_execve = info->exe->cmds[i];
+	//info->exe->cmds_execve = (char **)&info->exe->cmds[info->idx_re][i]; // ???
 	if ((execve(info->exe->path, info->exe->cmds_execve, (char **)info->envp)) == -1)
-		fc_error_tmp(1, "Problem with fc_execve\n");
+		fc_error_tmp(1, "execve");
 	return (fc_putstr_fd_re("error: ", info->exe->path));
 }
 

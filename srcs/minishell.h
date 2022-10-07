@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/07 16:29:35 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 18:20:19 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,14 @@ typedef struct s_execution
 	char	**cmds_execve;
 	char	**str_left;
 	char	*path;
-	int		index;
-	pid_t	*pid_lst;
-	pid_t	w_pid;
 	pid_t	pid_init;
-	pid_t	pid_other;
 	int		pipe_init;
 	char	*buffer;
 	char	*buff;
 	int		file;
 	int		size_buffer;
 	int		fd[2];
-	int		tmp_td;
+	int		tmp_fd;
 }	t_execution;
 
 typedef struct s_builtin
@@ -111,10 +107,12 @@ typedef struct s_info
 
 /* execution */
 int		fc_execution(t_info *info);
-int		fc_exe_without_re(t_info *info);
 int		fc_exe_with_re(t_info *info);
+int		fc_is_last_command(t_info *info, int i);
+int		fc_not_in_last_command(t_info *info, int i);
 int		fc_builtins_or_execve(t_info *info);
 int		fc_builtins_or_execve2(t_info *info, int i);
+int		fc_builtins2(t_info *info, int i);
 
 /* execution/builtins */
 int		fc_builtins(t_info *info);

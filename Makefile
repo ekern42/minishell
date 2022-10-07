@@ -6,7 +6,7 @@
 #    By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/07 16:09:47 by angelo           ###   ########.fr        #
+#    Updated: 2022/10/07 17:40:55 by angelo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,6 @@ SRC_REDIRECTIONS =	\
 
 SRC_EXECUTION =	\
 	srcs/execution/fc_execution.c	\
-	srcs/execution/fc_exe_without_re.c	\
 	srcs/execution/fc_exe_with_re.c	\
 	srcs/execution/fc_builtins_or_execve.c
 
