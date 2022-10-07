@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/07 12:42:39 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:25:50 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_execution
 	int		file;
 	int		size_buffer;
 	int		fd[2];
+	int		tmp_td;
 }	t_execution;
 
 typedef struct s_builtin
@@ -114,9 +115,8 @@ typedef struct s_info
 int		fc_execution(t_info *info);
 int		fc_exe_without_re(t_info *info);
 int		fc_exe_with_re(t_info *info);
-char **	fc_create_tmp_str(t_info *info); // emplacement temporaire
-void	fc_print_tmp_str(char **str); // emplacement temporaire
 int		fc_builtins_or_execve(t_info *info);
+int		fc_builtins_or_execve2(t_info *info, int i);
 
 /* execution/builtins */
 int		fc_builtins(t_info *info);
@@ -130,9 +130,9 @@ int		fc_unset(t_info *info);
 
 /* execution/execve */
 int		fc_execve(t_info *info);
-int		fc_execve_redir(t_info *info);
 int		fc_putstr_fd_re(char *str, char *arg);
-int		fc_execute(char **arg, char *path, int tmp_fd, char **env);
+int		fc_execve_re(t_info *info, int i);
+int		fc_execve_redir(t_info *info);
 int		fc_execve_mlt_pipes(t_info *info);
 void	*fc_path_for_execve(t_info *info);
 void	*fc_path_mlt_pipes(t_info *info, int index_re);
@@ -187,11 +187,14 @@ size_t	fc_strlen(const char *str);
 void	fc_test(char **envp);
 void	*fc_find_envp_without_name(t_info *info, char *var_env);
 void	fc_print_cmds(t_info *info);
+int		fc_find_idx_file(t_info *info, char *re, int size);
 int		fc_check_is_redir(t_info *info);
 int		fc_size_str(t_info *info);
 void	*fc_create_left_str(t_info *info);
 void	fc_print_str_left(t_info *info);
-int		fc_find_idx_file(t_info *info, char *re, int size);
+char	**fc_create_tmp_str(t_info *info);
+void	fc_print_tmp_str(char **str);
+
 
 /* variable */
 void	fc_variable_command(t_info *info);

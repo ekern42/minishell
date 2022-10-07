@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/06 15:45:55 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:04:20 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,64 @@ int	fc_putstr_fd_re(char *str, char *arg)
 	return (1);
 }
 
+
+
+
+int	fc_exe_with_re(t_info *info)
+{
+	int	i;
+	
+	i = 0;
+	info->exe->tmp_td = dup(STDIN_FILENO);
+
+	while (i < info->lex->nbr_pipe + 1) //check if the end is reached
+	{
+		if (i == info->lex->nbr_pipe) //exec in stdout
+		{
+			if (fork() == 0)
+			{
+				info->exe->path = fc_path_mlt_pipes(info, i);
+				//if (fc_execute(info->exe->cmds[i], info->exe->path, info->exe->tmp_td, (char**)info->envp))
+				//	return (1);
+				fc_execve_re(info, i);
+					return (1);
+			}
+			else
+			{
+				close(info->exe->tmp_td);
+				while(waitpid(-1, NULL, WUNTRACED) != -1)
+					;
+				info->exe->tmp_td = dup(STDIN_FILENO);
+			}
+		}
+		else // envoie l'output dans un pipe
+		{
+			pipe(info->exe->fd);
+			if (fork() == 0)
+			{
+				info->exe->path = fc_path_mlt_pipes(info, i);
+				dup2(info->exe->fd[1], STDOUT_FILENO);
+				close(info->exe->fd[0]);
+				close(info->exe->fd[1]);
+				fc_execve_re(info, i);
+					return (1);
+			}
+			else
+			{
+				close(info->exe->fd[1]);
+				close(info->exe->tmp_td);
+				info->exe->tmp_td = info->exe->fd[0];
+			}
+		}
+		i++;
+	}
+	close(info->exe->tmp_td);
+	return (0);
+}
+
+
+/*
+
 int	fc_execute(char **arg, char *path, int tmp_fd, char **env)
 {
 	dup2(tmp_fd, STDIN_FILENO);
@@ -31,15 +89,13 @@ int	fc_execute(char **arg, char *path, int tmp_fd, char **env)
 	return (fc_putstr_fd_re("error: ", path));
 }
 
-
 int	fc_exe_with_re(t_info *info)
 {
 	int		i;
-	int		tmp_fd;
 	char	*path;
 
 	i = 0;
-	tmp_fd = dup(STDIN_FILENO);
+	info->exe->tmp_td = dup(STDIN_FILENO);
 
 	while (i < info->lex->nbr_pipe + 1) //check if the end is reached
 	{
@@ -48,15 +104,15 @@ int	fc_exe_with_re(t_info *info)
 			if (fork() == 0)
 			{
 				path = fc_path_mlt_pipes(info, i);
-				if (fc_execute(info->exe->cmds[i], path, tmp_fd, (char**)info->envp))
+				if (fc_execute(info->exe->cmds[i], path, info->exe->tmp_td, (char**)info->envp))
 					return (1);
 			}
 			else
 			{
-				close(tmp_fd);
+				close(info->exe->tmp_td);
 				while(waitpid(-1, NULL, WUNTRACED) != -1)
 					;
-				tmp_fd = dup(STDIN_FILENO);
+				info->exe->tmp_td = dup(STDIN_FILENO);
 			}
 		}
 		else // envoie l'output dans un pipe
@@ -68,22 +124,22 @@ int	fc_exe_with_re(t_info *info)
 				dup2(info->exe->fd[1], STDOUT_FILENO);
 				close(info->exe->fd[0]);
 				close(info->exe->fd[1]);
-				if (fc_execute(info->exe->cmds[i], path, tmp_fd, (char**)info->envp))
+				if (fc_execute(info->exe->cmds[i], path, info->exe->tmp_td, (char**)info->envp))
 					return (1);
 			}
 			else
 			{
 				close(info->exe->fd[1]);
-				close(tmp_fd);
-				tmp_fd = info->exe->fd[0];
+				close(info->exe->tmp_td);
+				info->exe->tmp_td = info->exe->fd[0];
 			}
 		}
 		i++;
 	}
-	close(tmp_fd);
+	close(info->exe->tmp_td);
 	return (0);
 }
-
+*/
 
 /*
 static int	fc_init_exe_with_re(t_info *info)
@@ -207,14 +263,3 @@ int	fc_exe_with_re(t_info *info)
 	return (0);
 }
 */
-
-
-//// ls -la
-//printf("%s\n", info->exe->cmds[0][0]);
-//printf("%s\n", info->exe->cmds[0][1]);
-//// wc -l
-//printf("%s\n", info->exe->cmds[1][0]);
-//printf("%s\n", info->exe->cmds[1][1]);
-//// ls -la
-//printf("%s\n", info->exe->cmds[2][0]);
-//printf("%s\n", info->exe->cmds[2][1]);
