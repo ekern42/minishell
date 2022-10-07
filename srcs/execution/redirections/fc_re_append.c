@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:45:37 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 16:17:04 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 20:01:22 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	fc_go_end_of_file(t_info *info)
 	if (fd == -1)
 		fc_error_tmp(1, "open() failed\n");
 
-
 	i = 0;
 	str = get_next_line(fd);
 	while (str != NULL)
@@ -67,7 +66,7 @@ int	fc_re_append(t_info *info)
 	{
 		fc_stdin_to_stdout(info);
 		info->idx = 0;
-		fc_builtins_or_execve(info);
+		fc_builtins_or_execve2(info);
 	}
 	fc_create_file(info);
 	

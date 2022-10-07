@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:51:42 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/11 17:06:45 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:00:40 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 int	fc_env(t_info *info)
 {
 	fc_print_chainlist(info->envp, 's', 1);
-	return (0);
+	exit (0);
+	//return (0);
 }

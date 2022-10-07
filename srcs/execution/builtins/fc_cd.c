@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:51:19 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/01 19:01:49 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:00:07 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ int	fc_cd(t_info *info)
 
 	//if (info->b->entity->d_type == 4)
 	//ft_putstr_fd("cd\nNot yet implemented\n", 1);
-	return (0);
+	exit (0);
+	//return (0);
 }

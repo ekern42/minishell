@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/07 18:20:19 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:35:40 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,13 @@ int		fc_execution(t_info *info);
 int		fc_exe_with_re(t_info *info);
 int		fc_is_last_command(t_info *info, int i);
 int		fc_not_in_last_command(t_info *info, int i);
-int		fc_builtins_or_execve(t_info *info);
-int		fc_builtins_or_execve2(t_info *info, int i);
-int		fc_builtins2(t_info *info, int i);
+int		fc_builtins_or_execve(t_info *info, int i);
+int		fc_builtins(t_info *info, int i);
+int		fc_is_builtin(t_info *info, int i);
+int		fc_builtins_or_execve2(t_info *info);
+int		fc_builtins2(t_info *info);
 
 /* execution/builtins */
-int		fc_builtins(t_info *info);
 int		fc_cd(t_info *info);
 int		fc_echo(t_info *info);
 int		fc_env(t_info *info);

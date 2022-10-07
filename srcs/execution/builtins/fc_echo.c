@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:39:20 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 18:31:53 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:00:25 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int	fc_echo(t_info *info)
 	(void)info;
 	
 	ft_putstr_fd("echo\nOk but change info->seg_command_line and check with redirection\n", 1);
-	return (0);
+	exit (0);
+	//return (0);
 }

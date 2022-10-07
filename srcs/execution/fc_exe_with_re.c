@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 18:28:02 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:54:11 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ int	fc_is_last_command(t_info *info, int i)
 	if (fork() == 0)
 	{
 		info->exe->path = fc_path_mlt_pipes(info, i);
-		//fc_execve_re(info, i);
-		fc_builtins_or_execve2(info, i);
-			return (1);
+		fc_execve_re(info, i);
+		//	return (1); PAS COMPRIS À QUOI SERT CE RETURN (1) ??
+		//fc_builtins_or_execve(info, i);
+		//	return (1);
 	}
 	else
 	{
@@ -82,9 +83,10 @@ int	fc_not_in_last_command(t_info *info, int i)
 			fc_error_tmp(1, "close");
 		if (close(info->exe->fd[1]) == -1)
 			fc_error_tmp(1, "close");
-		//fc_execve_re(info, i);
-		fc_builtins_or_execve2(info, i);
-			return (1);
+		fc_execve_re(info, i);
+		//	return (1); PAS COMPRIS À QUOI SERT CE RETURN (1) ??
+		//fc_builtins_or_execve(info, i);
+		//	return (1);
 	}
 	else
 	{

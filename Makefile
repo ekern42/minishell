@@ -6,7 +6,7 @@
 #    By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/07 17:40:55 by angelo           ###   ########.fr        #
+#    Updated: 2022/10/07 19:15:05 by angelo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ LIBFT_DIR = libft
 LIBFT_FILE = $(LIBFT_DIR)/$(LIBFT)
 
 SRC_BUILTINS =	\
-	srcs/execution/builtins/builtins.c	\
 	srcs/execution/builtins/fc_cd.c	\
 	srcs/execution/builtins/fc_echo.c	\
 	srcs/execution/builtins/fc_env.c	\

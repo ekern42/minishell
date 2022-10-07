@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:52:20 by angelo            #+#    #+#             */
-/*   Updated: 2022/09/10 15:55:34 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:01:43 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int	fc_pwd(t_info *info)
 			info->envp = info->envp->next;
 		}
 	}
-	return (1);
+	exit (0);
+	//return (1);
 }
