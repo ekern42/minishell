@@ -35,7 +35,6 @@ static void	fc_envp_init(t_info *info, char **envp)
 
 void	fc_init_lexer(t_info *info)
 {
-	info->idx_re = 0; // quand il y a des pipes je mets 1
 	info->b_sub_str = 0;
 	info->nbr_sstr = 0;
 	info->quotes_list = NULL;

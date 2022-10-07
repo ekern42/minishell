@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:43:02 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 13:01:28 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 11:41:07 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,16 @@ int	fc_exe_without_re(t_info *info)
 	{
 		info->idx = 0;
 		fc_builtins_or_execve(info);
+		//printf ("4. ---\n");
 	}
 	if (close(info->exe->fd[0]) < 0)
 		fc_error_tmp(5, "Problem with close(info->exe->fd[0])\n");
 	if (close(info->exe->fd[1]) < 0)
 		fc_error_tmp(5, "Problem with close(info->exe->fd[1])\n");
-
-	if (waitpid(info->exe->pid_init, NULL, 0) < 0)
+	//printf("2. ----\n");
+	if (waitpid(info->exe->pid_init, WIFEXITED(true), 0) < 0)
 		fc_error_tmp(6, "Problem with waitpid - info->exe->pid_init\n");
-
+	//printf("3. ----\n");
 	return (0);
 }
 

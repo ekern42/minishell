@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:45:37 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/06 19:10:00 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 12:36:44 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,23 @@
 //printf("%s\n", info->exe->cmds[1][0]); // segfault
 //printf("%s\n", info->exe->cmds[1][1]); // segfault
 
-int	fc_find_size_buffer(t_info *info)
+static	int	fc_find_idx_file(t_info *info)
 {
-	int	i = 0;
-	int j = 0;
-	int	end_line = 0;
-	char *str = get_next_line(info->exe->fd[0]);
-	while (str[i])
+	info->idx = 0;
+	while (info->exe->cmds[info->idx_re][info->idx++] != NULL)
 	{
-		j = 0;
-		while (str[j] != '\0')
+		if (strncmp(info->exe->cmds[info->idx_re][info->idx], ">>", 3) == 0)
 		{
-			if (str[j] == '\n')
-				end_line++;
-			j++;
-		}
-		if (i == end_line)
+			info->idx++;
 			break ;
-		i++;
+		}
 	}
-	printf("i = %d\n", i);
-	return (i);
+	return (info->idx);
 }
-
 
 int	fc_re_append(t_info *info)
 {
-	int		new_fd;
-	ssize_t	r;
+//	int	i;
 
 	if (pipe(info->exe->fd) < 0)
 		fc_error_tmp(1, "Problem with pipe\n");
@@ -60,56 +49,114 @@ int	fc_re_append(t_info *info)
 	{
 		fc_stdin_to_stdout(info);
 		info->idx = 0;
-		info->exe->path = NULL;
-		info->exe->path = fc_path_for_execve(info);
-		info->exe->cmds_execve = fc_create_left_str(info);
-		if ((execve(info->exe->path, info->exe->cmds_execve, (char **)info->envp)) == -1)
-			fc_error_tmp(1, "Problem with fc_execve_redir\n");
+		fc_builtins_or_execve(info);
 	}
 
-	info->exe->buff = NULL;
-	info->exe->buff = malloc(sizeof(char) * 1000);
 
-	new_fd = open(info->exe->cmds[info->idx_re][3], O_CREAT | O_RDWR | O_APPEND, 0777);
-	if (new_fd < 0)
+	fc_find_idx_file(info);
+	info->exe->file = open(info->exe->cmds[info->idx_re][info->idx], O_CREAT | O_RDWR | O_APPEND, 0777);
+	if (info->exe->file < 0)
 		fc_error_tmp(1, "Problem with open\n");
+	
+	if (close(info->exe->file) < 0)
+		fc_error_tmp(1, "Problem with close(info->exe->file)\n");
 
-	r = read(info->exe->fd[0], info->exe->buff, 10);
-	if (r == -1)
+
+	info->exe->buffer = malloc(sizeof(char) * 1000);
+	if (read(info->exe->fd[0], info->exe->buffer, 999) < 0)
 		fc_error_tmp(1, "Problem with read\n");
 
-	while (r)
-	{
-		//printf("Read %zd bytes\n", r);
-		write(new_fd, info->exe->buff, r);
-		//printf("Writing %zd\n", r);
-		r = read(info->exe->fd[0], info->exe->buff, 10);
-		printf("r = %ld\n", r);
-	}
-	//while ((r = read(info->exe->fd[0], info->exe->buff, 1024)) > 0)
-	//{
-	//	printf("1. salut\n");
-	//	//printf("Read %zd bytes\n", r);
-	//	write(new_fd, info->exe->buff, r);
-	//	//printf("Writing %zd\n", r);
-	//	//r = read(info->exe->fd[0], info->exe->buff, 1024);
-	//}
-	//printf("2. salut\n");
-	
-	if (close (new_fd) < 0)
-		fc_error_tmp(1, "Problem with close(new_fd)\n");
+
+	info->exe->fd[0] = open(info->exe->cmds[info->idx_re][info->idx], O_WRONLY, 0777);
+	if (info->exe->fd[0] < 0)
+		fc_error_tmp(1, "Problem with open\n");
+
+	if (write(info->exe->fd[0], info->exe->buffer, ft_strlen(info->exe->buffer)) < 0)
+		fc_error_tmp(1, "Problem with write\n");
+
 
 	if (close (info->exe->fd[0]) < 0)
 		fc_error_tmp(1, "Problem with close(info->exe->fd[0])\n");
 	if (close(info->exe->fd[1]) < 0)
 		fc_error_tmp(1, "Problem with close(info->exe->fd[1])\n");
 
-	if (waitpid(info->exe->pid_init, WIFEXITED(true), 0) < 0)
+	if (waitpid(info->exe->pid_init, NULL, 0) < 0)
 		fc_error_tmp(1, "Problem with waitpid - info->exe->pid_init\n");
 	
 	return (0);
 }
 
+
+/*
+int	fc_re_append(t_info *info)
+{
+	int		new_fd;
+	ssize_t	r;
+	int		size;
+
+	info->exe->buff = NULL;
+	info->exe->buff = malloc(sizeof(char) * 1000);
+
+	if (pipe(info->exe->fd) < 0)
+		fc_error_tmp(1, "Problem with pipe\n");
+	info->exe->pid_init = fork();
+	if (info->exe->pid_init < 0)
+		fc_error_tmp(1, "Problem with fork\n");
+	if (info->exe->pid_init == 0)
+	{
+		new_fd = open(info->exe->cmds[info->idx_re][3], O_CREAT | O_RDWR | O_APPEND, 0777);
+		if (new_fd < 0)
+			fc_error_tmp(1, "Problem with open\n");
+
+
+		//fc_stdin_to_stdout(info);
+		if (dup2(info->exe->fd[1], STDOUT_FILENO) < 0)
+			fc_error_tmp(1, "Problem with dup2 - info->exe->fd[1], STDOUT_FILENO\n");
+		if (close(info->exe->fd[0]) < 0)
+			fc_error_tmp(1, "Problem with close - fd[0]- fc_stdin_to_stdout\n");
+		if (close(info->exe->fd[1]) < 0)
+			fc_error_tmp(1, "Problem with close - fd[1]- fc_stdin_to_stdout\n");
+		info->idx = 0;
+		info->exe->path = NULL;
+		info->exe->path = fc_path_for_execve(info);
+		info->exe->cmds_execve = fc_create_left_str(info);
+		if ((execve(info->exe->path, info->exe->cmds_execve, (char **)info->envp)) == -1)
+			fc_error_tmp(1, "Problem with fc_execve_redir\n");
+	}
+	else
+	{
+		//new_fd = open(info->exe->cmds[info->idx_re][3], O_CREAT | O_RDWR | O_APPEND, 0777);
+		//if (new_fd < 0)
+		//	fc_error_tmp(1, "Problem with open\n");
+		
+		size = 10;
+		r = read(info->exe->fd[0], info->exe->buff, size);
+		if (r == -1)
+			fc_error_tmp(1, "Problem with read\n");
+		while (r)
+		{
+			//printf("Read %zd bytes\n", r);
+			write(new_fd, info->exe->buff, r);
+			//printf("Writing %zd\n", r);
+			r = read(info->exe->fd[0], info->exe->buff, size);
+		}
+
+		
+		if (close (new_fd) < 0)
+			fc_error_tmp(1, "Problem with close(new_fd)\n");
+
+		if (close (info->exe->fd[0]) < 0)
+			fc_error_tmp(1, "Problem with close(info->exe->fd[0])\n");
+		if (close(info->exe->fd[1]) < 0)
+			fc_error_tmp(1, "Problem with close(info->exe->fd[1])\n");
+
+		if (waitpid(info->exe->pid_init, WIFEXITED(true), 0) < 0)
+			fc_error_tmp(1, "Problem with waitpid - info->exe->pid_init\n");
+	
+	}
+	return (0);
+}
+*/
 
 /*
 // Avant de trouver la taille dynamiquement pour le malloc de buffer
@@ -124,7 +171,6 @@ int	fc_re_append(t_info *info)
 	{
 		fc_stdin_to_stdout(info);
 		info->idx = 0;
-		info->idx_re = 0;
 		fc_builtins_or_execve(info);
 	}
 
@@ -133,11 +179,10 @@ int	fc_re_append(t_info *info)
 		fc_error_tmp(1, "Problem with read\n");
 
 	info->idx = 1;
-	info->idx_re = 0;
 	while (fc_path_for_execve(info) == NULL)
 		info->idx++;
 
-	//info->exe->fd[0] = open(info->exe->cmds[info->idx2][info->idx], O_CREAT | O_RDWR, 0777);
+	//info->exe->fd[0] = open(info->exe->cmds[info->idx_re][info->idx], O_CREAT | O_RDWR, 0777);
 	info->exe->fd[0] = open(info->exe->cmds[info->idx_re][info->idx], O_CREAT | O_RDWR | O_APPEND, 0777);
 	if (info->exe->fd[0] < 0)
 		fc_error_tmp(1, "Problem with open\n");
@@ -169,3 +214,15 @@ int	fc_re_append(t_info *info)
 //printf("%s", get_next_line(info->exe->fd[0]));
 
 //printf("%s", get_next_line(info->exe->fd[0]));
+
+
+// Hajar variant
+//while ((r = read(info->exe->fd[0], info->exe->buff, 1024)) > 0)
+//{
+//	printf("1. salut\n");
+//	//printf("Read %zd bytes\n", r);
+//	write(new_fd, info->exe->buff, r);
+//	//printf("Writing %zd\n", r);
+//	//r = read(info->exe->fd[0], info->exe->buff, 1024);
+//}
+//printf("2. salut\n");

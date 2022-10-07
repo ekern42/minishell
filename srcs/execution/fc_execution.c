@@ -6,14 +6,23 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:00:45 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 13:12:25 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 11:40:10 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+static void	fc_check_is_pipe(t_info *info)
+{
+	if (info->lex->pipes == true)
+		info->idx_re = 1;
+	else
+		info->idx_re = 0;
+}
+
 int	fc_execution(t_info *info)
 {
+	fc_check_is_pipe(info);
 	if (info->lex->pipes == false
 	&& info->lex->re_append == false
 	&& info->lex->re_input == false
