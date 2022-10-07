@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 16:41:54 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:59:21 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,48 @@ int	fc_putstr_fd_re(char *str, char *arg)
 }
 
 
+static int	fc_is_last_command(t_info *info, int i)
+{
+	if (fork() == 0)
+	{
+		info->exe->path = fc_path_mlt_pipes(info, i);
+		//fc_builtins_or_execve2(info, i);
+		fc_execve_re(info, i);
+			return (1);
+	}
+	else
+	{
+		close(info->exe->tmp_td);
+		while(waitpid(-1, NULL, WUNTRACED) != -1)
+			;
+		info->exe->tmp_td = dup(STDIN_FILENO);
+	}
+	return (0);
+}
+
+static int	fc_not_in_last_command(t_info *info, int i)
+{
+	pipe(info->exe->fd);
+	if (fork() == 0)
+	{
+		info->exe->path = fc_path_mlt_pipes(info, i);
+		dup2(info->exe->fd[1], STDOUT_FILENO);
+		close(info->exe->fd[0]);
+		close(info->exe->fd[1]);
+		//fc_builtins_or_execve2(info, i);
+		fc_execve_re(info, i);
+			return (1);
+	}
+	else
+	{
+		close(info->exe->fd[1]);
+		close(info->exe->tmp_td);
+		info->exe->tmp_td = info->exe->fd[0];
+	}
+	return (0);
+}
+
+
 int	fc_exe_with_re(t_info *info)
 {
 	int	i;
@@ -33,43 +75,11 @@ int	fc_exe_with_re(t_info *info)
 
 	while (i < info->lex->nbr_pipe + 1) //check if the end is reached
 	{
+		//printf("i = %d\n", i);
 		if (i == info->lex->nbr_pipe) //exec in stdout
-		{
-			if (fork() == 0)
-			{
-				info->exe->path = fc_path_mlt_pipes(info, i);
-				//fc_builtins_or_execve2(info, i);
-				fc_execve_re(info, i);
-					return (1);
-			}
-			else
-			{
-				close(info->exe->tmp_td);
-				while(waitpid(-1, NULL, WUNTRACED) != -1)
-					;
-				info->exe->tmp_td = dup(STDIN_FILENO);
-			}
-		}
+			fc_is_last_command(info, i);
 		else // envoie l'output dans un pipe
-		{
-			pipe(info->exe->fd);
-			if (fork() == 0)
-			{
-				info->exe->path = fc_path_mlt_pipes(info, i);
-				dup2(info->exe->fd[1], STDOUT_FILENO);
-				close(info->exe->fd[0]);
-				close(info->exe->fd[1]);
-				//fc_builtins_or_execve2(info, i);
-				fc_execve_re(info, i);
-					return (1);
-			}
-			else
-			{
-				close(info->exe->fd[1]);
-				close(info->exe->tmp_td);
-				info->exe->tmp_td = info->exe->fd[0];
-			}
-		}
+			fc_not_in_last_command(info, i);
 		i++;
 	}
 	close(info->exe->tmp_td);
