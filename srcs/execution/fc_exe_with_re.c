@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_exe_with_re.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/10 16:31:47 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/10 19:27:53 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,35 +70,42 @@ int	fc_is_last_command(t_info *info, int i)
 int	fc_not_in_last_command(t_info *info, int i)
 {
 	int	fd;
+	char *strtemp;
 	int	a;
+	bool	bool_temp;
 
 	a = 0;
+	bool_temp = false;
 	if (pipe(info->exe->fd) == -1)
+	{
 		fc_error_tmp(1, "pipe");
+	}
 	if (fork() == 0)
 	{
-		while (info->exe->cmds[i][a] != NULL)
+		while (info->exe->cmds[i][a] != NULL && bool_temp == false)
 		{
-			if (ft_strncmp(info->exe->cmds[i][a],">>", 3) == 0)
-			{
-				fd = open(info->exe->cmds[i][a + 1], O_WRONLY | O_CREAT | O_APPEND , 0777);
-				if (fd == 1)
-					fc_error_tmp(1, "open");
-				
-				if (dup2(fd, STDOUT_FILENO) == -1)
-					fc_error_tmp(1, "dup2");
-				if (close(info->exe->fd[0]) == -1)
-					fc_error_tmp(1, "close");
-				if (close(fd) == -1)
-					fc_error_tmp(1, "close");
-				info->exe->cmds[i][a] = NULL;
-
-			}
-		a++;
+			strtemp = info->exe->cmds[i][a];
+			if ((fc_re_append(info, a, i)) == 1)	
+				bool_temp = true;
+			a++;
 		}
-		fprintf(stderr, "i = %d\n", i);
-		info->exe->path = fc_path_mlt_pipes(info, i);
-		fc_execve_re(info, i);
+		if (bool_temp == true)
+		{
+			info->exe->path = fc_path_mlt_pipes(info, i);
+			fc_execve_re(info, i);
+			info->exe->cmds[i][a - 1] = strtemp;
+		}
+		else
+		{	
+			info->exe->path = fc_path_mlt_pipes(info, i);
+			if (dup2(info->exe->fd[1], STDOUT_FILENO) == -1)
+				fc_error_tmp(1, "dup2");
+			if (close(info->exe->fd[0]) == -1)
+				fc_error_tmp(1, "close");
+			if (close(info->exe->fd[1]) == -1)
+				fc_error_tmp(1, "close");
+			fc_execve_re(info, i);
+		}
 	}
 	else
 	{
@@ -117,7 +124,10 @@ int	fc_not_in_last_command(t_info *info, int i)
 				fc_error_tmp(1, "close");
 			if (close(info->exe->tmp_fd) == -1)
 				fc_error_tmp(1, "close");
-			info->exe->tmp_fd = fd;
+			if (info->lex->re_append == true)
+				info->exe->tmp_fd = fd;
+			else
+				info->exe->tmp_fd = info->exe->fd[0];
 	}
 	return (0);
 }

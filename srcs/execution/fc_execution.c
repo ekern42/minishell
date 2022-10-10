@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:00:45 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 19:59:32 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/10 17:43:55 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ int	fc_execution(t_info *info)
 		info->idx_re = 1;
 	else
 		info->idx_re = 0;
-	if (fc_check_is_redir(info) == 0 && info->lex->pipes == false) // provisoire, pour : >>
-		fc_re_append(info);
-	else
-		fc_exe_with_re(info);
+	fc_exe_with_re(info);
 	return (0);
 }
 
