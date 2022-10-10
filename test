@@ -1,0 +1,10 @@
+total 332
+drwxr-xr-x  5 angelo angelo   4096 Oct 10 16:31 .
+drwxr-xr-x  6 angelo angelo   4096 Oct 10 15:01 ..
+drwxr-xr-x  8 angelo angelo   4096 Oct 10 13:11 .git
+-rw-r--r--  1 angelo angelo     35 Oct 10 13:11 .gitignore
+-rw-r--r--  1 angelo angelo   3101 Oct 10 13:14 Makefile
+drwxr-xr-x  4 angelo angelo   4096 Oct 10 15:21 libft
+-rwxr-xr-x  1 angelo angelo 307672 Oct 10 16:30 minishell
+drwxr-xr-x 11 angelo angelo   4096 Oct 10 15:21 srcs
+-rwxr-xr-x  1 angelo angelo      0 Oct 10 16:31 test

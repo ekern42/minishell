@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/10 12:23:50 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/10 15:31:59 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,9 @@ typedef struct s_info
 /* execution */
 int		fc_execution(t_info *info);
 int		fc_exe_with_re(t_info *info);
+
+//int		fc_ntm(t_info *info, int i);
+
 int		fc_is_last_command(t_info *info, int i);
 int		fc_not_in_last_command(t_info *info, int i);
 int		fc_builtins_or_execve(t_info *info, int i);

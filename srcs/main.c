@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/10 12:29:32 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/10 13:13:54 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	main(int ac, char **av, char **envp)
 			fc_parsing(&info);
 			fc_exit(&info);
 			//fc_print_cmds(&info);
-//			fc_execution(&info);
+			fc_execution(&info);
 		}
-		free(info.command_line);
-		fc_final_free(&info);
+		//free(info.command_line);
+		//fc_final_free(&info);
 	}
 	
 }
