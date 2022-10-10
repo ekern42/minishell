@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:19:16 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/01 10:26:58 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:30:56 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	fc_check_lex(t_info *info, int a)
 		info->lex->error = true;
 		return (0);
 	}
-	if (info->command_line[a + 1] == ' ')
+/*	if (info->command_line[a + 1] == ' ')
 		a++;
 	if (info->command_line[a + 1] == '|'
 		|| info->command_line[a + 1] == '<'
@@ -62,7 +62,7 @@ int	fc_check_lex(t_info *info, int a)
 	{
 		info->lex->error = true;
 		return (0);
-	}
+	} */
 	return (1);
 }
 

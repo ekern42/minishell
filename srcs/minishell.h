@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/07 20:24:02 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/10 12:23:50 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ int		fc_signal(t_info *info);
 /* utils */
 size_t	fc_strlen(const char *str);
 void	fc_test(char **envp);
+int		fc_dblstrlen(char **tab);
 void	*fc_find_envp_without_name(t_info *info, char *var_env);
 void	fc_print_cmds(t_info *info);
 int		fc_find_idx_file(t_info *info, char *re, int size);

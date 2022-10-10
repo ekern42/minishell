@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 19:44:16 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/04 17:18:59 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/07 13:35:13 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	fc_print_for_pipe(t_info *info)
 		b = 0;
 		while (info->exe->cmds[a][b] != NULL)
 		{
-			//printf("%s | a = %d | b = %d\n", info->exe->cmds[a][b], a, b);
+			printf("%s | a = %d | b = %d\n", info->exe->cmds[a][b], a, b);
 			b++;
 		}
-//			printf("----------\n");
+			printf("----------\n");
 		a++;
 	}
 }

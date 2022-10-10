@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:38:34 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 19:30:11 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/10 12:30:40 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 int	fc_exit(t_info *info)
 {
 	if (strncmp(*info->exe->cmds[0], "exit", 5) == 0)
+	{
+		fc_final_free(info);
 		exit (127);
+	}
 	return (1);
 }

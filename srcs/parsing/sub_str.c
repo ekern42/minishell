@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sub_str.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:44:17 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/01 10:20:18 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/10 12:26:48 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,62 @@ static void	fc_sub_str(t_info *info, int a)
 }
 /* b_sub_str = premier charactere apres un space, a = space de fin de str ou '\0' */
 
+static int	fc_small_str_common2(t_info *info, int a)
+{
+	if (a != 0)
+	{
+		if ((info->command_line[a] == '<' || info->command_line[a] == '>') && info->command_line[a - 1] != ' ')
+		{
+			if (info->command_line[a - 1] != '<' && info->command_line[a - 1] != '>')
+			{
+				fc_sub_str(info, a);
+				info->b_sub_str = a;
+			}
+	}
+	}
+	if ((info->command_line[a] == '<' || info->command_line[a] == '>') && info->command_line[a + 1] != ' ')
+	{
+		
+		if (info->command_line[a + 1] != '<' && info->command_line[a + 1] != '>')
+		{
+			fc_sub_str(info, a + 1);
+			info->b_sub_str = a + 1;
+			a++;
+		}
+		else
+		{
+			if (info->command_line[a + 2] != ' ')
+			{
+				fc_sub_str(info, a + 2);
+				info->b_sub_str = a + 2;
+				a += 2;
+			}
+		}
+	}
+	return (a);
+}
+
 int	fc_small_str_common(t_info *info, int a)
 {
 	while (info->command_line[info->b_sub_str] == ' ') //common
 	{
 		info->b_sub_str++;
 		a++;
-//		printf("while space with\n");
 	}
 	if (info->command_line[a] == ' ') //common
 	{
 		fc_sub_str(info, a);
 		info->b_sub_str = a + 1;
-//		printf("1 if with\n");
 	}	
 	if (a != 0) // common
+	{
 		if (info->command_line[a - 1] != ' ' && info->command_line[a] == '|')
 		{
 			fc_sub_str(info, a);
 			info->b_sub_str = a;
-//			printf("2 if with\n");
 		}
+	}
+	a = fc_small_str_common2(info, a);
 	return (a);
 }
 
@@ -60,7 +95,6 @@ int	fc_small_str_with_quote(t_info *info, t_quotes *temp, int a)
 			{
 				fc_sub_str(info, a + 1);
 				info->b_sub_str = a + 1;
-//				printf("3 if with\n");
 			}
 			a++;
 		}
@@ -82,16 +116,16 @@ void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a)
 			{
 				fc_sub_str(info, a + 1);
 				info->b_sub_str = a + 1;
-//				printf("3 if out\n");
 			}
 			a++;		
 		}
 	}
-//	printf("after out\n");
 	if (info->command_line[a] == '\0' && info->command_line[a - 1] != ' ')
 	{
-		fc_sub_str(info, a);
-		info->nbr_sstr++;
-//		printf("4 if out\n");
+		if (info->command_line[a - 1] != '>' && info->command_line[a - 1] != '<')
+		{
+			fc_sub_str(info, a);
+			info->nbr_sstr++;
+		}
 	}
 }

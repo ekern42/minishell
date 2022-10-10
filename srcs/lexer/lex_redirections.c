@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:47:40 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/22 10:35:49 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/07 16:57:46 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,32 @@ static void	fc_lex_dbl_red(t_info *info, int a)
 		info->lex->nbr_re_append++;
 	}
 }
-
-int	fc_lex_redirections(t_info *info, int a)
+static int	fc_check_red(t_info *info, int a)
 {
-	if (a == 0)
+	while (info->command_line[++a] == ' ' && info->command_line[a] != '\0');
+	if (info->command_line[a] == '\0')
+		return (1);
+	else if (info->command_line[a] == '<' || info->command_line[a] == '>')
 	{
 		info->lex->error = true;
 		return (0);
 	}
+	return (1);
+}
+
+int	fc_lex_redirections(t_info *info, int a)
+{
 	if (info->command_line[a] == info->command_line[a + 1])
 	{
 		fc_lex_dbl_red(info, a);
-		if (fc_check_lex(info, a + 1) == 0)
+		if (fc_check_red(info, a + 1) == 0)
 			return (0);
 		return (2);
 	}
 	else
 	{
 		fc_lex_sgl_red(info, a);
-		if (fc_check_lex(info, a) == 0)
+		if (fc_check_red(info, a) == 0)
 			return (0);
 		return (1);
 	}

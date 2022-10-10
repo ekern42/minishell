@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:26:39 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/28 15:06:41 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/10 12:19:25 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,4 @@ void	fc_seg_str(t_info *info)
 	}
 	fc_small_str_without_quote(info, temp, a);
 	fc_final_seg(info);
-//	fc_free_t_list(info);
 }
