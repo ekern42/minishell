@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_path_for_execve.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:35:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/06 14:16:32 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/11 14:14:31 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*fc_path_mlt_pipes(t_info *info, int index_re)
 		//printf("path = %s\n", path);
 		if (access(path, X_OK) == 0)
 		{
-			//printf("path = %s\n", path);
+//			printf("path = %s\n", path);
 			return (path);
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:35:18 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/10 18:49:02 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/11 12:21:35 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	fc_error_exe2(int code_return)
 
 int	fc_error_tmp(int code_return, char *error_message)
 {
-	printf("%s\n", error_message);
-	//perror(error_message);
+//	printf("%s\n", error_message);
+	perror(error_message);
 	//printf("Error :\ncode return = %d | %s\n", code_return, error_message);
 	return (code_return);
 }

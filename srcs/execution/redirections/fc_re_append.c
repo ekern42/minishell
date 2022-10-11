@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:45:37 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/10 18:57:14 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/11 15:51:14 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,26 @@ int	fc_re_append(t_info *info, int a, int i)
 	return (0);
 }
 
+int	fc_re_append_last(t_info *info, int a, int i)
+{
+	int fd;
+	
+	if (ft_strncmp(info->exe->cmds[i][a], ">>", 3) == 0)
+	{
+		fd = open(info->exe->cmds[i][a + 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
+		if (fd == -1)
+			fc_error_tmp(1, "open");
+		if (dup2(fd, STDOUT_FILENO) == -1)
+			fc_error_tmp(1, "dup2");
+		if (close(info->exe->fd[0]) == -1)
+			fc_error_tmp(1, "close");
+		if (close(fd) == -1)
+			fc_error_tmp(1, "close");
+		info->exe->cmds[i][a] = NULL;
+		return (1);
+	}
+	return (0);
+}
 /*
 int	fc_re_append(t_info *info)
 {
