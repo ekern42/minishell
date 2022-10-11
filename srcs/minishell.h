@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/11 12:09:30 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/11 18:27:05 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,8 @@ int		fc_stdin_to_stdout(t_info *info); //Donc à gauche du pipe
 int		fc_stdout_to_stdin(t_info *info); //Donc à droite du pipe
 int		fc_stdout_and_stdin(t_info *info);
 int		fc_re_append(t_info *info, int a, int i); // >>
-int		fc_re_append_last(t_info *info, int a, int i);
-int		fc_re_output(t_info *info); // >
+int		fc_re_output(t_info *info, int a, int i); // >
+int		fc_re_input(t_info *info, int a, int i); // <
 
 /* errors */
 void	fc_error(t_info *info, int a);

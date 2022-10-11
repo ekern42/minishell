@@ -3,19 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   fc_re_output.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:48:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/03 10:22:02 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/11 17:00:23 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 // >
-int	fc_re_output(t_info *info)
+int	fc_re_output(t_info *info, int a, int i)
 {
-	(void)info;
+	int fd;
+	
+	if (ft_strncmp(info->exe->cmds[i][a], ">", 2) == 0)
+	{
+		fd = open(info->exe->cmds[i][a + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd == -1)
+			fc_error_tmp(1, "open");
+		if (dup2(fd, STDOUT_FILENO) == -1)	
+			fc_error_tmp(1, "dup2");
+		if (close(fd) == -1)
+			fc_error_tmp(1, "close");
+		info->exe->cmds[i][a] = NULL;
+		info->exe->path = fc_path_mlt_pipes(info, i);
+		fc_execve_re(info, i);
+		return (1);
+	}
 	return (0);
 }
 

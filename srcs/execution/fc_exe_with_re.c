@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/11 15:51:05 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/11 20:29:31 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,26 @@ int	fc_is_last_command(t_info *info, int i)
 	{	
 		while (info->exe->cmds[i][a] != NULL)
 		{
-			if ((fc_re_append_last(info, a, i)) == 1)	
+			if ((fc_re_append(info, a, i)) == 1)	
 				info->lex->error = true;
+			if ((fc_re_output(info, a, i)) == 1)
+				info->lex->error = true;
+			
 			a++;
 		}
-		info->exe->path = fc_path_mlt_pipes(info, i);
-		fc_execve_re(info, i);
-		//fc_builtins_or_execve(info, i);
+		if (info->lex->error == false)
+		{	
+			info->exe->path = fc_path_mlt_pipes(info, i);
+			fc_execve_re(info, i);
+			//fc_builtins_or_execve(info, i);
+		}
 	}
 	else
 	{
-		if (close(info->exe->tmp_fd) == -1)
-			fc_error_tmp(1, "close");
 		while(waitpid(-1, NULL, WUNTRACED) != -1)
 			;
+		if (close(info->exe->tmp_fd) == -1)
+			fc_error_tmp(1, "close");
 		info->exe->tmp_fd = dup(STDIN_FILENO);
 		if (info->exe->tmp_fd == -1)
 			fc_error_tmp(1, "dup");
@@ -93,14 +99,11 @@ int	fc_not_in_last_command(t_info *info, int i)
 		{
 			if ((fc_re_append(info, a, i)) == 1)	
 				bool_temp = true;
+			if ((fc_re_output(info, a, i)) == 1)
+				bool_temp = true;
 			a++;
 		}
-		if (bool_temp == true)
-		{
-			info->exe->path = fc_path_mlt_pipes(info, i);
-			fc_execve_re(info, i);
-		}
-		else if (bool_temp == false)
+		if (bool_temp == false)
 		{	
 			info->exe->path = fc_path_mlt_pipes(info, i);
 			if (dup2(info->exe->fd[1], STDOUT_FILENO) == -1)
@@ -114,19 +117,8 @@ int	fc_not_in_last_command(t_info *info, int i)
 	}
 	else
 	{
-		c = info->exe->cmds[i][a];
-		while (c[0] != '>' && c[0] != '<' && info->exe->cmds[i][++a])
-			c = info->exe->cmds[i][a];
-		if (c[0] == '>' || c[0] == '<')
-		{
-			if (wait(NULL) < 0)
-				fc_error_tmp(1, "wait");
-			while (ft_strncmp(info->exe->cmds[i][a],">>", 3) != 0)
-				a++;
-			fd = open(info->exe->cmds[i][a + 1], O_RDONLY);
-			if (fd == -1)
-				fc_error_tmp(1, "open");
-		}
+		if (wait(NULL) < 0)
+			fc_error_tmp(1, "wait");
 		if (close(info->exe->fd[1]) == -1)
 			fc_error_tmp(1, "close");
 		if (close(info->exe->tmp_fd) == -1)
