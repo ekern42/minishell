@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:35:18 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 14:55:06 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 15:20:54 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int	fc_putstr_fd_error(char *str, t_info *info)
 	while (*str)
 		write(2, str++, 1);
 	if (info->exe->path)
-		while(*info->exe->path)
+		while (*info->exe->path)
 			write(2, info->exe->path++, 1);
 	write(2, "\n", 1);
 	return (1);
 }
-

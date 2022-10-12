@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:53:19 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/22 10:33:32 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 15:20:02 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(void)
 
 	list = ft_lstnew("salut");
 	ft_lstadd_front(&list, ft_lstnew((void*)42));
-	printf("1er maillon : %d et 2eme maillon : %s\n", list->content, list->next->content);
+	printf("1er maillon : %d et 2eme maillon : %s\n",
+	list->content, list->next->content);
 }
 */

@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:37:31 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 14:52:57 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 15:35:28 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	fc_not_in_last_command(t_info *info, int i)
 {
-	int	a;
-	bool bool_temp;
+	int		a;
+	bool	bool_temp;
 
 	a = 0;
 	bool_temp = false;
@@ -25,7 +25,7 @@ int	fc_not_in_last_command(t_info *info, int i)
 	{
 		while (info->exe->cmds[i][a] != NULL && bool_temp == false)
 		{
-			if ((fc_re_append(info, a, i)) == 1)	
+			if ((fc_re_append(info, a, i)) == 1)
 				bool_temp = true;
 			if ((fc_re_output(info, a, i)) == 1)
 				bool_temp = true;

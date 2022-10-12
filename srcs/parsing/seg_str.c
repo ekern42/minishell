@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   seg_str.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:26:39 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/10 12:19:25 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 15:22:10 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void fc_free_last_list(t_info *info, t_quotes *temp)
+static void	fc_free_last_list(t_info *info, t_quotes *temp)
 {
 	t_quotes	*temp2;
 
@@ -28,7 +28,7 @@ static void fc_free_last_list(t_info *info, t_quotes *temp)
 	}
 }
 
-static t_quotes *fc_last_quote_list(t_info *info)
+static t_quotes	*fc_last_quote_list(t_info *info)
 {
 	t_quotes	*temp;
 
@@ -40,8 +40,8 @@ static t_quotes *fc_last_quote_list(t_info *info)
 
 void	fc_seg_str(t_info *info)
 {
-	t_quotes *temp;
-	int	a;
+	t_quotes	*temp;
+	int			a;
 
 	a = 0;
 	info->small_str_list = NULL;

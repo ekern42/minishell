@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 19:44:16 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 14:28:37 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 15:27:53 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	fc_parsing(t_info *info)
 {
-	int nbr_cmds;
-	char ***temp;
+	int		nbr_cmds;
+	char	***temp;
 
 	temp = malloc(sizeof(char **) * (info->lex->nbr_pipe + 2));
 	if (!temp)
@@ -24,7 +24,7 @@ int	fc_parsing(t_info *info)
 	temp[nbr_cmds] = NULL;
 	info->exe->cmds = temp;
 	fc_seg_str(info);
-	fc_print_for_pipe(info);
+	//fc_print_for_pipe(info);
 	return (0);
 }
 
@@ -43,7 +43,7 @@ void	fc_print_for_pipe(t_info *info)
 			printf("%s | a = %d | b = %d\n", info->exe->cmds[a][b], a, b);
 			b++;
 		}
-			printf("----------\n");
+		printf("----------\n");
 		a++;
 	}
 }

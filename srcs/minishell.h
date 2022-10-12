@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 15:06:16 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 15:28:57 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,5 @@ int		fc_check_variable(t_info *info);
 /* main.c */
 int		fc_prompt(t_info *info);
 void	fc_print_list(t_info *info);
-
 
 #endif

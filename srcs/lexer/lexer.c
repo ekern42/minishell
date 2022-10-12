@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:19:16 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/07 16:30:56 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 15:39:12 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static void test(t_info *info)
 }
 */
 
-void fc_print_list(t_info *info)
+void	fc_print_list(t_info *info)
 {
-	t_quotes *temp;
-	
+	t_quotes	*temp;
+
 	temp = info->quotes_list;
 	while (temp)
 	{
@@ -74,7 +74,6 @@ void	fc_lexer(t_info *info)
 	a = -1;
 	while (info->command_line[++a] != '\0')
 	{
-		
 		a = fc_lex_quotes(info, a);
 		if (info->command_line[a] == '$')
 			fc_lex_variables(info);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:47:40 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/07 16:57:46 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 15:30:45 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	fc_lex_dbl_red(t_info *info, int a)
 		info->lex->nbr_re_append++;
 	}
 }
+
 static int	fc_check_red(t_info *info, int a)
 {
 	while (info->command_line[++a] == ' ' && info->command_line[a] != '\0');

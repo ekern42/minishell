@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:26:02 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 15:09:57 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 15:36:25 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	fc_re_input(t_info *info, int a, int i)
 {
-	int    fd;
+	int	fd;
 
 	if (ft_strncmp(info->exe->cmds[i][a], "<", 2) == 0)
 	{
 		fd = open(info->exe->cmds[i][a + 1], O_RDONLY);
 		if (fd == -1)
 			fc_error_exe(1, "open");
-		if (dup2(fd, STDIN_FILENO) == -1)	
+		if (dup2(fd, STDIN_FILENO) == -1)
 			fc_error_exe(1, "dup2");
 		if (close(fd) == -1)
 			fc_error_exe(1, "close");

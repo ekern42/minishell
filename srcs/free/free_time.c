@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_time.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:45:01 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/10 12:38:23 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 15:40:18 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	fc_free_t_list_spec(t_info *info)
 {
 	t_list	*free_time;
 	t_list	*temp;
-	int	a;
+	int		a;
 
 	free_time = info->small_str_list;
 	a = 0;
@@ -36,10 +36,10 @@ void	fc_free_t_list_spec(t_info *info)
 /* free cmds */
 void	fc_final_free(t_info *info)
 {
-		int	a;
+	int	a;
 	int	b;
 	int	c;
-	
+
 	a = 0;
 	b = 0;
 	while (a <= (info->lex->nbr_pipe + 1))

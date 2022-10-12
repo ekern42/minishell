@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sub_str.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:44:17 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/10 12:26:48 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 15:43:15 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ static int	fc_small_str_common2(t_info *info, int a)
 				fc_sub_str(info, a);
 				info->b_sub_str = a;
 			}
-	}
+		}
 	}
 	if ((info->command_line[a] == '<' || info->command_line[a] == '>') && info->command_line[a + 1] != ' ')
 	{
-		
 		if (info->command_line[a + 1] != '<' && info->command_line[a + 1] != '>')
 		{
 			fc_sub_str(info, a + 1);
@@ -85,7 +84,6 @@ int	fc_small_str_common(t_info *info, int a)
 
 int	fc_small_str_with_quote(t_info *info, t_quotes *temp, int a)
 {
-
 	while (a != temp->begin)
 	{
 		a = fc_small_str_common(info, a);
@@ -99,10 +97,9 @@ int	fc_small_str_with_quote(t_info *info, t_quotes *temp, int a)
 			a++;
 		}
 	}
-	a = temp->end; 
-	
+	a = temp->end;
 	return (a);
-} 
+}
 
 void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a)
 {
@@ -117,7 +114,7 @@ void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a)
 				fc_sub_str(info, a + 1);
 				info->b_sub_str = a + 1;
 			}
-			a++;		
+			a++;
 		}
 	}
 	if (info->command_line[a] == '\0' && info->command_line[a - 1] != ' ')

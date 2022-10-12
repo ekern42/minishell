@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:34:39 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 14:52:46 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 15:34:48 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	fc_is_last_command(t_info *info, int i)
 	{	
 		while (info->exe->cmds[i][a] != NULL)
 		{
-			if ((fc_re_append(info, a, i)) == 1)	
+			if ((fc_re_append(info, a, i)) == 1)
 				info->lex->error = true;
 			if ((fc_re_output(info, a, i)) == 1)
 				info->lex->error = true;
@@ -40,7 +40,7 @@ int	fc_is_last_command(t_info *info, int i)
 	}
 	else
 	{
-		while(waitpid(-1, NULL, WUNTRACED) != -1)
+		while (waitpid(-1, NULL, WUNTRACED) != -1)
 			;
 		if (close(info->exe->tmp_fd) == -1)
 			fc_error_exe(1, "close");

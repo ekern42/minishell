@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:00:45 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 15:10:37 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 15:34:07 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,3 @@ int	fc_execution(t_info *info)
 		fc_error_exe(1, "close");
 	return (0);
 }
-
-

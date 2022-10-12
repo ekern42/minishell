@@ -6,13 +6,13 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:11:47 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/01 13:52:11 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 15:23:26 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char *fc_sstr_change(char *content_temp)
+static char	*fc_sstr_change(char *content_temp)
 {
 	int		a;
 	int		b;
@@ -55,11 +55,11 @@ static void	fc_size_seg_str(t_info *info)
 	}
 }
 
-void fc_final_seg(t_info *info)
+void	fc_final_seg(t_info *info)
 {
 	t_list	*temp;
 	char	*content_temp;
-	char 	**seg_temp;
+	char	**seg_temp;
 	int		a;
 	int		b;
 
