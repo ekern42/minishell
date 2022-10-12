@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fc_path_for_execve.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:35:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/11 14:14:31 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 15:09:33 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	*fc_path_mlt_pipes(t_info *info, int index_re)
+void	*fc_path_for_execve(t_info *info, int index_re)
 {
 	char	**path_splited;
 	char	*path;
@@ -20,7 +20,7 @@ void	*fc_path_mlt_pipes(t_info *info, int index_re)
 
 	path = fc_find_envp_without_name(info, "PATH");
 	if (path == NULL)
-		fc_error_tmp(1, "Problem with fc_find_envp_without_name !\n");
+		fc_error_exe(1, "Problem with fc_find_envp_without_name !\n");
 	path_splited = ft_split(path, ':');
 	i = 0;
 	while (path_splited[i] != NULL)
@@ -42,31 +42,33 @@ void	*fc_path_mlt_pipes(t_info *info, int index_re)
 	return (NULL);
 }
 
-void	*fc_path_for_execve(t_info *info)
+// without the name of $VAR
+void	*fc_find_envp_without_name(t_info *info, char *var_env)
 {
-	char	**path_splited;
-	char	*path;
+	t_list	*temp;
+	char	*var;
+	int		size;
 	int		i;
+	int		j;
 
-	path = fc_find_envp_without_name(info, "PATH");
-	if (path == NULL)
-		fc_error_tmp(1, "Problem with fc_find_envp_without_name !\n");
-	path_splited = ft_split(path, ':');
-	i = 0;
-	while (path_splited[i] != NULL)
+	temp = info->envp;
+	size = ft_strlen(var_env);
+	while (temp->next != NULL)
 	{
-		path_splited[i][ft_strlen(path_splited[i])] = '/';
-		if (path_splited[0][ft_strlen(path_splited[0]) - 1] == '!')
-			path_splited[0][ft_strlen(path_splited[0]) - 1] = '\0';
-		path = ft_strjoin(path_splited[i], info->exe->cmds[info->idx_re][info->idx]);
-		//printf("path = %s\n", path);
-		if (access(path, X_OK) == 0)
+		if (ft_strncmp(temp->content, var_env, size) == 0)
 		{
-			//printf("path = %s\n", path);
-			return (path);
+			var_env = temp->content;
+			var = NULL;
+			var = malloc(sizeof(char) * (ft_strlen(temp->content) - size));
+			i = 0;
+			j = size + 1;
+			while (var_env[j] != '\0')
+				var[i++] = var_env[j++];
+			//printf("var = %s\n", var);
+			return (var);
 		}
-		else
-			i++;
+		temp = temp->next;
+		//printf("%s\n", (char *)temp->content);
 	}
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
+#    By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/12 13:25:09 by ekern            ###   ########.fr        #
+#    Updated: 2022/10/12 15:12:14 by angelo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ MINISHELL = minishell
 NAME = $(MINISHELL)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 
+CFLAGS = -Werror -Wextra -Wall -g3 
 #-fsanitize=address
 
 INCLUDES = srcs/minishell.h
@@ -46,8 +46,9 @@ SRC_REDIRECTIONS =	\
 
 SRC_EXECUTION =	\
 	srcs/execution/fc_execution.c	\
-	srcs/execution/fc_exe_with_re.c	\
-	srcs/execution/fc_builtins_or_execve.c
+	srcs/execution/fc_builtins_or_execve.c	\
+	srcs/execution/fc_is_last_command.c	\
+	srcs/execution/fc_not_in_last_command.c
 
 SRC_ERRORS =	\
 	srcs/errors/errors.c
@@ -75,10 +76,7 @@ SRC_SIGNAL =	\
 	srcs/signal/signal.c
 
 SRC_UTILS =	\
-	srcs/utils/utils.c	\
-	srcs/utils/utils_exe.c	\
-	srcs/utils/create_str_redir.c	\
-	srcs/utils/fc_create_tmp_str.c
+	srcs/utils/utils.c
 
 SRC_VARIABLE =	\
 	srcs/variable/variable.c

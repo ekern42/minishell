@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:37 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/10 12:23:31 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 15:06:46 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,28 @@ void	fc_test(char **envp)
 	i = -1;
 	while (envp[++i] != NULL)
 		printf("{%d}%s{%d}\n", i, envp[i], i);
+}
+
+void	fc_print_cmds(t_info *info)
+{
+	int	i;
+	int	j;
+	int	size;
+	
+	size = 0;
+	while (info->exe->cmds[size])
+		size++;
+	printf("info->exe->cmds[i][j] : \n");
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (info->exe->cmds[i][j] != NULL)
+		{
+			printf("%s\n", info->exe->cmds[i][j]);
+			j++;
+		}
+		i++;
+	}
+	printf("----------\n");
 }

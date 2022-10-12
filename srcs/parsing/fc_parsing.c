@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 19:44:16 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 13:35:13 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 14:28:37 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	fc_parsing(t_info *info)
 	int nbr_cmds;
 	char ***temp;
 
-	temp= malloc(sizeof(char **) * (info->lex->nbr_pipe + 2));
+	temp = malloc(sizeof(char **) * (info->lex->nbr_pipe + 2));
 	if (!temp)
 		exit (0); // error a gerer
 	nbr_cmds = info->lex->nbr_pipe + 1;

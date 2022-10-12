@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_re_append.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:45:37 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 11:07:29 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 14:54:01 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	fc_re_append(t_info *info, int a, int i)
 	{
 		fd = open(info->exe->cmds[i][a + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
-			fc_error_tmp(1, "open");
+			fc_error_exe(1, "open");
 		if (dup2(fd, STDOUT_FILENO) == -1)	
-			fc_error_tmp(1, "dup2");
+			fc_error_exe(1, "dup2");
 		if (close(fd) == -1)
-			fc_error_tmp(1, "close");
+			fc_error_exe(1, "close");
 		info->exe->cmds[i][a] = NULL;
-		info->exe->path = fc_path_mlt_pipes(info, i);
-		fc_execve_re(info, i, "stdout");
+		info->exe->path = fc_path_for_execve(info, i);
+		fc_execve(info, i, "stdout");
 		return (1);
 	}
 	return (0);
