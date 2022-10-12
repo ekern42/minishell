@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 17:44:19 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 19:18:18 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ typedef struct s_info
 int		fc_execution(t_info *info);
 int		fc_is_last_command(t_info *info, int i);
 int		fc_not_in_last_command(t_info *info, int i);
-//int		fc_builtins_or_execve(t_info *info, int i);
 int		fc_builtins_or_execve(t_info *info, int i, char *std);
 int		fc_builtins(t_info *info, int i);
 int		fc_is_builtin(t_info *info, int i);
@@ -145,6 +144,7 @@ int		fc_init(t_info *info, t_lex_info *lex, char **envp);
 void	fc_init_lexer(t_info *info);
 void	fc_lexer(t_info *info);
 int		fc_check_lex(t_info *info, int a);
+void	fc_print_list(t_info *info);
 int		fc_lex_pipes(t_info *info, int a);
 int		fc_lex_quotes(t_info *info, int a);
 int		fc_lex_redirections(t_info *info, int a);
@@ -174,6 +174,5 @@ int		fc_check_variable(t_info *info);
 
 /* main.c */
 int		fc_prompt(t_info *info);
-void	fc_print_list(t_info *info);
 
 #endif

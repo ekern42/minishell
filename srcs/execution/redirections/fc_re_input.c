@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:26:02 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 15:36:25 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 19:11:26 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	fc_re_input(t_info *info, int a, int i)
 			fc_error_exe(1, "close");
 		info->exe->cmds[i][a] = NULL;
 		info->exe->path = fc_path_for_execve(info, i);
-		fc_execve(info, i, "stdin");
+		//fc_execve(info, i, "stdin");
+		fc_builtins_or_execve(info, i, "stdin");
 		return (1);
 	}
 	return (0);

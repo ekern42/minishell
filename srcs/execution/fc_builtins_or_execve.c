@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:22:07 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 17:45:19 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 17:49:28 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	fc_builtins(t_info *info, int i)
 		fc_echo(info);
 	else if (ft_strncmp(*info->exe->cmds[i], "cd", 3) == 0)
 		fc_cd(info);
-	//else if	(ft_strncmp(*info->exe->cmds[i], "exit", 5) == 0) // ??
+	//else if (ft_strncmp(*info->exe->cmds[i], "exit", 5) == 0) // ??
 	//	fc_exit(info);
 	else if (ft_strncmp(*info->exe->cmds[i], "pwd", 4) == 0)
 		fc_pwd(info);
