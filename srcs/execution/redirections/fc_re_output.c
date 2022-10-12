@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:48:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/11 17:00:23 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 11:06:43 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	fc_re_output(t_info *info, int a, int i)
 			fc_error_tmp(1, "close");
 		info->exe->cmds[i][a] = NULL;
 		info->exe->path = fc_path_mlt_pipes(info, i);
-		fc_execve_re(info, i);
+		fc_execve_re(info, i, "stdout");
 		return (1);
 	}
 	return (0);

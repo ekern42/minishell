@@ -3,19 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   fc_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:31:17 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/10 15:11:30 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 11:15:01 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	fc_execve_re(t_info *info, int i)
+int	fc_execve_re(t_info *info, int i, char *std)
 {
-	if (dup2(info->exe->tmp_fd, STDIN_FILENO) == -1)
-		fc_error_tmp(1, "dup2");
+	if (ft_strncmp(std, "stdin", 6) == 0)
+	{
+		if (dup2(info->exe->tmp_fd, STDOUT_FILENO) == -1)
+			fc_error_tmp(1, "dup2");
+	}
+	else if (ft_strncmp(std, "stdout", 7) == 0)
+	{
+		if (dup2(info->exe->tmp_fd, STDIN_FILENO) == -1)
+			fc_error_tmp(1, "dup2");
+	}
+	else
+		return (1);
 	if (close(info->exe->tmp_fd) == -1)
 		fc_error_tmp(1, "close");
 	info->exe->cmds_execve = info->exe->cmds[i];

@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/11 18:27:05 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 11:25:21 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int		fc_unset(t_info *info);
 /* execution/execve */
 int		fc_execve(t_info *info);
 int		fc_putstr_fd_re(char *str, t_info *info);
-int		fc_execve_re(t_info *info, int i);
+int		fc_execve_re(t_info *info, int i, char *std);
 int		fc_execve_redir(t_info *info);
 int		fc_execve_mlt_pipes(t_info *info);
 void	*fc_path_for_execve(t_info *info);
@@ -144,6 +144,7 @@ int		fc_stdout_and_stdin(t_info *info);
 int		fc_re_append(t_info *info, int a, int i); // >>
 int		fc_re_output(t_info *info, int a, int i); // >
 int		fc_re_input(t_info *info, int a, int i); // <
+int		fc_re_del(t_info *info, int a, int i); // <<
 
 /* errors */
 void	fc_error(t_info *info, int a);

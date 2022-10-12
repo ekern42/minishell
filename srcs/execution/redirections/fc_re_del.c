@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fc_re_append.c                                     :+:      :+:    :+:   */
+/*   fc_re_del.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/01 18:45:37 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 11:07:29 by ekern            ###   ########.fr       */
+/*   Created: 2022/10/12 11:18:29 by ekern             #+#    #+#             */
+/*   Updated: 2022/10/12 11:47:36 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	fc_re_append(t_info *info, int a, int i)
+int	fc_re_del(t_info *info, int a, int i)
 {
-	int fd;
-	
-	if (ft_strncmp(info->exe->cmds[i][a], ">>", 3) == 0)
+	char	*del;
+	char	*line;
+
+	if (ft_strncmp(info->exe->cmds[i][a], "<<", 3) == 0)
 	{
-		fd = open(info->exe->cmds[i][a + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (fd == -1)
-			fc_error_tmp(1, "open");
-		if (dup2(fd, STDOUT_FILENO) == -1)	
-			fc_error_tmp(1, "dup2");
-		if (close(fd) == -1)
-			fc_error_tmp(1, "close");
-		info->exe->cmds[i][a] = NULL;
-		info->exe->path = fc_path_mlt_pipes(info, i);
-		fc_execve_re(info, i, "stdout");
+		line = readline("> ");
+		del = info->exe->cmds[i][a + 1];
+		while (ft_strncmp(line, del, 5) != 0)
+		{
+			free(line);
+//			fc_stockage();
+			line = readline("> ");
+		}
+//		fc_re_input();
+		free(line);
 		return (1);
 	}
 	return (0);

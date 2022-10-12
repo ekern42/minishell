@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/11 20:29:31 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 11:26:49 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,16 @@ int	fc_is_last_command(t_info *info, int i)
 				info->lex->error = true;
 			if ((fc_re_output(info, a, i)) == 1)
 				info->lex->error = true;
-			
+			if ((fc_re_input(info, a, i)) == 1)
+				info->lex->error = true;
+			if ((fc_re_del(info, a, i)) == 1)
+				info->lex->error = true;
 			a++;
 		}
 		if (info->lex->error == false)
 		{	
 			info->exe->path = fc_path_mlt_pipes(info, i);
-			fc_execve_re(info, i);
+			fc_execve_re(info, i, "stdout");
 			//fc_builtins_or_execve(info, i);
 		}
 	}
@@ -112,7 +115,7 @@ int	fc_not_in_last_command(t_info *info, int i)
 				fc_error_tmp(1, "close");
 			if (close(info->exe->fd[1]) == -1)
 				fc_error_tmp(1, "close");
-			fc_execve_re(info, i);
+			fc_execve_re(info, i, "stdout");
 		}
 	}
 	else

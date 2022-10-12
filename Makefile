@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/11 18:34:17 by ekern            ###   ########.fr        #
+#    Updated: 2022/10/12 11:27:16 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_REDIRECTIONS =	\
 	srcs/execution/redirections/fc_re_append.c	\
 	srcs/execution/redirections/fc_re_output.c	\
 	srcs/execution/redirections/fc_re_input.c	\
+	srcs/execution/redirections/fc_re_del.c	\
 	srcs/execution/redirections/pipe.c
 
 SRC_EXECUTION =	\
