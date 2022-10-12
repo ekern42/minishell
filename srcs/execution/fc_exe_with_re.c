@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:44:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 11:26:49 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 13:32:06 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ int	fc_is_last_command(t_info *info, int i)
 
 int	fc_not_in_last_command(t_info *info, int i)
 {
-	int	fd;
 	int	a;
-	char *c;
 	bool bool_temp;
 
 	a = 0;
@@ -104,6 +102,10 @@ int	fc_not_in_last_command(t_info *info, int i)
 				bool_temp = true;
 			if ((fc_re_output(info, a, i)) == 1)
 				bool_temp = true;
+			if ((fc_re_input(info, a, i)) == 1)
+				info->lex->error = true;
+			if ((fc_re_del(info, a, i)) == 1)
+				info->lex->error = true;
 			a++;
 		}
 		if (bool_temp == false)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_builtins_or_execve.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:22:07 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 20:14:22 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 13:30:50 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	fc_builtins_or_execve(t_info *info, int i)
 	if (fc_is_builtin(info, i) == 0)
 		fc_builtins(info, i);
 	else if (fc_is_builtin(info, i) == 1)
-		fc_execve_re(info, i);
+		fc_execve_re(info, i, "stdout");
 	return (0);
 }
 

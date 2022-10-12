@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:26:02 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 11:12:44 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/12 13:26:01 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 int	fc_re_input(t_info *info, int a, int i)
 {
 	int    fd;
-	char	*str;
-	char	*src;
-	int		l;
 
 	if (ft_strncmp(info->exe->cmds[i][a], "<", 2) == 0)
 	{
