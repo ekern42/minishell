@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:37:31 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 15:35:28 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 16:19:06 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,9 @@ int	fc_not_in_last_command(t_info *info, int i)
 			a++;
 		}
 		if (bool_temp == false)
-		{	
+		{
+			fc_stdin_to_stdout(info);
 			info->exe->path = fc_path_for_execve(info, i);
-			if (dup2(info->exe->fd[1], STDOUT_FILENO) == -1)
-				fc_error_exe(1, "dup2");
-			if (close(info->exe->fd[0]) == -1)
-				fc_error_exe(1, "close");
-			if (close(info->exe->fd[1]) == -1)
-				fc_error_exe(1, "close");
 			fc_execve(info, i, "stdout");
 		}
 	}

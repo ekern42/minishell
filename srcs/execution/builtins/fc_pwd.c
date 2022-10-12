@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:52:20 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/07 19:01:43 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 16:42:39 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	fc_pwd(t_info *info)
 {
 	int		i;
-	char	*new_pwd_str;
+	char	*str;
 
 	while (info->envp)
 	{
@@ -24,9 +24,9 @@ int	fc_pwd(t_info *info)
 			if (ft_strncmp(info->envp->content, "PWD=", 4) == 0)
 			{
 				i = 3;
-				new_pwd_str = info->envp->content;
-				while (new_pwd_str[i++] != '\0')
-					printf("%c", new_pwd_str[i]);
+				str = info->envp->content;
+				while (str[i++] != '\0')
+					printf("%c", str[i]);
 				printf("\n");
 				return (0);
 			}

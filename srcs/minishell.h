@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 15:28:57 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 17:44:19 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct s_execution
 {
 	char	***cmds;
 	char	**cmds_execve;
-	char	**str_left;
 	char	*path;
 	int		fd[2];
 	int		tmp_fd;
@@ -87,8 +86,6 @@ typedef struct s_info
 	char			*command_line;
 	int				b_sub_str;
 	int				nbr_sstr;
-	int				idx;
-	int				idx_re;
 	t_builtin		*b;
 	t_execution		*exe;
 	int				pair_sgl_quotes;
@@ -103,7 +100,8 @@ typedef struct s_info
 int		fc_execution(t_info *info);
 int		fc_is_last_command(t_info *info, int i);
 int		fc_not_in_last_command(t_info *info, int i);
-int		fc_builtins_or_execve(t_info *info, int i);
+//int		fc_builtins_or_execve(t_info *info, int i);
+int		fc_builtins_or_execve(t_info *info, int i, char *std);
 int		fc_builtins(t_info *info, int i);
 int		fc_is_builtin(t_info *info, int i);
 

@@ -6,7 +6,7 @@
 /*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:34:39 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 15:34:48 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/12 17:43:53 by angelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	fc_is_last_command(t_info *info, int i)
 		}
 		if (info->lex->error == false)
 		{	
+			//printf("ntm = %s\n", *info->exe->cmds[i]);
 			info->exe->path = fc_path_for_execve(info, i);
-			fc_execve(info, i, "stdout");
-			//fc_builtins_or_execve(info, i);
+			fc_builtins_or_execve(info, i, "stdout");
 		}
 	}
 	else
