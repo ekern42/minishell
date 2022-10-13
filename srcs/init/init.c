@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:33:28 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/13 14:04:07 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:28:31 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 static void	fc_start_up(void)
 {
-	ft_putstr_fd("-------------------------------\n", 1);
-	ft_putstr_fd("-------------------------------\n", 1);
-	ft_putstr_fd("-----------MINISHELL-----------\n", 1);
-	ft_putstr_fd("-------------------------------\n", 1);
-	ft_putstr_fd("-------------------------------\n", 1);
+	char	*cmd_nf;
+
+	cmd_nf = "/Users/aprosper/.brew/bin/neofetch";
+	if (access(cmd_nf, X_OK) == 0)
+		execve(cmd_nf, NULL, NULL);
+	else
+	{
+		ft_putstr_fd("-------------------------------\n", 1);
+		ft_putstr_fd("-------------------------------\n", 1);
+		ft_putstr_fd("-----------MINISHELL-----------\n", 1);
+		ft_putstr_fd("-------------------------------\n", 1);
+		ft_putstr_fd("-------------------------------\n", 1);
+	}
 }
 
 static void	fc_envp_init(t_info *info, char **envp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_path_for_execve.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:35:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 15:09:33 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/13 14:23:51 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*fc_path_for_execve(t_info *info, int index_re)
 		//printf("path = %s\n", path);
 		if (access(path, X_OK) == 0)
 		{
-//			printf("path = %s\n", path);
+			printf("path = %s\n", path);
 			return (path);
 		}
 		else
