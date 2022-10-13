@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:22:07 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/13 14:32:30 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:16:42 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	fc_builtins(t_info *info, int i)
 	else if (ft_strncmp(*info->exe->cmds[i], "unset", 6) == 0)
 		fc_unset(info);
 	else if (ft_strncmp(*info->exe->cmds[i], "env", 4) == 0)
-		fc_env(info);
+		fc_env(info, i);
 	else if (fc_check_variable(info) == 1)
 		fc_variable_command(info);
 	return (1);
