@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:52:20 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/13 14:45:17 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:10:31 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,62 +14,36 @@
 
 static void	*fc_find_and_create_str(t_info *info)
 {
+	int		i;
 	int		j;
 	char	*str;
+	t_list	*temp;
 
-	while (info->envp)
+	temp = info->envp;
+	while (temp->next != NULL)
 	{
-		while (info->envp->content != NULL)
+		if (ft_strncmp(temp->content, "PWD=", 4) == 0)
 		{
-			if (ft_strncmp(info->envp->content, "PWD=", 5) == 0)
-			{
-				j = 3;
-				str = malloc(sizeof(char) * ft_strlen(info->envp->content));
-				if (!str)
-					fc_error_exe(1, "malloc");
-				while (str[j++] != '\0')
-					return (str);
-			}
-			info->envp = info->envp->next;
+			str = temp->content;
+			i = 0;
+			j = 3;
+			while (str[j++] != '\0')
+				str[i++] = str[j];
+			str[i - 1] = '\n';
+			str[i] = '\0';
+			return (str);
 		}
+		temp = temp->next;
 	}
-	return ((int *)1);
+	return (NULL);
 }
 
 int	fc_pwd(t_info *info, int i)
 {
-	(void)i;
-	char	*str;
-
-	str = fc_find_and_create_str(info);
-	printf("str = %s\n", str);
+	if (i < info->lex->nbr_pipe)
+		info->b->local_fd = info->exe->fd[1];
+	else
+		info->b->local_fd = 1; // last command = stdout
+	ft_putstr_fd(fc_find_and_create_str(info), info->b->local_fd);
 	exit (0);
 }
-
-/*
-int	fc_pwd(t_info *info, int i)
-{
-	int		j;
-	char	*str;
-
-	while (info->envp)
-	{
-		while (info->envp->content != NULL)
-		{
-			if (ft_strncmp(info->envp->content, "PWD=", 5) == 0)
-			{
-				j = 3;
-				str = malloc(sizeof(char) * ft_strlen(info->envp->content));
-				if (!str)
-					fc_error_exe(1, "malloc");
-				while (str[j++] != '\0')
-					printf("%c", str[j]);
-				printf("\n");
-				return (0);
-			}
-			info->envp = info->envp->next;
-		}
-	}
-	exit (0);
-}
-*/
