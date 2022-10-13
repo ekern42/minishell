@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_builtins_or_execve.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:22:07 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 17:49:28 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/13 13:35:53 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	fc_builtins(t_info *info, int i)
 {
 	if (ft_strncmp(*info->exe->cmds[i], "echo", 5) == 0)
-		fc_echo(info);
+		fc_echo(info, i);
 	else if (ft_strncmp(*info->exe->cmds[i], "cd", 3) == 0)
 		fc_cd(info);
 	//else if (ft_strncmp(*info->exe->cmds[i], "exit", 5) == 0) // ??

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_is_last_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:34:39 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 19:13:38 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/13 13:34:11 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	fc_is_last_command(t_info *info, int i)
 		if (info->lex->error == false)
 		{
 			info->exe->path = fc_path_for_execve(info, i);
-			//fc_execve(info, i, "stdout");
 			fc_builtins_or_execve(info, i, "stdout");
 		}
 	}

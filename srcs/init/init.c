@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:33:28 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 15:33:31 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/13 14:04:07 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ int	fc_init(t_info *info, t_lex_info *lex, char **envp)
 	fc_envp_init(info, envp);
 	info->lex = lex;
 	info->exe = malloc(sizeof(t_execution));
+	info->b = malloc(sizeof(t_builtin));
 	return (0);
 }

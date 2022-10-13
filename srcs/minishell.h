@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 19:18:18 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/13 14:03:33 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ typedef struct s_execution
 
 typedef struct s_builtin
 {
+	int				local_fd;
+	int				option;
+	int				j;
 	struct dirent	*entity;
 	DIR				*dir;
 }	t_builtin;
@@ -106,7 +109,7 @@ int		fc_is_builtin(t_info *info, int i);
 
 /* execution/builtins */
 int		fc_cd(t_info *info);
-int		fc_echo(t_info *info);
+int		fc_echo(t_info *info, int i);
 int		fc_env(t_info *info);
 int		fc_exit(t_info *info);
 int		fc_export(t_info *info);

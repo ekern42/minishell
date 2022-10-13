@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_not_in_last_command.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:37:31 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 19:12:20 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/13 14:07:35 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,19 @@ int	fc_not_in_last_command(t_info *info, int i)
 				info->lex->error = true;
 			a++;
 		}
-		if (bool_temp == false)
+		/*if (bool_temp == false)
 		{
 			fc_stdin_to_stdout(info);
 			info->exe->path = fc_path_for_execve(info, i);
-			//fc_execve(info, i, "stdout");
+			fc_builtins_or_execve(info, i, "stdout");
+		}*/
+		if (bool_temp == false)
+		{
+			if (fc_is_builtin(info, i))
+				fc_stdin_to_stdout(info);
+			else
+				info->exe->tmp_fd = info->exe->fd[1];
+			info->exe->path = fc_path_for_execve(info, i);
 			fc_builtins_or_execve(info, i, "stdout");
 		}
 	}
@@ -55,3 +63,4 @@ int	fc_not_in_last_command(t_info *info, int i)
 	}
 	return (0);
 }
+
