@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:34:39 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/14 16:23:13 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:11:59 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	fc_is_last_command(t_info *info, int i)
 	int	a;
 
 	a = 0;
-	info->pid = fork();
-	if (info->pid == 0)
-	{	
+	//info->pid = fork();
+	//if (info->pid == 0)
+	//{	
 		/*while (info->exe->cmds[i][a] != NULL)
 		{
 			if ((fc_re_append(info, a, i)) == 1)
@@ -38,7 +38,7 @@ int	fc_is_last_command(t_info *info, int i)
 			//fc_execve(info, i, "stdout");
 			//fc_builtins_or_execve(info, i, "stdout");
 		}
-	}
+	//}
 	else
 	{
 		close(info->exe->fd[0]);

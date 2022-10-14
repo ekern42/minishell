@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:31:17 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/14 16:20:47 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:25:23 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	fc_execve(t_info *info, int i)
 	//	return (1);*/
 	// if (close(info->exe->tmp_fd) == -1)
 	// 	fc_error_exe(1, "close");
+	info->exe->path = fc_path_for_execve(info, i);
 	info->exe->cmds_execve = info->exe->cmds[i];
 	 if ((execve(info->exe->path, info->exe->cmds_execve, (char **)info->envp)) == -1)
 		return (fc_putstr_fd_error("error: ", info));

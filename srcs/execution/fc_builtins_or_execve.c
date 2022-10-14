@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:22:07 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/14 16:22:53 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:19:27 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	fc_is_builtin(t_info *info, int i)
 		return (0);
 	return (1);
 }
-
+/*
 int	fc_builtins_or_execve(t_info *info, int i, char *std)
 {
 	(void)std;
@@ -53,5 +53,15 @@ int	fc_builtins_or_execve(t_info *info, int i, char *std)
 		fc_builtins(info, i);
 	//else
 	//	fc_execve(info, i, std);
+	return (0);
+}
+*/
+
+int	fc_builtins_or_execve(t_info *info, int i)
+{
+	if (fc_is_builtin(info, i) == 0)
+		fc_builtins(info, i);
+	else
+		fc_execve(info, i);
 	return (0);
 }

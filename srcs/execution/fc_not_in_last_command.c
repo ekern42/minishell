@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:37:31 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/14 16:23:16 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:12:10 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	fc_not_in_last_command(t_info *info, int i)
 	bool_temp = false;
 	if (pipe(info->exe->fd) == -1)
 		fc_error_exe(1, "pipe");
-	info->pid = fork();
-	if (info->pid == 0)
-	{
+	//info->pid = fork();
+	//if (info->pid == 0)
+//	{
 		/*while (info->exe->cmds[i][a] != NULL && bool_temp == false)
 		{
 			if ((fc_re_append(info, a, i)) == 1)
@@ -55,7 +55,7 @@ int	fc_not_in_last_command(t_info *info, int i)
 			//fc_execve(info, i, "stdout");
 		}
 		
-	}
+//	}
 	else
 	{
 		// close(info->exe->fd[0]);
