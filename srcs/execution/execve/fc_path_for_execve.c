@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:35:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/13 15:27:44 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:35:32 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,60 +15,69 @@
 void	*fc_path_for_execve(t_info *info, int index_re)
 {
 	char	**path_splited;
+	char	*temp_path;
 	char	*path;
 	int		i;
+	int		a;
 
-	path = fc_find_envp_without_name(info, "PATH");
+	path = fc_find_envp_path(info);
 	if (path == NULL)
 		fc_error_exe(1, "Problem with fc_find_envp_without_name !\n");
 	path_splited = ft_split(path, ':');
 	i = 0;
 	while (path_splited[i] != NULL)
 	{
-		path_splited[i][ft_strlen(path_splited[i])] = '/';
-		if (path_splited[0][ft_strlen(path_splited[0]) - 1] == '!')
-			path_splited[0][ft_strlen(path_splited[0]) - 1] = '\0';
+		a = -1;
+		temp_path = malloc(sizeof(char) * ft_strlen(path_splited[i] + 2));
+		while (path_splited[i][++a] != '\0')
+			temp_path[a] = path_splited[i][a];
+		temp_path[a] = '/';
+		temp_path[a + 1] = '\0';
+		free(path_splited[i]);
+		path_splited[i] = temp_path;
 		path = ft_strjoin(path_splited[i], info->exe->cmds[index_re][0]);
-		//path = ft_strjoin(path_splited[i], info->exe->cmds[index_re][info->idx]);
 		//printf("path = %s\n", path);
 		if (access(path, X_OK) == 0)
 		{
+			free(path_splited);
 			//printf("path = %s\n", path);
 			return (path);
 		}
 		else
+		{
+			free(path);
+			path = NULL;
 			i++;
+		}
 	}
+	free (path);
+	free (path_splited);
 	return (NULL);
 }
 
-// without the name of $VAR
-void	*fc_find_envp_without_name(t_info *info, char *var_env)
+void	*fc_find_envp_path(t_info *info)
 {
 	t_list	*temp;
 	char	*var;
-	int		size;
 	int		i;
 	int		j;
 
 	temp = info->envp;
-	size = ft_strlen(var_env);
+	var = NULL;
 	while (temp->next != NULL)
 	{
-		if (ft_strncmp(temp->content, var_env, size) == 0)
+		if (ft_strncmp(temp->content, "PATH=", 5) == 0)
 		{
-			var_env = temp->content;
-			var = NULL;
-			var = malloc(sizeof(char) * (ft_strlen(temp->content) - size));
+			var = temp->content;
 			i = 0;
-			j = size + 1;
-			while (var_env[j] != '\0')
-				var[i++] = var_env[j++];
-			//printf("var = %s\n", var);
+			j = 4;
+			while (var[j++] != '\0')
+				var[i++] = var[j];
+			var[i - 1] = '\0';
 			return (var);
 		}
 		temp = temp->next;
-		//printf("%s\n", (char *)temp->content);
 	}
+	free(var);
 	return (NULL);
 }

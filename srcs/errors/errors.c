@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:35:18 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 15:20:54 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/14 13:45:01 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	fc_error(t_info *info, int a)
 
 int	fc_error_exe(int code_return, char *error_message)
 {
-//	printf("%s\n", error_message);
+	//printf("%s\n", error_message);
 	perror(error_message);
 	//printf("Error :\ncode return = %d | %s\n", code_return, error_message);
 	return (code_return);

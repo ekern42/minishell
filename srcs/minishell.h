@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/13 18:16:20 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:34:35 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_info
 	char			*command_line;
 	int				b_sub_str;
 	int				nbr_sstr;
+	int				pid;
 	t_builtin		*b;
 	t_execution		*exe;
 	int				pair_sgl_quotes;
@@ -101,6 +102,7 @@ typedef struct s_info
 
 /* execution */
 int		fc_execution(t_info *info);
+
 int		fc_is_last_command(t_info *info, int i);
 int		fc_not_in_last_command(t_info *info, int i);
 int		fc_builtins_or_execve(t_info *info, int i, char *std);
@@ -111,15 +113,17 @@ int		fc_is_builtin(t_info *info, int i);
 int		fc_cd(t_info *info);
 int		fc_echo(t_info *info, int i);
 int		fc_env(t_info *info, int i);
-int		fc_exit(t_info *info);
+int		fc_exit(t_info *info, int i);
+//int		fc_exit(t_info *info);
 int		fc_export(t_info *info);
 int		fc_pwd(t_info *info, int i);
 int		fc_unset(t_info *info);
 
 /* execution/execve */
-int		fc_execve(t_info *info, int i, char *std);
+//int		fc_execve(t_info *info, int i, char *std);
+int		fc_execve(t_info *info, int i);
 void	*fc_path_for_execve(t_info *info, int index_re);
-void	*fc_find_envp_without_name(t_info *info, char *var_env);
+void	*fc_find_envp_path(t_info *info);
 
 /* execution/redirections */
 int		fc_stdin_to_stdout(t_info *info); //Donc à gauche du pipe
