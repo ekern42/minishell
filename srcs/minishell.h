@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/13 18:16:20 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:29:45 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ typedef struct s_quotes
 	int				end;
 	struct s_quotes	*next;
 }	t_quotes;
+
+typedef struct s_var
+{
+	char			*content;
+	char			*name;
+	struct s_var	*next;
+}	t_var;
 
 typedef struct s_lex_info // lexical qqch -> vérifie chaque caractère
 {
@@ -97,6 +104,7 @@ typedef struct s_info
 	struct s_list	*small_str_list;
 	t_lex_info		*lex;
 	t_quotes		*quotes_list;
+	t_var			*var_list;
 }	t_info;
 
 /* execution */
@@ -141,7 +149,7 @@ void	fc_free_t_list_spec(t_info *info);
 void	fc_quote_list_free(t_info *info);
 
 /* init */
-int		fc_init(t_info *info, t_lex_info *lex, char **envp);
+int		fc_init(t_info *info, char **envp);
 
 /* lexer */
 void	fc_init_lexer(t_info *info);
@@ -170,9 +178,9 @@ size_t	fc_strlen(const char *str);
 void	fc_test(char **envp);
 int		fc_dblstrlen(char **tab);
 void	fc_print_cmds(t_info *info);
+void	fc_print_var_list(t_info *info);
 
 /* variable */
-void	fc_variable_command(t_info *info);
 int		fc_check_variable(t_info *info);
 
 /* main.c */

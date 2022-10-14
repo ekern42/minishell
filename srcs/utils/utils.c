@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:37 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 15:40:50 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/14 12:43:08 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,16 @@ void	fc_print_cmds(t_info *info)
 		i++;
 	}
 	printf("----------\n");
+}
+
+void fc_print_var_list(t_info *info)
+{
+	t_var	*temp;
+	
+	temp = info->var_list;
+	while (temp)
+	{
+		printf("name %s, content %s\n", temp->name, temp->content);
+		temp = temp->next;	
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:33:28 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/13 15:08:56 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:29:17 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	fc_start_up(void)
 {
+	ft_putstr_fd("\033[1;34m-------------------------------\n", 1);
 	ft_putstr_fd("-------------------------------\n", 1);
+	ft_putstr_fd("-----------\033[1;37mMINISHELL\033[1;34m-----------\n", 1);
 	ft_putstr_fd("-------------------------------\n", 1);
-	ft_putstr_fd("-----------MINISHELL-----------\n", 1);
-	ft_putstr_fd("-------------------------------\n", 1);
-	ft_putstr_fd("-------------------------------\n", 1);
+	ft_putstr_fd("-------------------------------\033[0m\n", 1);
 }
 
 static void	fc_envp_init(t_info *info, char **envp)
@@ -57,11 +57,12 @@ void	fc_init_lexer(t_info *info)
 	info->lex->error = false;
 }
 
-int	fc_init(t_info *info, t_lex_info *lex, char **envp)
+int	fc_init(t_info *info, char **envp)
 {
 	fc_start_up();
 	fc_envp_init(info, envp);
-	info->lex = lex;
+	info->var_list = NULL;
+	info->lex = malloc(sizeof(t_lex_info));
 	info->exe = malloc(sizeof(t_execution));
 	info->b = malloc(sizeof(t_builtin));
 	return (0);

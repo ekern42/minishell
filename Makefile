@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+         #
+#    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/13 17:22:52 by aprosper         ###   ########.fr        #
+#    Updated: 2022/10/14 14:26:13 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@ MINISHELL = minishell
 NAME = $(MINISHELL)
 
 CC = gcc
-CFLAGS = -Werror -Wextra -Wall -g3 
-#-fsanitize=address
+CFLAGS = #-Werror -Wextra -Wall -g3 -fsanitize=address
 
 INCLUDES = srcs/minishell.h
 

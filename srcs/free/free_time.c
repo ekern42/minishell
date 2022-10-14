@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_time.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:45:01 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 15:40:18 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/14 14:25:51 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	fc_final_free(t_info *info)
 
 	a = 0;
 	b = 0;
+	free(info->command_line);
+	if (!info->exe->cmds)
+		return ;
 	while (a <= (info->lex->nbr_pipe + 1))
 	{
 		if (info->exe->cmds[a] != NULL)

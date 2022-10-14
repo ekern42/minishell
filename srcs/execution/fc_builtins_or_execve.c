@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_builtins_or_execve.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:22:07 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/13 18:16:42 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/14 10:28:31 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	fc_builtins(t_info *info, int i)
 		fc_unset(info);
 	else if (ft_strncmp(*info->exe->cmds[i], "env", 4) == 0)
 		fc_env(info, i);
-	else if (fc_check_variable(info) == 1)
-		fc_variable_command(info);
 	return (1);
 }
 
