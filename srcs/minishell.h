@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/15 12:48:42 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/15 13:23:57 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,7 @@ typedef struct s_info
 
 /* execution */
 int		fc_execution(t_info *info);
-int		fc_is_re(t_info *info, int i, int fd);
-int		fc_is_last_command(t_info *info, int i);
-int		fc_not_in_last_command(t_info *info, int i);
-//int		fc_builtins_or_execve(t_info *info, int i, char *std);
-
 int		fc_builtins_or_execve(t_info *info, int i);
-
 int		fc_builtins(t_info *info, int i);
 int		fc_is_builtin(t_info *info, int i);
 
@@ -125,14 +119,12 @@ int		fc_pwd(t_info *info, int i);
 int		fc_unset(t_info *info);
 
 /* execution/execve */
-//int		fc_execve(t_info *info, int i, char *std);
 int		fc_execve(t_info *info, int i);
 void	*fc_path_for_execve(t_info *info, int index_re);
 void	*fc_find_envp_path(t_info *info);
 
 /* execution/redirections */
-int		fc_stdin_to_stdout(t_info *info); //Donc à gauche du pipe
-int		fc_stdout_to_stdin(t_info *info); //Donc à droite du pipe
+int		fc_is_re(t_info *info, int i, int fd);
 int		fc_re_append(t_info *info, int i, int j, int fd);
 int		fc_re_output(t_info *info, int i, int j, int fd);
 int		fc_re_input(t_info *info, int i, int j, int fd);

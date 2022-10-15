@@ -6,7 +6,7 @@
 #    By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/15 11:19:37 by aprosper         ###   ########.fr        #
+#    Updated: 2022/10/15 13:11:40 by aprosper         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ NAME = $(MINISHELL)
 
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall -g3
-
 #-fsanitize=address
 
 INCLUDES = srcs/minishell.h
@@ -39,17 +38,15 @@ SRC_EXECVE =	\
 	srcs/execution/execve/fc_path_for_execve.c
 
 SRC_REDIRECTIONS =	\
+	srcs/execution/redirections/fc_is_re.c	\
 	srcs/execution/redirections/fc_re_append.c	\
 	srcs/execution/redirections/fc_re_output.c	\
 	srcs/execution/redirections/fc_re_input.c	\
-	srcs/execution/redirections/fc_re_del.c	\
-	srcs/execution/redirections/pipe.c
+	srcs/execution/redirections/fc_re_del.c
 
 SRC_EXECUTION =	\
 	srcs/execution/fc_execution.c	\
-	srcs/execution/fc_builtins_or_execve.c	\
-	srcs/execution/fc_is_last_command.c	\
-	srcs/execution/fc_not_in_last_command.c
+	srcs/execution/fc_builtins_or_execve.c
 
 SRC_ERRORS =	\
 	srcs/errors/errors.c
