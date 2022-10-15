@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/15 15:56:04 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:07:38 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int		fc_echo(t_info *info, int i);
 int		fc_env(t_info *info, int i);
 int		fc_exit_m(t_info *info);
 int		fc_exit(t_info *info, int i);
+int		fc_exit_with_re(t_info *info);
 int		fc_export(t_info *info);
 int		fc_pwd(t_info *info, int i);
 int		fc_unset(t_info *info);
