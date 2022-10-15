@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:52:20 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/13 19:02:03 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:26:01 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ static void	*fc_find_and_create_str(t_info *info)
 
 int	fc_pwd(t_info *info, int i)
 {
+	if (i == info->lex->nbr_pipe)
+		info->b->local_fd = STDOUT_FILENO; // last command
+	else if (i < info->lex->nbr_pipe)
+		info->b->local_fd = STDOUT_FILENO;
+	ft_putstr_fd(fc_find_and_create_str(info), info->b->local_fd);
+	exit (0);
+}
+
+/*
+int	fc_pwd(t_info *info, int i)
+{
 	if (i < info->lex->nbr_pipe)
 		info->b->local_fd = info->exe->fd[1];
 	else
@@ -47,3 +58,5 @@ int	fc_pwd(t_info *info, int i)
 	ft_putstr_fd(fc_find_and_create_str(info), info->b->local_fd);
 	exit (0);
 }
+*/
+// ls -la | pwd > test | wc

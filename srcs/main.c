@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/14 12:28:59 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:56:40 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int ac, char **av, char **envp)
 		if (info.lex->error == false)
 		{
 			fc_parsing(&info);
-			//fc_exit(&info);
+			fc_exit_m(&info);
 			fc_execution(&info);
 		}
 		//free(info.command_line);

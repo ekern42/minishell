@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:00:45 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/15 13:34:55 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:58:06 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ int	fc_execution(t_info *info)
 			if (close(info->exe->fd[1]) == -1)
 				fc_error_exe(1, "close");
 			if (info->exe->is_re) // si il y'a une redirection il faut prendre le fd du fichier 
-			{
-				info->exe->tmp_fd = info->exe->fd_re;
-				info->exe->is_re = 0;
-			}
+				info->exe->tmp_fd = info->exe->fd_re; // voir mettre : info->exe->is_re = 0; ??
 			else
 				info->exe->tmp_fd = info->exe->fd[0];
 		}
