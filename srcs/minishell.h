@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/14 14:29:45 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/15 17:25:11 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,10 @@ void	fc_print_cmds(t_info *info);
 void	fc_print_var_list(t_info *info);
 
 /* variable */
-int		fc_check_variable(t_info *info);
+int		fc_check_variable(t_info *info, int	a, int b);
+void	fc_check_dollar(t_info *info, char *str);
+//t_list	*fc_sub_str(t_list *sub_temp, char *str, int a, int b);
+void	fc_replace_dollar(t_var *temp_var, char *small_str);
 
 /* main.c */
 int		fc_prompt(t_info *info);

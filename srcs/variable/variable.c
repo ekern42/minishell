@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 12:41:00 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/14 13:26:39 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/14 16:45:35 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,40 @@ static void	fc_var_chain(t_info *info, char *str_name, char *str_content)
 		}
 	}
 }
+static int	fc_check_isalpha(char *str, int a)
+{
+	int	b;
 
+	b = 0;
+	if (!ft_isalpha(str[0]))
+		return (0); // erreur a faire, command not found
+	while (++b < a)
+		if (!ft_isalnum(str[b]))
+			return (0); // erreur a faire, command not found
+	return (1);
+}
 static int	fc_variable_command(t_info *info, char *str, int a)
 {
 	int		b;
 	char	*str_name;
 	char	*str_content;
 
-	if (a == 0)
-		exit (0); // erreur a faire, command not found
 	b = ft_strlen(str);
 	str_name = malloc(sizeof(char) * (a + 1));
 	str_content = malloc(sizeof(char) * (b - a));
+	if (!str_name || !str_content)
+		exit (0); // erreur a faire, malloc
 	str_name[a] = '\0';
 	str_content[b - a - 1] = '\0';
 	b = -1;
-	if (!ft_isalpha(str[0]))
-		exit (0); // erreur a faire, command not found
-	while (++b < a)
+	if (!fc_check_isalpha(str, a))
 	{
-		str_name[b] = str[b];
-		if (!ft_isalnum(str[b]))
-			exit (0); // erreur a faire, command not found
+		free(str_name);
+		free(str_content);
+		return (0); // erreur a faire, command not found
 	}
+	while (++b < a)
+		str_name[b] = str[b];
 	b = 0;
 	while (str[++a] != '\0')
 		str_content[b++] = str[a];
@@ -86,7 +97,7 @@ static int	fc_variable_command(t_info *info, char *str, int a)
 	return (1);
 }
 
-int	fc_check_variable(t_info *info)
+int	fc_check_variable(t_info *info, int	i, int j)
 {
 	int		a;
 	int		b;
@@ -94,7 +105,7 @@ int	fc_check_variable(t_info *info)
 	char	*str;
 
 	a = -1;
-	str = info->small_str_list->content;
+	str = info->exe->cmds[i][j];
 	while (str[++a] != '\0')
 	{
 		if (str[a] == '\'' || str[a] == '\"')
@@ -107,9 +118,13 @@ int	fc_check_variable(t_info *info)
 				a = b;
 		}
 		if (str[a] == '=')
-		{	
-			fc_variable_command(info, str, a);
+		{
+			if (a == 0)
+				exit (0); // erreur a faire, command not found
+			if (!fc_variable_command(info, str, a))
+				printf("\033[1;31m%s: command not found\n\033[0m", str);
 			return (1);
+	
 		}
 	}
 	return (0);

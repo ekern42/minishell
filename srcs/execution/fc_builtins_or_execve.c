@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:22:07 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/14 10:28:31 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/15 10:15:50 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	fc_builtins(t_info *info, int i)
 		fc_unset(info);
 	else if (ft_strncmp(*info->exe->cmds[i], "env", 4) == 0)
 		fc_env(info, i);
+	else
+		fc_check_variable(info, i, 0);
 	return (1);
 }
 

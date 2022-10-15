@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:11:47 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/14 14:18:48 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/15 11:50:35 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,21 @@ void	fc_final_seg(t_info *info)
 	b = 0;
 	while (info->small_str_list)
 	{
-		if (!fc_check_variable(info))
+		fc_check_dollar(info, info->small_str_list->content);
+		fc_size_seg_str(info);
+		a = 0;
+		temp = info->small_str_list;
+		seg_temp = malloc(sizeof(char *) * (info->b_sub_str + 1));
+		if (!seg_temp)
+			exit(1); // erreur a faire
+		seg_temp[info->b_sub_str] = NULL;
+		while (temp && ft_strncmp(temp->content, "|", 1))
 		{
-			fc_size_seg_str(info);
-			a = 0;
-			temp = info->small_str_list;
-			seg_temp = malloc(sizeof(char *) * (info->b_sub_str + 1));
-			if (!seg_temp)
-				exit(1); // erreur a faire
-			seg_temp[info->b_sub_str] = NULL;
-			while (temp && ft_strncmp(temp->content, "|", 1))
-			{
-				content_temp = fc_sstr_change(temp->content);
-				seg_temp[a] = content_temp;
-				a++;
-				temp = temp->next;
-			}
-			info->exe->cmds[b] = seg_temp;
-			b++;
+			content_temp = fc_sstr_change(temp->content);
+			seg_temp[a++] = content_temp;
+			temp = temp->next;
 		}
-		fc_free_t_list_spec(info); //delete t_list jusqu'au pipe ou jusqu'a la fin
-		if (b == 0 && !info->small_str_list)
-		{
-			free(info->exe->cmds);
-			info->exe->cmds = NULL;
-		}
+		info->exe->cmds[b++] = seg_temp;
+	fc_free_t_list_spec(info); //delete t_list jusqu'au pipe ou jusqu'a la fin
 	}
 }

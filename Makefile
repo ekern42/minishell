@@ -6,7 +6,7 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/14 14:26:13 by ekern            ###   ########.fr        #
+#    Updated: 2022/10/15 16:18:49 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ MINISHELL = minishell
 NAME = $(MINISHELL)
 
 CC = gcc
-CFLAGS = #-Werror -Wextra -Wall -g3 -fsanitize=address
+CFLAGS = -g3 -fsanitize=address
+#-Werror -Wextra -Wall -g3 -fsanitize=address
 
 INCLUDES = srcs/minishell.h
 
@@ -78,7 +79,9 @@ SRC_UTILS =	\
 	srcs/utils/utils.c
 
 SRC_VARIABLE =	\
-	srcs/variable/variable.c
+	srcs/variable/variable.c	\
+	srcs/variable/dollar.c		\
+	srcs/variable/dollar_utils.c
 
 SRC_ROOT = srcs/main.c
 

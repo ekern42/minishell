@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/14 14:29:23 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/15 13:12:15 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	fc_prompt(t_info *info)
 {
-	info->command_line = readline("Minishell :");
+	info->command_line = readline("\033[1;36mMinishell :\033[0m");
 	if (!info->command_line)
 		fc_control_d(info);
 	else if (info->command_line[0] == '\0')
@@ -41,10 +41,12 @@ int	main(int ac, char **av, char **envp)
 			fc_parsing(&info);
 			if (info.exe->cmds)
 			{
-				fc_exit(&info);
-				fc_execution(&info);
+//				fc_exit(&info);
+//				if(!fc_check_variable(&info, 0, 0))
+//					fc_execution(&info);
 			}
 		}
+//		fc_print_var_list(&info);
 		fc_final_free(&info);
 	}
 }
