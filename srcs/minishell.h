@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/16 12:54:54 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/16 18:26:59 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ typedef struct s_lex_info // lexical qqch -> vérifie chaque caractère
 typedef struct s_execution
 {
 	char	***cmds;
-	char	**cmds_execve;
+	char	**cmds_exe;
+	char	**envp_exe;
 	char	*path;
 	int		is_re;
 	pid_t	pid;
@@ -105,13 +106,15 @@ typedef struct s_info
 
 /* execution */
 int		fc_execution(t_info *info);
-int		fc_builtins_or_execve(t_info *info, int i);
+//int		fc_builtins(t_info *info, int i, int j);
+//int		fc_builtins_or_execve(t_info *info, int i);
 int		fc_builtins(t_info *info, int i);
-int		fc_is_builtin(t_info *info, int i);
+int		fc_builtins_or_execve(t_info *info, int i);
 
 /* execution/builtins */
 int		fc_cd(t_info *info);
 int		fc_echo(t_info *info, int i);
+//int		fc_echo(t_info *info, int i, int j);
 int		fc_env(t_info *info, int i);
 int		fc_exit_m(t_info *info);
 int		fc_exit_m_with_re(t_info *info);
@@ -130,6 +133,7 @@ void	*fc_find_envp_path(t_info *info);
 
 /* execution/redirections */
 int		fc_is_re(t_info *info, int i, int fd);
+//int		fc_sort_re(t_info *info);
 int		fc_re_append(t_info *info, int i, int j, int fd);
 int		fc_re_output(t_info *info, int i, int j, int fd);
 int		fc_re_input(t_info *info, int i, int j, int fd);

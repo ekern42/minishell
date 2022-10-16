@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:39:20 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/15 15:31:46 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/16 17:01:12 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,29 @@ int	fc_echo(t_info *info, int i)
 	exit (0);
 }
 
+
 /*
-int	fc_echo(t_info *info, int i)
+static void	fc_check_is_option(t_info *info, int i, int j)
 {
-	if (i < info->lex->nbr_pipe) //si not in last command
-		info->b->local_fd = info->exe->fd[1]; // je sais pas pq ça marche avec fd[1] et pas fd[0]
+	if (ft_strncmp(info->exe->cmds[i][j + 1], "-n", 3) == 0)
+	{
+		info->b->j = j + 2;
+		info->b->option = 1;
+	}
 	else
-		info->b->local_fd = 1; // last command = stdout
-	fc_check_is_option(info, i);
+	{
+		info->b->j = j + 1;
+		info->b->option = 0;
+	}
+}
+
+int	fc_echo(t_info *info, int i, int j)
+{
+	if (i < info->lex->nbr_pipe)
+		info->b->local_fd = STDOUT_FILENO;
+	else
+		info->b->local_fd = STDOUT_FILENO;
+	fc_check_is_option(info, i, j);
 	while (info->exe->cmds[i][info->b->j])
 	{
 		ft_putstr_fd(info->exe->cmds[i][info->b->j], info->b->local_fd);
