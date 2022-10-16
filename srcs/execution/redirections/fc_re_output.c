@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:48:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/15 15:06:55 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:34:55 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	fc_re_output(t_info *info, int i, int j, int fd)
 	info->exe->cmds[i][j] = NULL;
 	if (info->exe->cmds[i + 1] != NULL)
 		info->exe->fd[1] = info->exe->fd_re;
-	fc_builtins_or_execve(info, i);
 	info->exe->is_re = 1;
 	return (0);
 }
