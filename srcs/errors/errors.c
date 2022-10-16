@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:35:18 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/14 13:45:01 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:11:40 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,23 @@ int	fc_putstr_fd_error(char *str, t_info *info)
 			write(2, info->exe->path++, 1);
 	write(2, "\n", 1);
 	return (1);
+}
+
+void	fc_error_message(t_info *info, int i)
+{
+	if (i == 1)
+	{
+		write(2, "Minishell: ", 11);
+		write(2, info->exe->cmds[0][2], ft_strlen(info->exe->cmds[0][2]));
+		write (2, ": No such file or directory\n", 28);
+	}
+
+	else if (i == 2)
+	{
+		ft_putstr_fd("Minishell: syntax error ", 2);
+		ft_putstr_fd("near unexpected token `newline'\n", 2);
+	}
+	
+
+
 }

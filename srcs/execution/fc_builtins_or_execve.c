@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:22:07 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/15 13:09:58 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/16 12:31:13 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	fc_builtins(t_info *info, int i)
 	else if (ft_strncmp(*info->exe->cmds[i], "cd", 3) == 0)
 		fc_cd(info);
 	else if (ft_strncmp(*info->exe->cmds[i], "exit", 5) == 0)
-		fc_exit(info, i);
+		fc_exit_re(info, i);
 	else if (ft_strncmp(*info->exe->cmds[i], "pwd", 4) == 0)
 		fc_pwd(info, i);
 	else if (ft_strncmp(*info->exe->cmds[i], "export", 7) == 0)

@@ -6,7 +6,7 @@
 #    By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 13:40:58 by ekern             #+#    #+#              #
-#    Updated: 2022/10/15 13:11:40 by aprosper         ###   ########.fr        #
+#    Updated: 2022/10/16 12:23:18 by aprosper         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC_BUILTINS =	\
 	srcs/execution/builtins/fc_cd.c	\
 	srcs/execution/builtins/fc_echo.c	\
 	srcs/execution/builtins/fc_env.c	\
+	srcs/execution/builtins/fc_exit_re.c	\
 	srcs/execution/builtins/fc_exit.c	\
 	srcs/execution/builtins/fc_export.c	\
 	srcs/execution/builtins/fc_pwd.c	\

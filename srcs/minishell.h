@@ -6,7 +6,7 @@
 /*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/15 17:07:38 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/16 12:54:54 by aprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_execution
 typedef struct s_builtin
 {
 	int				local_fd;
+	int				fd_ex;
 	int				option;
 	int				j;
 	struct dirent	*entity;
@@ -113,8 +114,11 @@ int		fc_cd(t_info *info);
 int		fc_echo(t_info *info, int i);
 int		fc_env(t_info *info, int i);
 int		fc_exit_m(t_info *info);
-int		fc_exit(t_info *info, int i);
-int		fc_exit_with_re(t_info *info);
+int		fc_exit_m_with_re(t_info *info);
+int		fc_exit_m_with_re_input(t_info *info);
+int		fc_exit_re(t_info *info, int i);
+int		fc_exit_re_with_re(t_info *info, int i);
+int		fc_exit_re_with_re_input(t_info *info, int i);
 int		fc_export(t_info *info);
 int		fc_pwd(t_info *info, int i);
 int		fc_unset(t_info *info);
@@ -135,6 +139,7 @@ int		fc_re_del(t_info *info, int a, int i); // <<
 void	fc_error(t_info *info, int a);
 int		fc_error_exe(int code_return, char *error_message);
 int		fc_putstr_fd_error(char *str, t_info *info);
+void	fc_error_message(t_info *info, int i);
 
 /* free */
 void	fc_final_free(t_info *info);
