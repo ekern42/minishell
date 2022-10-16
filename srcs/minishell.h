@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/15 17:25:11 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/16 16:17:13 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct s_builtin
 typedef struct s_info
 {
 	char			*command_line;
+	int				*begin;
+	int				*end;
 	int				b_sub_str;
 	int				nbr_sstr;
 	t_builtin		*b;
@@ -183,8 +185,10 @@ void	fc_print_var_list(t_info *info);
 /* variable */
 int		fc_check_variable(t_info *info, int	a, int b);
 void	fc_check_dollar(t_info *info, char *str);
-//t_list	*fc_sub_str(t_list *sub_temp, char *str, int a, int b);
-void	fc_replace_dollar(t_var *temp_var, char *small_str);
+t_list	*fc_sub_dollar(t_list *sub_temp, t_info *info, char *str, int l);
+void	fc_replace_dollar(t_info *info, t_list *sub_temp);
+void	fc_dollar_fusion(t_info *info, t_list *sub);
+void	fc_malloc_dollar(t_info *info, int n);
 
 /* main.c */
 int		fc_prompt(t_info *info);

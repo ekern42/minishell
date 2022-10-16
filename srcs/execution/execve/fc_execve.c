@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:31:17 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/12 14:59:51 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/16 14:18:54 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	fc_execve(t_info *info, int i, char *std)
 	if (close(info->exe->tmp_fd) == -1)
 		fc_error_exe(1, "close");
 	info->exe->cmds_execve = info->exe->cmds[i];
-	if ((execve(info->exe->path, info->exe->cmds_execve, (char **)info->envp)) == -1)
+	if (execve(info->exe->path, info->exe->cmds_execve, NULL) == -1)
 		return (fc_putstr_fd_error("error: ", info));
 	return (1);
 }

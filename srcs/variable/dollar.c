@@ -6,21 +6,83 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:21:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/15 18:05:45 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/16 16:50:46 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-static void	fc_dollar_details2(char *str, int *begin, int *end, int n)
+
+void	fc_dollar_fusion(t_info *info, t_list *sub)
+{
+	t_list	*sub_temp;
+	char	*str;
+	char	*str_temp;
+
+	sub_temp = sub;
+	str_temp = ft_strdup(sub_temp->content);
+	sub_temp = sub_temp->next;
+	while (sub_temp)
+	{
+		str = ft_strjoin(str_temp, sub_temp->content);
+		free(str_temp);
+		str_temp = ft_strdup(str);
+		free(str);
+		sub_temp = sub_temp->next;
+	}
+	printf("str_temp %s\n", str_temp);
+	free (info->small_str_list->content);
+	info->small_str_list->content = str_temp;
+}
+
+static void	fc_dollar(t_info *info, char *str, int n)
+{
+	t_list	*sub_temp;
+	int		a;
+	int		b;
+	int		l;
+
+	a = 0;
+	b = 0;
+	l = 0;
+	info->b_sub_str = 0;
+	sub_temp = NULL;
+	while (a < ft_strlen(str) && l < 30)
+	{	
+		if (a > info->end[b] && b < n)
+			b++;
+		else if (a > info->end[b] && b >= n)
+		{
+			sub_temp = fc_sub_dollar(sub_temp, info, str, ft_strlen(str) - a + 1);
+			a = ft_strlen(str);
+		}
+		if (a < info->begin[b])
+		{
+			sub_temp = fc_sub_dollar(sub_temp, info, str, info->begin[b] - a);
+			a = info->begin[b];
+			info->b_sub_str = a;
+		}
+		if (a == info->begin[b])
+		{
+			sub_temp = fc_sub_dollar(sub_temp, info, str, (info->end[b] + 1) - info->begin[b]);
+			a = info->end[b] + 1;
+			info->b_sub_str = a;
+		}
+		l++;
+	}
+	fc_replace_dollar(info, sub_temp);
+//	fc_print_chainlist(sub_temp, 's', 1);
+}
+
+static void	fc_dollar_details2(t_info *info, char *str, int n)
 {
 	int	a;
 	int	b;
 	int	c;
 
 	a = -1;
-//	printf("begin be %d, end be %d\n", begin[0], end[0]);
-//	printf("begin be %d, end be %d\n", begin[1], end[1]);
-//	printf("begin be %d, end be %d\n", begin[2], end[2]);
+//	printf("info->begin be %d, info->end be %d\n", info->begin[0], info->end[0]);
+//	printf("info->begin be %d, info->end be %d\n", info->begin[1], info->end[1]);
+//	printf("info->begin be %d, info->end be %d\n", info->begin[2], info->end[2]);
 //	ft_putstr_fd("---------------\n", 1);
 	while (str[++a] != '\0')
 	{
@@ -35,10 +97,10 @@ static void	fc_dollar_details2(char *str, int *begin, int *end, int n)
 		}
 		while (b < n)
 		{
-			if (begin[b] > c && end[b] < a)
+			if (info->begin[b] > c && info->end[b] < a)
 			{
-				begin[b] = -1;
-				end[b] = -1;
+				info->begin[b] = -1;
+				info->end[b] = -1;
 			}
 			b++;
 		}
@@ -46,44 +108,39 @@ static void	fc_dollar_details2(char *str, int *begin, int *end, int n)
 			break ;
 		c = a;
 	}
-	printf("begin af %d, end af %d\n", begin[0], end[0]);
-//	printf("begin af %d, end af %d\n", begin[1], end[1]);
-//	printf("begin af %d, end af %d\n", begin[2], end[2]);
+//	printf("info->begin af %d, info->end af %d\n", info->begin[0], info->end[0]);
+//	printf("info->begin af %d, info->end af %d\n", info->begin[1], info->end[1]);
+//	printf("info->begin af %d, info->end af %d\n", info->begin[2], info->end[2]);
+	fc_dollar(info, str, n);
 }
 
 static void	fc_dollar_details(t_info *info, char *str, int n)
 {
-	int	*begin;
-	int	*end;
 	int	a;
 	int	b;
 
 	a = -1;
 	b = 0;
-	begin = ft_calloc(sizeof(int), (n + 1));
-	end = ft_calloc(sizeof(int), (n + 1));
-	if (!begin || !end)
-		exit (0); // erreur a faire, malloc
+	fc_malloc_dollar(info, n);
 	while (str[++a] != '\0')
 	{
 		if (str[a] == '$')
 		{
-			begin[b] = a;
+			info->begin[b] = a;
 			while (str[++a] != '\0')
 			{
 				if (str[a] == '\'' || str[a] == '\"' || str[a] == '$')
 				{
-					end[b++] = a - 1;
+					info->end[b++] = a - 1;
 					break ;
 				}
 			}
 			if (str[a] == '\0')
-				end[b++] = a - 1;
+				info->end[b++] = a - 1;
 			a--;
 		}
 	}
-//	printf("begin %d, end %d\n", begin[0], end[0]);
-	fc_dollar_details2(str, begin, end, n);
+	fc_dollar_details2(info, str, n);
 }
 
 void	fc_check_dollar(t_info *info, char *str)
