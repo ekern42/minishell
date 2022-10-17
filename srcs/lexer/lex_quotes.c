@@ -6,11 +6,24 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:24:46 by ekern             #+#    #+#             */
-/*   Updated: 2022/09/26 15:02:45 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/17 15:17:15 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	fc_quote_list_free(t_info *info)
+{
+	t_quotes	*temp;
+
+	temp = info->quotes_list->next;
+	while (temp)
+	{
+		free (info->quotes_list);
+		info->quotes_list = temp;
+		temp = info->quotes_list->next;
+	}
+}
 
 static void	fc_free_one_chain(t_info *info)
 {
@@ -36,63 +49,29 @@ static void	fc_init_quote_list(t_info *info, int a, char c)
 
 int	fc_lex_quotes(t_info *info, int a)
 {
-	int	b;
+	int		b[2];
+	char	c;
 
-	b = a;
-	if (info->command_line[a] == 39) // single quote '
+	b[0] = a;
+	b[1] = 0;
+	if (info->command_line[a] == '\'' || info->command_line[a] == '\"')
 	{
-		info->lex->nbr_pair_sgl_q++;
-		fc_init_quote_list(info, a, 39);
-		while (info->command_line[++b] != 39)
+		c = info->command_line[a];
+		b[1] = 1;
+	}
+	if (b[1] == 1)
+	{
+		fc_init_quote_list(info, a, c);
+		while (info->command_line[++b[0]] != c)
 		{
-			if (info->command_line[b] == '\0')
+			if (info->command_line[b[0]] == '\0')
 			{
-				info->lex->nbr_pair_sgl_q--;
-				fc_free_one_chain(info);
+				info->lex->error = true;
+				fc_quote_list_free(info);
 				return (a + 1);
 			}
 		}
-		info->quotes_list->end = b;
+		info->quotes_list->end = b[0];
 	}
-	else if (info->command_line[a] == 34) // double quote "
-	{
-		info->lex->nbr_pair_dbl_q++;
-		fc_init_quote_list(info, a, 34);
-		while (info->command_line[++b] != 34)
-		{
-			if (info->command_line[b] == '\0')
-			{
-				info->lex->nbr_pair_dbl_q--;
-				fc_free_one_chain(info);
-				return (a + 1);
-			}
-		}
-		info->quotes_list->end = b;
-	}
-	return (b);
+	return (b[0]);
 }
-
-/*
-int	fc_quotes(t_info *info)
-{
-	int	i;
-	int	sgl_quote;
-	int	dbl_quote;
-	i = -1;
-	sgl_quote = 0;
-	dbl_quote = 0;
-	while (info->command_line[++i] != '\0')
-	{
-		
-		if (info->command_line[i] == 39) // single quote '
-			sgl_quote++;
-		else if (info->command_line[i] == 34) // double quote "
-			dbl_quote++;
-	}
-	
-	info->pair_sgl_quotes = sgl_quote / 2;
-	info->pair_dbl_quotes = dbl_quote / 2;
-//	printf("sgl : %d dbl : %d\n", info->pair_sgl_quotes, info->pair_dbl_quotes);
-	return (0);
-}
-*/

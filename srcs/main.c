@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 14:07:21 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/17 12:54:11 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/17 15:20:21 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,18 @@ int	main(int ac, char **av, char **envp)
 		fc_lexer(&info);
 		if (info.lex->error == false)
 		{
+			printf("lexer valable\n");
 			fc_parsing(&info);
 			if (info.exe->cmds)
 			{
 				fc_exit(&info);
-				if(fc_check_variable(&info, 0, 0) == 0)
+				if(!fc_check_variable(&info, 0, 0))
 					fc_execution(&info);
 			}
 		}
-		fc_print_var_list(&info);
+		else
+			printf("lexer error\n");
+//		fc_print_var_list(&info);
 		fc_final_free(&info);
 	}
 }

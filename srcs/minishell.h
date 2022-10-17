@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/17 12:37:18 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/17 14:25:34 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_info
 	t_builtin		*b;
 	t_execution		*exe;
 	struct s_list	*envp;
+	char			**envp_lol;
 	struct s_list	*small_str_list;
 	t_lex_info		*lex;
 	t_quotes		*quotes_list;
@@ -146,7 +147,6 @@ int		fc_putstr_fd_error(char *str, t_info *info);
 void	fc_final_free(t_info *info);
 void	fc_free_t_list(t_info *info);
 void	fc_free_t_list_spec(t_info *info);
-void	fc_quote_list_free(t_info *info);
 
 /* init */
 int		fc_init(t_info *info, char **envp);
@@ -167,6 +167,8 @@ void	fc_print_for_pipe(t_info *info);
 int		fc_small_str_with_quote(t_info *info, t_quotes *temp, int a);
 void	fc_small_str_without_quote(t_info *info, t_quotes *temp, int a);
 void	fc_seg_str(t_info *info);
+int		fc_small_str_common2_sec(t_info *info, int a);
+void	fc_sub_str(t_info *info, int a);
 void	fc_final_seg(t_info *info);
 
 /* signal */

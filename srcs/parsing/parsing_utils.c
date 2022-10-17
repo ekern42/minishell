@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_pipes.c                                        :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 09:42:54 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/17 14:15:40 by ekern            ###   ########.fr       */
+/*   Created: 2022/10/17 13:31:19 by ekern             #+#    #+#             */
+/*   Updated: 2022/10/17 14:01:08 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	fc_lex_pipes(t_info *info, int a)
+int	fc_small_str_common2_sec(t_info *info, int a)
 {
-	int	b;
-	int	c;
-
-	b = a;
-	c = a;
-	while (--b > 0 && info->command_line[b] == ' ')
-		;
-	while (info->command_line[++c] != '\0' && info->command_line[c] == ' ')
-		;
-	if (a == 0 || b == 0 || info->command_line[c] == '\0')
+	if (info->command_line[a + 1] != '<' && info->command_line[a + 1] != '>')
 	{
-		info->lex->error = true;
-		return (0);
+		fc_sub_str(info, a + 1);
+		info->b_sub_str = a + 1;
+		a++;
 	}
-	info->lex->nbr_pipe++;
-	info->lex->pipes = true;
-	return (1);
+	else
+	{
+		if (info->command_line[a + 2] != ' ')
+		{
+			fc_sub_str(info, a + 2);
+			info->b_sub_str = a + 2;
+			a += 2;
+		}
+	}
+	return (a);
 }

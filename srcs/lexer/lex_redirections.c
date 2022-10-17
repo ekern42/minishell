@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:47:40 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 15:30:45 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/17 14:15:16 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ static void	fc_lex_dbl_red(t_info *info, int a)
 
 static int	fc_check_red(t_info *info, int a)
 {
-	while (info->command_line[++a] == ' ' && info->command_line[a] != '\0');
+	while (info->command_line[++a] == ' ' && info->command_line[a] != '\0')
+		;
 	if (info->command_line[a] == '\0')
+	{
+		info->lex->error = true;
 		return (1);
+	}
 	else if (info->command_line[a] == '<' || info->command_line[a] == '>')
 	{
 		info->lex->error = true;

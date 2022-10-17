@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:33:28 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/16 11:51:52 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/17 15:21:19 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	fc_init_lexer(t_info *info)
 {
 	info->b_sub_str = 0;
 	info->nbr_sstr = 0;
+	info->exe->cmds = NULL;
 	info->quotes_list = NULL;
 	info->lex->pipes = false;
 	info->lex->nbr_pipe = 0;
@@ -62,6 +63,7 @@ int	fc_init(t_info *info, char **envp)
 	fc_start_up();
 	fc_envp_init(info, envp);
 	info->var_list = NULL;
+	info->envp_lol = envp;
 	info->lex = malloc(sizeof(t_lex_info));
 	info->exe = malloc(sizeof(t_execution));
 	info->b = malloc(sizeof(t_builtin));
