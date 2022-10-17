@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:18:19 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/16 17:05:01 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/17 11:44:15 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,20 @@ void	fc_malloc_dollar(t_info *info, int n)
 	info->end[n] = 0;
 }
 
-
 t_list	*fc_sub_dollar(t_list *sub_temp, t_info *info, char *str, int l)
 {
 	char	*str_temp;
 	t_list	*list_temp;
-	int	n;
+	int		n;
 
 	list_temp = sub_temp;
 	str_temp = ft_substr(str, info->b_sub_str, l);
 	ft_lstadd_back(&list_temp, ft_lstnew(str_temp));
 	sub_temp = list_temp;
 	return (sub_temp);
-} 
+}
 
-static int	fc_strcmp_spec(char *s1, char *s2)
+int	fc_strcmp_spec(char *s1, char *s2)
 {
 	int				a;
 	int				b;
@@ -47,60 +46,41 @@ static int	fc_strcmp_spec(char *s1, char *s2)
 	else
 		a = -1;
 	b = -1;
-	while (s1[++a] != '\0' && s2[++b] != '\0')
+	while (s2[++b] != '=' && s2[b] != '\0')
 	{
+		a++;
 		val[0] = s1[a];
 		val[1] = s2[b];
 		if (val[0] != val[1])
 			return (val[0] - val[1]);
+		if (s1[a] == '\0')
+			return (0);
 	}
-	return (0);
+	return (val[0] - val[1]);
 }
 
-void	fc_replace_dollar(t_info *info, t_list *sub)
+void	fc_check_dollar(t_info *info)
 {
-	t_var	*var_temp;
-	t_list	*sub_temp;
-	t_list	*envp_temp;
+	int		a;
+	int		b;
+	char	*str;
+	t_list	*temp_lst;
 
-	sub_temp = sub;
-	envp_temp = info->envp;
-	var_temp = info->var_list;
-	while (sub_temp)
+	info->nbr_sstr = 0;
+	temp_lst = info->small_str_list;
+	while (temp_lst)
 	{
-		var_temp = info->var_list;
-		if (ft_strncmp(sub_temp->content, "$?", 2) == 0)
+		a = -1;
+		b = 0;
+		str = temp_lst->content;
+		while (str[++a] != '\0')
 		{
-			/* A FAIRE */
-			continue;
+			if (str[a] == '$')
+				b++;
 		}
-		if (ft_strncmp(sub_temp->content, "$", 1) ==  0)
-		{
-			while (var_temp)
-			{
-//				printf("sub_temp %s var_temp %s\n", sub_temp->content, var_temp->name);
-				if (fc_strcmp_spec(sub_temp->content, var_temp->name) == 0)
-				{
-					free (sub_temp->content);
-					sub_temp->content = var_temp->content;
-					break ;
-				}
-				var_temp = var_temp->next;
-			}
-			while (envp_temp)
-			{
-				if (fc_strcmp_spec(sub_temp->content, envp_temp->content) == 0)
-				{
-//					printf("sub_temp %s envp_temp %s\n", sub_temp->content, envp_temp->content);
-					free (sub_temp->content);
-					sub_temp->content = envp_temp->content;
-					break ;
-				}
-//				printf("sub_temp %s envp_temp %s\n", sub_temp->content, envp_temp->content);
-				envp_temp = envp_temp->next;
-			}
-		}
-		sub_temp = sub_temp->next;
+		if (b > 0)
+			fc_dollar_details(info, str, b);
+		info->nbr_sstr++;
+		temp_lst = temp_lst->next;
 	}
-	fc_dollar_fusion(info, sub);
 }

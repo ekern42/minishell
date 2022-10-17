@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:11:47 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/15 11:50:35 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/17 09:16:22 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	fc_final_seg(t_info *info)
 	b = 0;
 	while (info->small_str_list)
 	{
-		fc_check_dollar(info, info->small_str_list->content);
 		fc_size_seg_str(info);
 		a = 0;
 		temp = info->small_str_list;
@@ -79,6 +78,6 @@ void	fc_final_seg(t_info *info)
 			temp = temp->next;
 		}
 		info->exe->cmds[b++] = seg_temp;
-	fc_free_t_list_spec(info); //delete t_list jusqu'au pipe ou jusqu'a la fin
+		fc_free_t_list_spec(info); //delete t_list jusqu'au pipe ou jusqu'a la fin
 	}
 }

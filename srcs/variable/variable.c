@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 12:41:00 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/14 16:45:35 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/17 11:23:24 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,14 @@ int	fc_check_variable(t_info *info, int	i, int j)
 		if (str[a] == '=')
 		{
 			if (a == 0)
-				exit (0); // erreur a faire, command not found
-			if (!fc_variable_command(info, str, a))
+				return (1); // erreur a faire
+			if (fc_variable_command(info, str, a) == 0)
+			{
 				printf("\033[1;31m%s: command not found\n\033[0m", str);
-			return (1);
+				return (0);
+			}
+			else
+				return (1);
 	
 		}
 	}

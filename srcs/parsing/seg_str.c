@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   seg_str.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angelo <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:26:39 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/12 15:22:10 by angelo           ###   ########.fr       */
+/*   Updated: 2022/10/17 09:17:19 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void	fc_seg_str(t_info *info)
 		fc_free_last_list(info, temp);
 	}
 	fc_small_str_without_quote(info, temp, a);
+	fc_check_dollar(info);
 	fc_final_seg(info);
 }

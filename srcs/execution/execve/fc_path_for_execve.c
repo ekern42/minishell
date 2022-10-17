@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fc_path_for_execve.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aprosper <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:35:38 by angelo            #+#    #+#             */
-/*   Updated: 2022/10/13 15:27:44 by aprosper         ###   ########.fr       */
+/*   Updated: 2022/10/17 10:30:15 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	*fc_path_for_execve(t_info *info, int index_re)
 		fc_error_exe(1, "Problem with fc_find_envp_without_name !\n");
 	path_splited = ft_split(path, ':');
 	i = 0;
+
 	while (path_splited[i] != NULL)
 	{
 		path_splited[i][ft_strlen(path_splited[i])] = '/';

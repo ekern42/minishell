@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:49:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/16 16:17:13 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/17 12:37:18 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ typedef struct s_info
 	int				nbr_sstr;
 	t_builtin		*b;
 	t_execution		*exe;
-	int				pair_sgl_quotes;
-	int				pair_dbl_quotes;
 	struct s_list	*envp;
 	struct s_list	*small_str_list;
 	t_lex_info		*lex;
@@ -184,11 +182,13 @@ void	fc_print_var_list(t_info *info);
 
 /* variable */
 int		fc_check_variable(t_info *info, int	a, int b);
-void	fc_check_dollar(t_info *info, char *str);
+void	fc_check_dollar(t_info *info);
+void	fc_dollar_details(t_info *info, char *str, int n);
 t_list	*fc_sub_dollar(t_list *sub_temp, t_info *info, char *str, int l);
 void	fc_replace_dollar(t_info *info, t_list *sub_temp);
 void	fc_dollar_fusion(t_info *info, t_list *sub);
 void	fc_malloc_dollar(t_info *info, int n);
+int		fc_strcmp_spec(char *s1, char *s2);
 
 /* main.c */
 int		fc_prompt(t_info *info);

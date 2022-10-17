@@ -6,71 +6,64 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:21:57 by ekern             #+#    #+#             */
-/*   Updated: 2022/10/16 16:50:46 by ekern            ###   ########.fr       */
+/*   Updated: 2022/10/17 12:53:10 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	fc_dollar_fusion(t_info *info, t_list *sub)
+static t_list	*fc_dollar_sec(t_list *sub_temp, t_info *info, char *str, int b)
 {
-	t_list	*sub_temp;
-	char	*str;
-	char	*str_temp;
-
-	sub_temp = sub;
-	str_temp = ft_strdup(sub_temp->content);
-	sub_temp = sub_temp->next;
-	while (sub_temp)
+	if (info->b->j < info->begin[b])
 	{
-		str = ft_strjoin(str_temp, sub_temp->content);
-		free(str_temp);
-		str_temp = ft_strdup(str);
-		free(str);
-		sub_temp = sub_temp->next;
+		sub_temp = fc_sub_dollar(sub_temp, info, str,
+				info->begin[b] - info->b->j);
+		info->b->j = info->begin[b];
+		info->b_sub_str = info->b->j;
 	}
-	printf("str_temp %s\n", str_temp);
-	free (info->small_str_list->content);
-	info->small_str_list->content = str_temp;
+	if (info->b->j == info->begin[b])
+	{
+		sub_temp = fc_sub_dollar(sub_temp, info, str,
+				(info->end[b] + 1) - info->begin[b]);
+		info->b->j = info->end[b] + 1;
+		info->b_sub_str = info->b->j;
+	}
+	return (sub_temp);
 }
 
 static void	fc_dollar(t_info *info, char *str, int n)
 {
 	t_list	*sub_temp;
-	int		a;
 	int		b;
-	int		l;
 
-	a = 0;
+	info->b->j = 0;
 	b = 0;
-	l = 0;
 	info->b_sub_str = 0;
 	sub_temp = NULL;
-	while (a < ft_strlen(str) && l < 30)
+	while (info->b->j < ft_strlen(str))
 	{	
-		if (a > info->end[b] && b < n)
+		if (info->b->j > info->end[b] && b < n)
 			b++;
-		else if (a > info->end[b] && b >= n)
+		else if (info->b->j > info->end[b] && b >= n)
 		{
-			sub_temp = fc_sub_dollar(sub_temp, info, str, ft_strlen(str) - a + 1);
-			a = ft_strlen(str);
+			sub_temp = fc_sub_dollar(sub_temp, info, str,
+					ft_strlen(str) - info->b->j + 1);
+			info->b->j = ft_strlen(str);
 		}
-		if (a < info->begin[b])
-		{
-			sub_temp = fc_sub_dollar(sub_temp, info, str, info->begin[b] - a);
-			a = info->begin[b];
-			info->b_sub_str = a;
-		}
-		if (a == info->begin[b])
-		{
-			sub_temp = fc_sub_dollar(sub_temp, info, str, (info->end[b] + 1) - info->begin[b]);
-			a = info->end[b] + 1;
-			info->b_sub_str = a;
-		}
-		l++;
+		sub_temp = fc_dollar_sec(sub_temp, info, str, b);
 	}
 	fc_replace_dollar(info, sub_temp);
-//	fc_print_chainlist(sub_temp, 's', 1);
+}
+
+static int	fc_dollar_details2_sec(t_info *info, int a, int b, int c)
+{
+	if (info->begin[b] > c && info->end[b] < a)
+	{
+		info->begin[b] = -1;
+		info->end[b] = -1;
+	}
+	b++;
+	return (b);
 }
 
 static void	fc_dollar_details2(t_info *info, char *str, int n)
@@ -80,10 +73,6 @@ static void	fc_dollar_details2(t_info *info, char *str, int n)
 	int	c;
 
 	a = -1;
-//	printf("info->begin be %d, info->end be %d\n", info->begin[0], info->end[0]);
-//	printf("info->begin be %d, info->end be %d\n", info->begin[1], info->end[1]);
-//	printf("info->begin be %d, info->end be %d\n", info->begin[2], info->end[2]);
-//	ft_putstr_fd("---------------\n", 1);
 	while (str[++a] != '\0')
 	{
 		b = 0;
@@ -96,25 +85,15 @@ static void	fc_dollar_details2(t_info *info, char *str, int n)
 				c = a;
 		}
 		while (b < n)
-		{
-			if (info->begin[b] > c && info->end[b] < a)
-			{
-				info->begin[b] = -1;
-				info->end[b] = -1;
-			}
-			b++;
-		}
+			b = fc_dollar_details2_sec(info, a, b, c);
 		if (str[a] == '\0')
 			break ;
 		c = a;
 	}
-//	printf("info->begin af %d, info->end af %d\n", info->begin[0], info->end[0]);
-//	printf("info->begin af %d, info->end af %d\n", info->begin[1], info->end[1]);
-//	printf("info->begin af %d, info->end af %d\n", info->begin[2], info->end[2]);
 	fc_dollar(info, str, n);
 }
 
-static void	fc_dollar_details(t_info *info, char *str, int n)
+void	fc_dollar_details(t_info *info, char *str, int n)
 {
 	int	a;
 	int	b;
@@ -141,20 +120,4 @@ static void	fc_dollar_details(t_info *info, char *str, int n)
 		}
 	}
 	fc_dollar_details2(info, str, n);
-}
-
-void	fc_check_dollar(t_info *info, char *str)
-{
-	int	a;
-	int	b;
-
-	a = -1;
-	b = 0;
-	while (str[++a] != '\0')
-	{
-		if (str[a] == '$')
-			b++;
-	}
-	if (b > 0)
-		fc_dollar_details(info, str, b);
 }
