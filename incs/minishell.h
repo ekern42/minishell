@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2023/03/16 15:08:58 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/16 15:32:53 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,14 +134,14 @@ typedef struct s_env
 // ----------------------------------------
 typedef struct s_vars
 {
-	char	*new_line;
-	int		stdin_fd;
-	int		stdout_fd;
-	int		stderr_fd;
-	t_env	*env;
-	t_env	*loc;
-	t_sig	sig;
-	int		segments_count;
+	char			*new_line;
+	int				stdin_fd;
+	int				stdout_fd;
+	int				stderr_fd;
+	t_env			*env;
+	t_env			*loc;
+	t_sig			sig;
+	int				segments_count;
 	char			*command_line;
 	int				*begin;
 	int				*end;
@@ -302,7 +302,7 @@ int		fc_valide_name(char *str);
 char	*fc_find_var(t_list *envp, char *name);
 
 /* variable */
-int		fc_check_variable(t_vars *info, int	a, int b);
+int		fc_check_variable(t_vars *info, int a, int b);
 void	fc_check_dollar(t_vars *info);
 void	fc_dollar_details(t_vars *info, char *str, int n);
 t_list	*fc_sub_dollar(t_list *sub_temp, t_vars *info, char *str, int l);

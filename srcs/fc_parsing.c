@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 19:44:16 by angelo            #+#    #+#             */
-/*   Updated: 2023/03/16 15:11:17 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/16 15:30:36 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	fc_print_for_pipe(t_vars *info)
 	int	a;
 	int	b;
 
-	//printf("pipe = %d\n", info->lex->nbr_pipe);
 	a = 0;
 	if (!info->exe->cmds)
 		return ;

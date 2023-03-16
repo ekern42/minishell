@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:19:16 by ekern             #+#    #+#             */
-/*   Updated: 2023/03/16 15:04:24 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/16 15:27:34 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,5 @@ void	fc_lexer(t_vars *info)
 			else if (b == 2)
 				a++;
 		}
-//		if (info->command_line[a] == '\0') si overflow decom
-//			break ;
 	}
-//	printf("%d  %d\n", info->lex->nbr_pair_dbl_q, info->lex->nbr_pair_sgl_q);
 }

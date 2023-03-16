@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:24:46 by ekern             #+#    #+#             */
-/*   Updated: 2023/03/16 15:04:44 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/16 15:28:44 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	fc_lex_quotes(t_vars *info, int a)
 	b[1] = 0;
 	if (info->command_line[a] == '\'' || info->command_line[a] == '\"')
 	{
-		
 		c = info->command_line[a];
 		b[1] = 1;
 	}
