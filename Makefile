@@ -6,14 +6,14 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2023/03/16 15:10:18 by ekern            ###   ########.fr        #
+#    Updated: 2023/03/16 16:22:59 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
 CC		= gcc
-CFLAGS	= 
+CFLAGS	= -Werror -Wextra -Wall
 
 INCL	= -I incs -I $(HOME)/.brew/opt/readline/include
 RM		= rm -f
@@ -39,7 +39,6 @@ SRCS	=	minishell.c \
 			builtin/pwd_builtin.c \
 			builtin/export_builtin.c \
 			array_utils.c \
-			lexing.c \
 			temporaire.c \
 			here_doc.c \
 			prompt.c \

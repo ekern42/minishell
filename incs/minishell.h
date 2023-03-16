@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2023/03/16 15:32:53 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/16 16:18:13 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ void	initialisation(t_vars *vars, char **envp);
 void	init_env(t_vars *vars, char **envp);
 void	clean_program(t_vars *vars);
 /* ************************************************************************** */
-char	**lexing(t_vars *vars, char *line);
+//char	**lexing(t_vars *vars, char *line);
 void	handle_segments(t_vars *vars, char ***segments);
 void	parse_line(t_vars *vars, char **line, int output);
 

@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:24:46 by ekern             #+#    #+#             */
-/*   Updated: 2023/03/16 15:28:44 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/16 16:18:52 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,13 @@ void	fc_quote_list_free(t_vars *info)
 	}
 }
 
-/*
-static void	fc_free_one_chain(t_vars *info)
-{
-	t_quotes	*temp;
-
-	temp = info->quotes_list->next;
-	free (info->quotes_list);
-	info->quotes_list = temp;
-}
-*/
-
 static void	fc_init_quote_list(t_vars *info, int a, char c)
 {
 	t_quotes	*temp;
 
 	temp = malloc(sizeof(t_quotes));
 	if (!temp)
-		exit (0); // erreur a faire
+		return ;
 	temp->type = c;
 	temp->begin = a;
 	temp->next = info->quotes_list;
