@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 15:29:38 by gudias            #+#    #+#             */
-/*   Updated: 2023/03/16 16:31:11 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/17 11:51:10 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	execute_cmd(t_vars *vars, t_cmd *cmd, int i)
 	return_code = 0;
 	set_redirections(cmd);
 	translate_dollars_all(cmd->args, vars);
-	
 	if (cmd->args[i] && vars->segments_count == 1 && is_builtin(cmd->args[i]))
 		return_code = exec_builtin(vars, (cmd->args) + i);
 	else

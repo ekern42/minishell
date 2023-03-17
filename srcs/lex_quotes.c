@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:24:46 by ekern             #+#    #+#             */
-/*   Updated: 2023/03/16 16:18:52 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/17 12:10:19 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ static void	fc_init_quote_list(t_vars *info, int a, char c)
 	info->quotes_list = temp;
 }
 
+void	fc_lex_quotes2(t_vars *info, char c, int b)
+{
+	info->quotes_list->end = b;
+	if (c == '\'')
+		info->lex->nbr_pair_sgl_q++;
+	else if (c == '\"')
+		info->lex->nbr_pair_dbl_q++;
+}
+
 int	fc_lex_quotes(t_vars *info, int a)
 {
 	int		b[2];
@@ -57,16 +66,12 @@ int	fc_lex_quotes(t_vars *info, int a)
 		{
 			if (info->command_line[b[0]] == '\0')
 			{
-				info->lex->error = true;
+				fc_error_lex(info, info->command_line[a]);
 				fc_quote_list_free(info);
 				return (a + 1);
 			}
 		}
-		info->quotes_list->end = b[0];
-		if (c == '\'')
-			info->lex->nbr_pair_sgl_q++;
-		else if (c == '\"')
-			info->lex->nbr_pair_dbl_q++;
+		fc_lex_quotes2(info, c, b[0]);
 	}
 	return (b[0]);
 }

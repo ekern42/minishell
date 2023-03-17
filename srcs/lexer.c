@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:19:16 by ekern             #+#    #+#             */
-/*   Updated: 2023/03/16 15:27:34 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/17 12:08:40 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	fc_check_lex(t_vars *info, int a)
 		|| info->command_line[a + 1] == '<'
 		|| info->command_line[a + 1] == '>')
 	{
-		info->lex->error = true;
+		fc_error_lex(info, info->command_line[a + 1]);
 		return (0);
 	}
 	return (1);

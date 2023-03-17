@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 09:47:40 by ekern             #+#    #+#             */
-/*   Updated: 2023/03/16 15:04:39 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/17 12:08:24 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,19 @@ static void	fc_lex_dbl_red(t_vars *info, int a)
 
 static int	fc_check_red(t_vars *info, int a)
 {
+	int	b;
+
+	b = a;
 	while (info->command_line[++a] == ' ' && info->command_line[a] != '\0')
 		;
 	if (info->command_line[a] == '\0')
 	{
-		info->lex->error = true;
+		fc_error_lex(info, info->command_line[b]);
 		return (1);
 	}
 	else if (info->command_line[a] == '<' || info->command_line[a] == '>')
 	{
-		info->lex->error = true;
+		fc_error_lex(info, info->command_line[b]);
 		return (0);
 	}
 	return (1);

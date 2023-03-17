@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 09:17:34 by ski               #+#    #+#             */
-/*   Updated: 2022/05/23 16:54:06 by gudias           ###   ########.fr       */
+/*   Updated: 2023/03/17 09:49:46 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	initialisation(t_vars *vars, char **envp)
 	init_env(vars, envp);
 	init_signal_main(&vars->sig);
 	init_loc(vars);
+	fc_init(vars, envp);
 	launch_message();
 }
 

@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:34:50 by gudias            #+#    #+#             */
-/*   Updated: 2023/03/16 15:06:41 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/17 09:47:36 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	handle_segments(t_vars *vars, char ***segments)
 	parse_line(vars, segments[i], 1);
 	dup2(vars->stdin_fd, 0);
 	vars->segments_count = 0;
+	free (segments);
 }
 
 void	parse_line(t_vars *vars, char **line, int output)

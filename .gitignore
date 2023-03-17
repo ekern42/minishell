@@ -1,3 +1,7 @@
 *.o
+*.a
+*.dSYM
 temp
 test
+t
+minishell

@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2023/03/16 16:18:13 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/17 12:00:36 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,5 +313,6 @@ int		fc_strcmp_spec(char *s1, char *s2);
 int		fc_order_re(t_vars *info);
 void	fc_free_t_list_spec(t_vars *info);
 void	fc_final_free(t_vars *info);
+void	fc_error_lex(t_vars *info, char c);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:42:59 by gudias            #+#    #+#             */
-/*   Updated: 2022/05/26 18:30:23 by ski              ###   ########.fr       */
+/*   Updated: 2023/03/17 12:02:00 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	run_cmd(t_vars *vars, t_cmd *cmd, int i)
 	close(pipe_fd[1]);
 	dup2(pipe_fd[0], 0);
 	close(pipe_fd[0]);
-	if (waitpid(id, &status, 0) == -1)
+	if (waitpid(id, &status, WCONTINUED) == -1)
 		return (-1);
 	return (get_child_returned_code(status));
 }

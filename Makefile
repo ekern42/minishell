@@ -6,14 +6,14 @@
 #    By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:27:19 by gudias            #+#    #+#              #
-#    Updated: 2023/03/16 16:22:59 by ekern            ###   ########.fr        #
+#    Updated: 2023/03/17 09:39:48 by ekern            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall
+CFLAGS	= -Werror -Wextra -Wall -g3
 
 INCL	= -I incs -I $(HOME)/.brew/opt/readline/include
 RM		= rm -f
