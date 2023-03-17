@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 09:17:34 by ski               #+#    #+#             */
-/*   Updated: 2023/03/17 09:49:46 by ekern            ###   ########.fr       */
+/*   Created: 2022/05/05 09:17:34 by ekern             #+#    #+#             */
+/*   Updated: 2023/03/17 12:35:04 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	initialisation(t_vars *vars, char **envp)
 	init_env(vars, envp);
 	init_signal_main(&vars->sig);
 	init_loc(vars);
-	fc_init(vars, envp);
+	fc_init(vars);
 	launch_message();
 }
 

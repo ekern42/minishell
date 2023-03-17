@@ -6,32 +6,11 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:33:28 by angelo            #+#    #+#             */
-/*   Updated: 2023/03/16 15:05:02 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/17 12:24:48 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	fc_start_up(void)
-{
-	ft_putstr_fd("-------------------------------\n", 1);
-	ft_putstr_fd("-------------------------------\n", 1);
-	ft_putstr_fd("-----------MINISHELL-----------\n", 1);
-	ft_putstr_fd("-------------------------------\n", 1);
-	ft_putstr_fd("-------------------------------\n", 1);
-}
-
-static void	fc_envp_init(t_vars *info, char **envp)
-{
-	t_list	*envtemp;
-	int		a;
-
-	a = 0;
-	envtemp = ft_lstnew(envp[a]);
-	while (envp[++a] != NULL)
-		ft_lstadd_back(&envtemp, ft_lstnew(envp[a]));
-	info->envp = envtemp;
-}
 
 void	fc_init_lexer(t_vars *info)
 {
@@ -57,12 +36,8 @@ void	fc_init_lexer(t_vars *info)
 	info->lex->error = false;
 }
 
-int	fc_init(t_vars *info, char **envp)
+int	fc_init(t_vars *info)
 {
-	fc_start_up();
-	fc_envp_init(info, envp);
-	info->var_list = NULL;
-	info->envp_lol = envp;
 	info->lex = malloc(sizeof(t_lex_info));
 	info->exe = malloc(sizeof(t_execution));
 	return (0);

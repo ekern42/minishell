@@ -6,7 +6,7 @@
 /*   By: ekern <ekern@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:55 by gudias            #+#    #+#             */
-/*   Updated: 2023/03/17 12:00:36 by ekern            ###   ########.fr       */
+/*   Updated: 2023/03/17 12:30:25 by ekern            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,9 +271,7 @@ void	stop_echoctl_fd(int fd);
 void	start_echoctl_fd(int fd);
 // -------------------------------------------------------------------
 
-int		fc_init(t_vars *info, char **envp);
-
-/* lexer */
+int		fc_init(t_vars *info);
 void	fc_init_lexer(t_vars *info);
 void	fc_lexer(t_vars *info);
 int		fc_check_lex(t_vars *info, int a);
@@ -283,7 +281,7 @@ int		fc_lex_quotes(t_vars *info, int a);
 int		fc_lex_redirections(t_vars *info, int a);
 void	fc_lex_variables(t_vars *info);
 
-/* parsing */
+// -------------------------------------------------------------------
 int		fc_parsing(t_vars *info);
 void	fc_print_for_pipe(t_vars *info);
 int		fc_small_str_with_quote(t_vars *info, t_quotes *temp, int a);
@@ -293,7 +291,7 @@ int		fc_small_str_common2_sec(t_vars *info, int a);
 void	fc_sub_str(t_vars *info, int a);
 void	fc_final_seg(t_vars *info);
 
-/* utils */
+// -------------------------------------------------------------------
 size_t	fc_strlen(const char *str, char c);
 void	fc_test(char **envp);
 int		fc_dblstrlen(char **tab);
@@ -301,7 +299,7 @@ void	fc_print_cmds(t_vars *info);
 int		fc_valide_name(char *str);
 char	*fc_find_var(t_list *envp, char *name);
 
-/* variable */
+// -------------------------------------------------------------------
 int		fc_check_variable(t_vars *info, int a, int b);
 void	fc_check_dollar(t_vars *info);
 void	fc_dollar_details(t_vars *info, char *str, int n);
